@@ -1,0 +1,10 @@
+## Interface: 90001
+## Title: Furyswipes_5mmb
+## Author: Furyswipes of Youtube with Papaancake for GSE macro load
+## Version: 0.1
+## Notes: Multiboxing goodness
+## OptionalDeps: GSE, AceComm-3.0, CallbackHandler-1.0
+
+
+embeds.xml
+Furyswipes_5mmb.lua

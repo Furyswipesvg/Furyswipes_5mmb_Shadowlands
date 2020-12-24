@@ -1,0 +1,87 @@
+#THIS IS YOUR TOONLIST. READ THESE COMMENTS BEFORE ASKING
+# A QUESTION ON DISCORD. EVERY ONE.
+# Lines that start with # are comments, and have no effect. You can delete.
+# Use a technical editor for this, NOT notepad. Notepad runs lines together.
+# Try notepad++
+
+# OPTIONAL: Set this rectangle to your clique overlay area. 
+# I suggest the right half of the main window's raid interface
+# It is currently set to not be there. See #user-guides on discord. There
+# is a video.
+#clique_overlay 1 1 1 1
+
+# You can use 2 monitors by uncommenting the following
+#use2monitors
+
+# each window you open is defined by a box command.
+# Max number of box lines is 5 (for now).
+# The box command starts with the word box.
+# Then battlenet account.
+# Then password.
+# Then subscription name (not important, can be anything, just a reminder)
+# Then toon name (with additional server name after dash on retail).
+# Then role tank / melee / healer / caster / hunter
+# You may add letters at the end 
+# to launch certain boxes when you hit ctrl-alt-<letter>
+# The letters are like their raid identifier. Example--The f
+# at the end of furyswipes line means ctrl-alt-f only opens him
+# Each toon can be in many different raids. 
+# ALL BOXES ARE IN RAID m by default. This cannot be changed!
+# ctrl alt m launches all your guys in this toonlist.
+# Alt characters are okay, chinese is not.
+# NOTE--For retail, if you play on different servers, you should 
+# put -<server> after your toon name. Otherwise invites won't work.
+# You do NOT need to do this for wotlk/classic/tbc! Caps don't matter,
+# spelling do.
+# IF YOU HAVE SPACES IN YOUR PASSWORD OR SERVERNAME YOU MUST USE QUOTES
+# See example
+box bnetaccount bnetpassword wow1 Furyswipes-cenarius tank f
+box bnetaccount bnetpassword wow2 "mootalia-altar of storms" melee
+box bnetaccount bnetpassword wow3 spirited-nathrezim healer
+box bnetaccount bnetpassword wow4 vajayjay-nathrezim caster
+box bnetaccount bnetpassword wow5 battlefield-nathrezim caster
+
+# extrawait1 and extrawait2 are new keywords that allow you to control the
+# timing of window opening if you find that windows aren't getting populated
+# with passwords and accounts properly or that the windows are strangely logging
+# into the wrong account. Start with the numbers shown. They are milliseconds,
+# and you can tune them for whatever works.
+# extrawait1 is a pause between opening wow and renaming the window.
+# extrawait2 is a pause after the window is renamed but before trying to
+# insert password/account
+extrawait1 300
+extrawait2 1000
+
+# meleeiwt (melee interact with target) makes your melee roles run toward 
+# the target or turn toward the target every swing.
+# sendwwithiwt makes them take a small step forward when the do to prevent
+# running wildly around the target during combat.
+meleeiwt
+sendwwithiwt
+
+# huntermeleeonfollow (classic/wotlk/tbc only) 
+# In expansions where hunters have a min range, they have two attack bars.
+# Bar 1 is melee and bar 2 is ranged. These bars switch automatically.
+# Bar 2 (ranged) gets set every time you alt-4 (call your raid to follow)
+# You can reverse this and set melee by default by using this command.
+#huntermeleeonfollow
+
+# raidname Assign your raid a catchy internal name so when you are combining
+# with another multiboxer, you don't conflict
+#raidname DisMyRaid
+
+# oemkey This is an override that should only be used in rare cases.
+# It assigns the oemkey used to share mouse clicks. To figure out what yours
+# is, turn on the "Last Key Pressed" panel in HKN, and click the key left of
+# 1. It will tell you the name of that key, oem3,oem5,oem7,oem8
+# Normally you do not have to do this, but if your keyboard is not found 
+# (see WARNING when you drag-n-drop), you will.
+#oemkey oem3 (again, do not use this unless absolutely necessary)
+
+# maxheal <druid> <priest> <shaman> <paladin>
+# This is not currently implemented this release, but it is supposed to limit
+# your heal rank on a given class to a number, example:
+# maxheal 5 7 3 4
+# In this example, Shaman will cast no more than healing wave 3.
+#maxheal 11 11 11 11
+

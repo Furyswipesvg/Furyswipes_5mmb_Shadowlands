@@ -1,0 +1,17 @@
+extrawait1: Time to wait after wow window is popped before renaming..ms
+extrawait2: time to wait after resizing wow window before filling in data..ms
+[NOT WORKING YET] huntermeleeonfollow: (classic/wotlk/tbc only) In expansions where hunters have
+a min range, they have two attack bars. Bar 1 is melee and bar 2 is ranged.
+These bars switch automatically. Bar 2 (ranged) gets set every time you alt-4
+(call your raid to follow). You can reverse this and set melee by default by using this command.
+hideframes : doesn't work anymore. To hide frames, select windowed fullscreen
+in game.
+nomacros : don't create dps macros--only the basics. Follow won't work.
+maxheal # # # # (four numbers) : Limit heals of classes to that level (
+numbers are Druid Priest Shaman Pally in that order ) NOT WORKING
+NO LONGER SUPPORTED clique_overlay # # # # (four numbers) Change where the clique overlay box sits
+(xpos ypos box_x_size box_y_size)
+monitor # : [OPTIONAL] Size of monitor 1280x1024 1920x1080 2560x1440 3360x1440
+3840x2160 (I DETECT THIS, DO NOT USE IT UNLESS YOU KNOW WHAT YOU ARE DOING)
+use2monitors : spread windows over 2 monitors
+oemkey: override the oemkey used to share mouseclicks. Do not use normally.

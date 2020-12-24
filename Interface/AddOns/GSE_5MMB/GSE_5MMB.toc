@@ -1,0 +1,8 @@
+## Interface: 90002
+## Title: |cffa335eeGSE:|r |cFF00D1FF5MMB Macros|r
+## Notes: 5MMB Macros
+## Author: Furyswipes
+## Version: 1.0
+## RequiredDeps: GSE
+
+loaded.lua
