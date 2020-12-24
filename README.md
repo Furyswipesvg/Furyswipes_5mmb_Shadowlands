@@ -2,7 +2,7 @@
 #  This is 5-Minute Multiboxing
 
 
-HEY! LISTEN! Download the latest release as a zip file over there on the release link-->
+HEY! LISTEN! Download the latest release as a zip file over there on the releases link-->
 
 5-minute-multiboxing is a set of files you can download into your wow directory that allows you to control up to 10 or more boxes at a time by helping you send a key one at a time to each box and changing the window that gets the next key automatically.
 
