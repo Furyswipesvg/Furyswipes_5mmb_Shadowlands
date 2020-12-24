@@ -11,3 +11,6 @@ This does NOT clone keys or generate keys of any kind. (Exception: Fills in logi
 This is a window swapping routine that runs while you play.
 
 --Furyswipes, Dec. 2020.
+
+FULL VIDEO TUTORIAL:
+https://youtu.be/FsofZomsS9g
