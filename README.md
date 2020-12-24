@@ -1,4 +1,4 @@
-#  ** What's. Up. Suckas. **
-#  ** This is 5-Minute Multiboxing **
+#  What's. Up. Suckas.
+#  This is 5-Minute Multiboxing
 
 
