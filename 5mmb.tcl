@@ -11,6 +11,10 @@ puts ""
 puts "USING 5MMB.TCL VERSION $version"
 puts "WOW VERSION DETECTED IS $game"
 puts "=============================================="
+puts -nonewline "encoding utf-8 is available: "
+if {[lsearch -exact [encoding names] utf-8] >= 0} { puts yes } else { puts no }
+puts "system encoding: [encoding system]"
+puts "=============================================="
 puts "My keyboard layout is $kb"
 #Program Globals
 set display [twapi::get_display_size]
@@ -43,71 +47,6 @@ set maxheal "11 11 11 11"
 set clique_overlay "1 1 1 1"
 
 # Special Key Characters
-set altchars(À) {\195\128}
-set altchars(Á) {\195\129}
-set altchars(Â) {\195\130}
-set altchars(Ã) {\195\131}
-set altchars(Ä) {\195\132}
-set altchars(Å) {\195\133}
-set altchars(Æ) {\195\134}
-set altchars(Ç) {\195\135}
-set altchars(È) {\195\136}
-set altchars(É) {\195\137}
-set altchars(Ê) {\195\138}
-set altchars(Ë) {\195\139}
-set altchars(Ì) {\195\140}
-set altchars(Í) {\195\141}
-set altchars(Î) {\195\142}
-set altchars(Ï) {\195\143}
-set altchars(Ð) {\195\144}
-set altchars(Ñ) {\195\145}
-set altchars(Ò) {\195\146}
-set altchars(Ó) {\195\147}
-set altchars(Ô) {\195\148}
-set altchars(Õ) {\195\149}
-set altchars(Ö) {\195\150}
-set altchars(×) {\195\151}
-set altchars(Ø) {\195\152}
-set altchars(Ù) {\195\153}
-set altchars(Ú) {\195\154}
-set altchars(Û) {\195\155}
-set altchars(Ü) {\195\156}
-set altchars(Ý) {\195\157}
-set altchars(Þ) {\195\158}
-set altchars(ß) {\195\159}
-set altchars(à) {\195\160}
-set altchars(á) {\195\161}
-set altchars(â) {\195\162}
-set altchars(ã) {\195\163}
-set altchars(ä) {\195\164}
-set altchars(å) {\195\165}
-set altchars(æ) {\195\166}
-set altchars(ç) {\195\167}
-set altchars(è) {\195\168}
-set altchars(é) {\195\169}
-set altchars(ê) {\195\170}
-set altchars(ë) {\195\171}
-set altchars(ì) {\195\172}
-set altchars(í) {\195\173}
-set altchars(î) {\195\174}
-set altchars(ï) {\195\175}
-set altchars(ð) {\195\176}
-set altchars(ñ) {\195\177}
-set altchars(ò) {\195\178}
-set altchars(ó) {\195\179}
-set altchars(ô) {\195\180}
-set altchars(õ) {\195\181}
-set altchars(ö) {\195\182}
-set altchars(÷) {\195\183}
-set altchars(ø) {\195\184}
-set altchars(ù) {\195\185}
-set altchars(ú) {\195\186}
-set altchars(û) {\195\187}
-set altchars(ü) {\195\188}
-set altchars(ý) {\195\189}
-set altchars(þ) {\195\190}
-set altchars(ÿ) {\195\191}
-set aname "ßoßo"
 proc isTrue { var } {
 	if { ! [info exists ::$var] } { return false } 
 	upvar ::$var $var
@@ -128,18 +67,6 @@ proc argcheck { name num {values "nil" } } {
 		puts "Error-- keyword $name must be one of $values"
 		#exit
 	}
-}
-proc altname { name } {
-	upvar altchars altchars
-	set newname ""
-	foreach letter [split $name ""] {
-		if { [lsearch [array names altchars] $letter ] > -1  } {
-			set newname $newname$altchars($letter)
-		} else {
-			set newname $newname$letter
-		}
-	}
-	return $newname
 }
 array set kb_oem "00020409 oem3"
 array set kb_oem "0000040f oem5"
@@ -180,7 +107,8 @@ if { ! [file exist $toonlistf ] } {
 }
 if { $fail } { puts "hit any key to return" ; gets stdin char ; return }
 set tL [open $toonlistf r]
-if { [set tL [open $toonlistf r]] != "" } {
+fconfigure $tL -encoding utf-8
+if { $tL != "" } {
   puts "Found toonlist $toonlistf"
 } else {
   puts "ERROR: Could not open $toonlistf in read mode."
@@ -449,7 +377,9 @@ if { [isTrue use2monitors] } {
 	}
 if { ! $nosmoverwrite } { 
 	set sM [open $SME r]
+	fconfigure $sM -encoding utf-8
 	set sMN [open tmp w+]
+	fconfigure $sMN -encoding utf-8
 	while { [gets $sM line] >= 0 } {
 	  if { [regexp "^FSMB_game" $line ] } {
 	    puts $sMN "FSMB_game=\"$game\""
@@ -469,7 +399,7 @@ if { ! $nosmoverwrite } {
 		      regexp "(.*)-" $name match name
 	        }
 		set found_tank true
-	        puts $sMN \"[altname $name]\"
+	        puts $sMN \"$name\"
 	      }
 	    }
 	    if { ! $found_tank } { puts $sMN \"\" }
@@ -489,10 +419,10 @@ if { ! $nosmoverwrite } {
 		      regexp "(.*)-" $name match name
 	        }
 	        if { $first=="false" } { 
-	          puts -nonewline $sMN \"[altname $name]\"
+	          puts -nonewline $sMN \"$name\"
 	          set first true
 	        } else {
-	          puts -nonewline $sMN ,\"[altname $name]\"
+	          puts -nonewline $sMN ,\"$name\"
 	        } 
 	      }
 	    }
@@ -504,10 +434,10 @@ if { ! $nosmoverwrite } {
 	    for { set i 0 } { $i<[array size toons] } { incr i } {
 	      set name [string totitle [ string tolower [lindex $toons($i) 3]]]
 	      if { $first=="false" } { 
-	        puts -nonewline $sMN \[$toonno\]=\"[altname $name]\"
+	        puts -nonewline $sMN \[$toonno\]=\"$name\"
 	        set first true
 	      } else {
-	        puts -nonewline $sMN ,\[$toonno\]=\"[altname $name]\"
+	        puts -nonewline $sMN ,\[$toonno\]=\"$name\"
 	      } 
 	      incr toonno
 	    }
@@ -522,16 +452,16 @@ if { ! $nosmoverwrite } {
 		      regexp "(.*)-" $name match name
 	      }
 	      if { $first=="false" } { 
-	        puts -nonewline $sMN \[$toonno\]=\"[altname $name]\"
+	        puts -nonewline $sMN \[$toonno\]=\"$name\"
 	        set first true
 	      } else {
-	        puts -nonewline $sMN ,\[$toonno\]=\"[altname $name]\"
+	        puts -nonewline $sMN ,\[$toonno\]=\"$name\"
 	      } 
 	      incr toonno
 	    }
 	    puts $sMN "\}"
 	 } elseif { [regexp "^FSMB_RAID" $line ] && [isTrue raidname] } {
-	    puts $sMN "FSMB_RAID = \"MULTIBOX_[altname $raidname]\""
+	    puts $sMN "FSMB_RAID = \"MULTIBOX_$raidname\""
 	  } elseif { [regexp "^FSMB_maxheal" $line ] && [isTrue maxheal] } {
 	    puts -nonewline $sMN "FSMB_maxheal=\{Druid=[lindex $maxheal 0],Priest=[lindex $maxheal 1],Shaman=[lindex $maxheal 2],Paladin=[lindex $maxheal 3]"
 	    puts $sMN "\}"
