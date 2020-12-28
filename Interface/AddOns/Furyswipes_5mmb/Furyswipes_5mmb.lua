@@ -1,4 +1,4 @@
-FSMB_version="121920"
+FSMB_version="122720"
 FSMB_game="shadow"
 FSMB_RAID = "MULTIBOX_myraid1"
 if FSMB_game=="tbc" then
@@ -14,6 +14,30 @@ end
 print(FSMB_game.." mode detected!")
 if FSMB_game=="classic" or FSMB_game=="shadow" then 
 	AceComm=LibStub("AceComm-3.0")
+	ActionButton1:RegisterForClicks("AnyDown","AnyUp")
+	SetOverrideBindingClick(UIParent, true,"1","ActionButton1")
+	ActionButton2:RegisterForClicks("AnyDown","AnyUp")
+	SetOverrideBindingClick(UIParent, true,"2","ActionButton2")
+	ActionButton3:RegisterForClicks("AnyDown","AnyUp")
+	SetOverrideBindingClick(UIParent, true,"3","ActionButton3")
+	ActionButton4:RegisterForClicks("AnyDown","AnyUp")
+	SetOverrideBindingClick(UIParent, true,"4","ActionButton4")
+	ActionButton5:RegisterForClicks("AnyDown","AnyUp")
+	SetOverrideBindingClick(UIParent, true,"5","ActionButton5")
+	ActionButton6:RegisterForClicks("AnyDown","AnyUp")
+	SetOverrideBindingClick(UIParent, true,"6","ActionButton6")
+	MultiBarBottomLeftButton1:RegisterForClicks("AnyDown","AnyUp")
+	SetOverrideBindingClick(UIParent, true,"SHIFT-1","MultiBarBottomLeftButton1")
+	MultiBarBottomLeftButton2:RegisterForClicks("AnyDown","AnyUp")
+	SetOverrideBindingClick(UIParent, true,"SHIFT-2","MultiBarBottomLeftButton2")
+	MultiBarBottomLeftButton3:RegisterForClicks("AnyDown","AnyUp")
+	SetOverrideBindingClick(UIParent, true,"SHIFT-3","MultiBarBottomLeftButton3")
+	MultiBarBottomLeftButton4:RegisterForClicks("AnyDown","AnyUp")
+	SetOverrideBindingClick(UIParent, true,"SHIFT-4","MultiBarBottomLeftButton4")
+	MultiBarBottomLeftButton5:RegisterForClicks("AnyDown","AnyUp")
+	SetOverrideBindingClick(UIParent, true,"SHIFT-5","MultiBarBottomLeftButton5")
+	MultiBarBottomLeftButton6:RegisterForClicks("AnyDown","AnyUp")
+	SetOverrideBindingClick(UIParent, true,"SHIFT-6","MultiBarBottomLeftButton6")
 end
 print('Hello from 5mmb!')
 FSMB_dontsetcamera=false
@@ -30,8 +54,8 @@ if (region == "deDE") then
 elseif (region == "frFR") then
 	rankName = "Rang"
 	hearthStone = "Pierre de foyer"
-	textSoulbound = "LiÈ"
-	textBoe = "LiÈ quand ÈquipÈ"
+	textSoulbound = "Li√©"
+	textBoe = "Li√© quand √©quip√©"
 elseif (region == "esES" or region == "esMX") then
 	rankName = "Rango"
 	hearthStone = "Piedra de hogar"
@@ -72,6 +96,7 @@ end
 -- Find Spellnames by ID, result will be in players locale, tested with german & english
 --local hearthStone = GetItemInfo(6948)
 if FSMB_game=="shadow" then
+	consumeMagic = GetSpellInfo(278326)
 	rejuvenation = GetSpellInfo(774)
 	swiftmend = GetSpellInfo(18562)
 	wildGrowth = GetSpellInfo(48438)
@@ -373,16 +398,16 @@ if FSMB_game=="tbc" then
 	victoryRush = GetSpellInfo(34428)
 end
 --
-FSMB_toonlist={[1]="Cheat",[2]="Im",[3]="Earthshock",[4]="Palia",[5]="Monique"}
-FSMB_invitelist={[1]="Cheat-cenarius",[2]="Im-nathrezim",[3]="Earthshock-cenarius",[4]="Palia-nathrezim",[5]="Monique-nathrezim"}
-FSMB_tank="Cheat"
+FSMB_toonlist={[1]="Me",[2]="Im",[3]="Earthshock",[4]="Palia",[5]="Sn√∂bgoblin"}
+FSMB_invitelist={[1]="Me-nathrezim",[2]="Im-nathrezim",[3]="Earthshock-cenarius",[4]="Palia-nathrezim",[5]="Sn√∂bgoblin-illidan"}
+FSMB_tank="Me"
 FSMB_clothto="Vaj"
 FSMB_tradeopen=nil
 FSMB_nomacros=nil
 FSMB_healerlist={"Im","Earthshock"}
 FSMB_maxheal={Druid=11,Priest=11,Shaman=11,Paladin=11}
 FSMB_myrez={["PALADIN"]=(redemption),["SHAMAN"]=(ancestralSpirit),["DRUID"]=(revive),["MONK"]=(resuscitate),["PRIEST"]=(resurrection),["DEATHKNIGHT"]=(raiseAlly)}
-FSMB_mypoly={["SHAMAN"]=(hex),["ROGUE"]=(sap),["DEATHKNIGHT"]=("NONE"),["DEMONHUNTER"]=(imprison),["MONK"]=(paralysis),["PRIEST"]=(shackleUndead),["MAGE"]=(magePoly),["DRUID"]=(druidHibernate),["WARLOCK"]=(warlockBanish)}
+FSMB_mypoly={["HUNTER"]=(freezingTrap),["SHAMAN"]=(hex),["ROGUE"]=(sap),["DEATHKNIGHT"]=("NONE"),["DEMONHUNTER"]=(imprison),["MONK"]=(paralysis),["PRIEST"]=(shackleUndead),["MAGE"]=(magePoly),["DRUID"]=(druidHibernate),["WARLOCK"]=(warlockBanish)}
 FSMB_selfheal={["DEATHKNIGHT"]=(ib),["DEMONHUNTER"]=(blur),["MONK"]=(spearHand),["PALADIN"]=(divineShield),["PRIEST"]=(priestHeal),["MAGE"]=(iceBlock),["DRUID"]=(druidHeal),["SHAMAN"]=(shamanHeal),["HUNTER"]=(exil),["WARLOCK"]=(unendingRes),["WARRIOR"]=(victoryRush),["ROGUE"]=(vanish),}
 FSMB_myint={["DEMONHUNTER"]=(disrupt),["MONK"]=(spearHand),["PALADIN"]=(hammerJustice),["PRIEST"]=(priestSilence),["MAGE"]=(mageCounter),["DRUID"]=(druidBash),["SHAMAN"]=(windShear),["HUNTER"]=(counterShot),["WARLOCK"]="",["WARRIOR"]=(warPummel),["ROGUE"]=(rogueKick),}
 if FSMB_game=="shadow" then FSMB_myint["PALADIN"]=rebuke end
@@ -956,6 +981,11 @@ function init()
 			PlaceAction(37)
 			ClearCursor()
 		end
+		if myClass=="DEMONHUNTER" and SpellExists(consumeMagic) then
+			GrabSpell(consumeMagic)
+			PlaceAction(64)
+			ClearCursor()
+		end
 		if myClass=="MAGE" then
 			if findSpell(conjureWater,BOOKTYPE_SPELL) then
 				GrabSpell(conjureWater)
@@ -996,7 +1026,7 @@ function init()
 			PickupAction(12)
 			ClearCursor()
 		end
-		if FSMB_tank==myname or (FSMB_game=="shadow" and (myClass=="HUNTER" or myClass=="WARRIOR" or myClass=="PALADIN")) or (FSMB_game~="shadow" and (myClass=="HUNTER" or myClass=="WARRIOR" or myClass=="ROGUE" or myClass=="SHAMAN" or myClass=="PALADIN" )) then
+		if (FSMB_game=="shadow" and (myClass=="WARRIOR" )) or (FSMB_game~="shadow" and (myClass=="HUNTER" or myClass=="WARRIOR" or myClass=="ROGUE" or myClass=="SHAMAN" or myClass=="PALADIN" )) then
 			macroId = CreateMacroFS("passive_fs", "Spell_magic_polymorphchicken", "/petfollow [mod:alt]\n/stopattack [mod:alt]", hunterpersonal);
 			PickupMacro(macroId)
 			PlaceAction(62)
@@ -1157,7 +1187,7 @@ function init()
 			ClearCursor()
 		end
 		if FSMB_game=="shadow" or FSMB_game=="classic" then
-			index=CreateMacroFS("turbo_fs","Spell_nature_lightning","/click "..prefix..myspec.."_TURBO\n/run focusme()\n/petpassive [mod:alt]\n/run SetView(4)",hunterpersonal)
+			index=CreateMacroFS("turbo_fs","Spell_nature_lightning","/click "..prefix..myspec.."_TURBO\n/run focusme()\n/petpassive [mod:alt]",hunterpersonal)
 		else
 			index=CreateMacroFS("turbo_fs","Spell_nature_lightning","/click "..prefix..myspec.."_TURBO\n/script follow()\n/petpassive [mod:alt]\n/run SetView(4)",hunterpersonal)
 		end
@@ -1256,6 +1286,18 @@ function init()
 		ClearCursor()
 	end
 	LoadBindings(1)
+	SetBinding("1","ACTIONBUTTON1")
+	SetBinding("2","ACTIONBUTTON2")
+	SetBinding("3","ACTIONBUTTON3")
+	SetBinding("4","ACTIONBUTTON4")
+	SetBinding("5","ACTIONBUTTON5")
+	SetBinding("6","ACTIONBUTTON6")
+	SetBinding("7","ACTIONBUTTON7")
+	SetBinding("8","ACTIONBUTTON8")
+	SetBinding("9","ACTIONBUTTON9")
+	SetBinding("0","ACTIONBUTTON10")
+	SetBinding("-","ACTIONBUTTON11")
+	SetBinding("=","ACTIONBUTTON12")
 	SetBinding("F1","MULTIACTIONBAR2BUTTON1")
 	SetBinding("F2","MULTIACTIONBAR2BUTTON2")
 	SetBinding("F3","MULTIACTIONBAR2BUTTON3")
@@ -1286,32 +1328,34 @@ function init()
 	SetBinding("SHIFT--","MULTIACTIONBAR1BUTTON11")
 	SetBinding("SHIFT-=","MULTIACTIONBAR1BUTTON12")
 	SetBinding("F","INTERACTTARGET")
-	SetBinding("SHIFT-F1","MULTIACTIONBAR4BUTTON1")
-	SetBinding("SHIFT-F2","MULTIACTIONBAR4BUTTON2")
-	SetBinding("SHIFT-F3","MULTIACTIONBAR4BUTTON3")
-	SetBinding("SHIFT-F4","MULTIACTIONBAR4BUTTON4")
-	SetBinding("SHIFT-F5","MULTIACTIONBAR4BUTTON5")
-	SetBinding("SHIFT-F6","MULTIACTIONBAR4BUTTON6")
-	SetBinding("SHIFT-F7","MULTIACTIONBAR4BUTTON7")
-	SetBinding("SHIFT-F8","MULTIACTIONBAR4BUTTON8")
-	SetBinding("SHIFT-F9","MULTIACTIONBAR4BUTTON9")
-	SetBinding("SHIFT-F10","MULTIACTIONBAR4BUTTON10")
-	SetBinding("SHIFT-F11","MULTIACTIONBAR4BUTTON11")
-	SetBinding("SHIFT-F12","MULTIACTIONBAR4BUTTON12")
-	SetBinding("CTRL-F1","MULTIACTIONBAR3BUTTON1")
-	SetBinding("CTRL-F2","MULTIACTIONBAR3BUTTON2")
-	SetBinding("CTRL-F3","MULTIACTIONBAR3BUTTON3")
-	SetBinding("CTRL-F4","MULTIACTIONBAR3BUTTON4")
-	SetBinding("CTRL-F5","MULTIACTIONBAR3BUTTON5")
-	SetBinding("CTRL-F6","MULTIACTIONBAR3BUTTON6")
-	SetBinding("CTRL-F7","MULTIACTIONBAR3BUTTON7")
-	SetBinding("CTRL-F8","MULTIACTIONBAR3BUTTON8")
-	SetBinding("CTRL-F9","MULTIACTIONBAR3BUTTON9")
-	SetBinding("CTRL-F10","MULTIACTIONBAR3BUTTON10")
-	SetBinding("CTRL-F11","MULTIACTIONBAR3BUTTON11")
-	SetBinding("CTRL-F12","MULTIACTIONBAR3BUTTON12")
+	if FSMB_game~="shadow" then
+		SetBinding("SHIFT-F1","MULTIACTIONBAR4BUTTON1")
+		SetBinding("SHIFT-F2","MULTIACTIONBAR4BUTTON2")
+		SetBinding("SHIFT-F3","MULTIACTIONBAR4BUTTON3")
+		SetBinding("SHIFT-F4","MULTIACTIONBAR4BUTTON4")
+		SetBinding("SHIFT-F5","MULTIACTIONBAR4BUTTON5")
+		SetBinding("SHIFT-F6","MULTIACTIONBAR4BUTTON6")
+		SetBinding("SHIFT-F7","MULTIACTIONBAR4BUTTON7")
+		SetBinding("SHIFT-F8","MULTIACTIONBAR4BUTTON8")
+		SetBinding("SHIFT-F9","MULTIACTIONBAR4BUTTON9")
+		SetBinding("SHIFT-F10","MULTIACTIONBAR4BUTTON10")
+		SetBinding("SHIFT-F11","MULTIACTIONBAR4BUTTON11")
+		SetBinding("SHIFT-F12","MULTIACTIONBAR4BUTTON12")
+		SetBinding("CTRL-F1","MULTIACTIONBAR3BUTTON1")
+		SetBinding("CTRL-F2","MULTIACTIONBAR3BUTTON2")
+		SetBinding("CTRL-F3","MULTIACTIONBAR3BUTTON3")
+		SetBinding("CTRL-F4","MULTIACTIONBAR3BUTTON4")
+		SetBinding("CTRL-F5","MULTIACTIONBAR3BUTTON5")
+		SetBinding("CTRL-F6","MULTIACTIONBAR3BUTTON6")
+		SetBinding("CTRL-F7","MULTIACTIONBAR3BUTTON7")
+		SetBinding("CTRL-F8","MULTIACTIONBAR3BUTTON8")
+		SetBinding("CTRL-F9","MULTIACTIONBAR3BUTTON9")
+		SetBinding("CTRL-F10","MULTIACTIONBAR3BUTTON10")
+		SetBinding("CTRL-F11","MULTIACTIONBAR3BUTTON11")
+		SetBinding("CTRL-F12","MULTIACTIONBAR3BUTTON12")
+		SetBinding("ALT-CTRL-1","ACTIONBUTTON1")
+	end
 	SetBinding("BUTTON3","MOVEBACKWARD")
-	SetBinding("ALT-CTRL-1","ACTIONBUTTON1")
 	SetBinding("CTRL-1")
 	SetBinding("CTRL-2")
 	SetBinding("CTRL-3")
@@ -1328,6 +1372,7 @@ function init()
 	SetBinding("SHIFT-DOWN")
 	SetBinding("SHIFT-MOUSEWHEELUP")
 	SetBinding("SHIFT-MOUSEWHEELDOWN")
+	SetBinding("B","OPENALLBAGS")
 	SaveBindings(1)
 	if FSMB_game=="wotlk" then 
 		SetCVar("UnitNameNPC", true)
@@ -1695,6 +1740,12 @@ FSMB:RegisterEvent("TAXIMAP_OPENED")
 FSMB:RegisterEvent("PLAYER_LOGIN")
 FSMB:RegisterEvent("UI_ERROR_MESSAGE")
 FSMB:RegisterEvent("AUTOFOLLOW_END")
+FSMB:RegisterEvent("PLAYER_GAINS_VEHICLE_DATA")
+FSMB:RegisterEvent("PLAYER_LOSES_VEHICLE_DATA")
+FSMB:RegisterEvent("UNIT_ENTERING_VEHICLE")
+FSMB:RegisterEvent("UNIT_EXITING_VEHICLE")
+FSMB:RegisterEvent("UPDATE_POSSESS_BAR")
+FSMB:RegisterEvent("UPDATE_OVERRIDE_ACTIONBAR")
 FSMBtooltip=CreateFrame("GAMETOOLTIP", "FSMBtooltip", UIParent, "GameTooltipTemplate")
 Print=print
 FSMB:SetScript("OnEvent", function(self,event, arg1, arg2, ...) -- event handler
@@ -1741,6 +1792,28 @@ FSMB:SetScript("OnEvent", function(self,event, arg1, arg2, ...) -- event handler
 			SetTrainerServiceTypeFilter("unavailable", 0);
 			SetTrainerServiceTypeFilter("used", 0);
 			FsR_TrainerIsUP = true
+		end
+  	elseif event == "UPDATE_OVERRIDE_ACTIONBAR" then
+		if HasOverrideActionBar() then
+			SetOverrideBinding(UIParent, true,"1",nil)
+			SetOverrideBinding(UIParent, true,"2",nil)
+			SetOverrideBinding(UIParent, true,"3",nil)
+			SetOverrideBinding(UIParent, true,"4",nil)
+			SetOverrideBinding(UIParent, true,"5",nil)
+			SetOverrideBinding(UIParent, true,"6",nil)
+		else
+			ActionButton1:RegisterForClicks("AnyDown","AnyUp")
+			SetOverrideBindingClick(UIParent, true,"1","ActionButton1")
+			ActionButton2:RegisterForClicks("AnyDown","AnyUp")
+			SetOverrideBindingClick(UIParent, true,"2","ActionButton2")
+			ActionButton3:RegisterForClicks("AnyDown","AnyUp")
+			SetOverrideBindingClick(UIParent, true,"3","ActionButton3")
+			ActionButton4:RegisterForClicks("AnyDown","AnyUp")
+			SetOverrideBindingClick(UIParent, true,"4","ActionButton4")
+			ActionButton5:RegisterForClicks("AnyDown","AnyUp")
+			SetOverrideBindingClick(UIParent, true,"5","ActionButton5")
+			ActionButton6:RegisterForClicks("AnyDown","AnyUp")
+			SetOverrideBindingClick(UIParent, true,"6","ActionButton6")
 		end
   	elseif event == "TRAINER_CLOSED" then
 		FsR_TrainerIsUP = false
@@ -2143,6 +2216,9 @@ function Build_Spell_Array()
 end
 function IAmFocus()
 	if FSMB_raidleader==UnitName("player") then return true end
+end
+function FSMB_leader()
+	return FSMB_raidleader
 end
 function focusme()
         if FSMB_game=="classic" or FSMB_game=="shadow" then 

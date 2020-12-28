@@ -1,4 +1,4 @@
-set version 122320_SL_CLASSIC
+set version 122720_SL_CLASSIC
 lappend auto_path twapi
 lappend auto_path aabacus
 package require twapi
@@ -47,7 +47,7 @@ set maxheal "11 11 11 11"
 set clique_overlay "1 1 1 1"
 
 # Special Key Characters
-proc isTrue { var } {
+proc toonlistKey { var } {
 	if { ! [info exists ::$var] } { return false } 
 	upvar ::$var $var
 	eval set var $$var
@@ -154,7 +154,7 @@ while { [gets $tL line] >= 0 } {
   }
 }
 close $tL 
-if { [isTrue keyboard] } {
+if { [toonlistKey keyboard] } {
   argcheck keyboard 1 "us uk de other"
   switch $keyboard {
 	    de { set oem "oem5" }
@@ -164,27 +164,27 @@ if { [isTrue keyboard] } {
 	    default { set oem "oem3" }
   }
 }
-if { [isTrue monitor] } {
+if { [toonlistKey monitor] } {
   argcheck monitor 1 "1280x1024 1920x1080 2560x1440 3360x1440 3840x2160"
 }
-if { [isTrue computer] } {
+if { [toonlistKey computer] } {
   argcheck computer 2
   unset computer
   set computer([lindex $computer 1]) [lindex $computer 2]
 }
-if { [isTrue raidname] } {
+if { [toonlistKey raidname] } {
   argcheck raidname 1
 }
-if { [isTrue extrawait1] } {
+if { [toonlistKey extrawait1] } {
   argcheck extrawait1 1
 }
-if { [isTrue extrawait2] } {
+if { [toonlistKey extrawait2] } {
   argcheck extrawait2 1
 }
-if { [isTrue oemkey] } {
+if { [toonlistKey oemkey] } {
   argcheck oemkey 1
 }
-if { [isTrue autodelete] } {
+if { [toonlistKey autodelete] } {
   argcheck autodelete 2
   set autodeletelist([lindex $autodelete 0]) [lindex $autodelete 1]
 }
@@ -201,7 +201,7 @@ if { ! [file exist "$wowexe" ] } {
 	return
 }
 if {$game=="tbc" || $game=="vanilla" } { set meleeiwt false }
-if { [isTrue oemkey] && $oemkey != "" } { 
+if { [toonlistKey oemkey] && $oemkey != "" } { 
 	set oem $oemkey
 } else {
 	if { [info exists kb_oem($kb)] } {
@@ -217,7 +217,7 @@ if { [isTrue oemkey] && $oemkey != "" } {
 	}
 }
 puts "Detected display size $display"
-if { [isTrue monitor] && $monitor != "" } { 
+if { [toonlistKey monitor] && $monitor != "" } { 
 	puts "Automatic monitor selection overridden by user to $monitor"
 } else {
 	set sizes "1280x1024 1920x1080 2560x1440 3360x1440 3840x2160"
@@ -258,7 +258,7 @@ if { $clique_overlay=="" } {
 }
 if { $monitor == "3840x2160" } {
 #3840x2160
-if { [isTrue use2monitors] } {
+if { [toonlistKey use2monitors] } {
 	set raidhash(1) {{3840 2160 0 0 }}
 	set raidhash(2) {{3840 2160 0 0 } {3840 2160 3840 0 }}
 	set raidhash(3) {{3840 2160 0 0 } {1920 1080 3840 0 } {1920 1080 3840 1080}}
@@ -273,7 +273,7 @@ if { [isTrue use2monitors] } {
 	set raidhash(2) {{2560 1440 0 720} {1280 720 0 0} {1280 720 1280 0} {1280 720 2560 0} {1280 720 2560 720}}
 	set raidhash(3) {{2560 1440 0 720} {1280 720 0 0} {1280 720 1280 0} {1280 720 2560 0} {1280 720 2560 720}}
 	set raidhash(4) {{2560 1440 0 720} {1280 720 0 0} {1280 720 1280 0} {1280 720 2560 0} {1280 720 2560 720}}
-			if { ! [isTrue different5mans] } {
+			if { ! [toonlistKey different5mans] } {
 				set raidhash(5) {{2560 1440 0 720} {1280 720 0 0} {1280 720 1280 0} {1280 720 2560 0} {1280 720 2560 720}}
 			} else {
 				if { $game=="shadow" } {
@@ -289,7 +289,7 @@ if { [isTrue use2monitors] } {
 	set raidhash(10) {{1280 1020 1280 960} {1280 1020 0 960} {1280 1020 2560 960} {640 480 0 480} {640 480 640 480} {640 480 1280 480} {640 480 1920 480} {640 480 0 0} {640 480 640 0} {640 480 1280 0}}
 	set raidhash(10) {{1920 1080 0 1080} {960 540 0 540} {960 540 960 540} {960 540 0 0} {960 540 960 0} {1920 1080 1920 1080} { 960 540 1920 540} {960 540 2880 540} {960 540 1920 0} {960 540 2880 0}}
 	set raidhash(10) {{1920 1080 0 1080} {1920 1080 1920 1080} {960 540 0 540} {960 540 960 540} {960 540 0 0} {960 540 960 0} {960 540 1920 540} {960 540 2880 540} {960 540 1920 0} {960 540 2880 0}}
-	if { ! [isTrue different5mans] } {
+	if { ! [toonlistKey different5mans] } {
 		set raidhash(20) {{640 480 0 0} {960 720 0 1440} {960 720 960 1440} {960 720 1920 1440} {640 480 640 0} {640 480 1280 0} {640 480 1920 0} {640 480 2560 0} {640 480 3200 0} {640 480 0 480} {640 480 640 480} {640 480 1280 480} {640 480 1920 480} {640 480 2560 480} {640 480 3200 480} {640 480 0 960} {640 480 640 960} {640 480 1280 960} {640 480 1920 960 } {640 480 2560 960}} 
 	} else {
 		set raidhash(20) {{1138 640 0 880} {782 440 0 0} {782 440 0 440} {782 440 782 0} {782 440 782 440} {1138 640 0 1520} {782 440 1564 0} {782 440 1564 440} {782 440 2346 0} {782 440 2346 440} {1138 640 1138 880} {782 440 3128 0} {782 440 3128 440} {782 440 3128 880} {782 440 3128 880} {1138 640 1138 1520} {782 440 2276 880} {782 440 2276 1320} {782 440 2279 1760} {782 440 3058 1760}}
@@ -300,7 +300,7 @@ if { [isTrue use2monitors] } {
 		}
 	} elseif { $monitor == "3360x1440" } {
 	  #3360x1440
-		if { [isTrue use2monitors] } {
+		if { [toonlistKey use2monitors] } {
 			set raidhash(1) {{3360 1440 0 0 }}
 			set raidhash(2) {{3360 1440 0 0 } {3360 1440 3360 0 }}
 			set raidhash(3) {{3360 1440 0 0 } {1280 720 3360 0 } {1280 720 3360 720}}
@@ -321,7 +321,7 @@ if { [isTrue use2monitors] } {
 		}
 	} elseif { $monitor == "2560x1440" } {
 	  #x1440
-		if { [isTrue use2monitors] } { 
+		if { [toonlistKey use2monitors] } { 
 			set raidhash(1) {{2560 1440 0 0 }}
 			set raidhash(2) {{2560 1440 0 0 } {2560 1440 2560 0 }}
 			set raidhash(3) {{2560 1440 0 0 } {1280 720 2560 0 } {1260 720 2560 720}}
@@ -349,7 +349,7 @@ if { [isTrue use2monitors] } {
 			set raidhash(5) {{640 480 320 240} {320 240 0 240} {320 240 320 0} {320 240 640 0} {320 240 960 240}}
 	} else {
 	  #1080p
-		if { [isTrue use2monitors] } {
+		if { [toonlistKey use2monitors] } {
 	set raidhash(1) {{1920 1080 0 0 }}
 						set raidhash(2) {{1920 1080 0 0} {960 540 1920 540} {960 540 1920 0} {960 540 2880 0} {960 540 2880 540}}
 						set raidhash(3) {{1920 1080 0 0} {960 540 1920 540} {960 540 1920 0} {960 540 2880 0} {960 540 2880 540}}
@@ -384,11 +384,11 @@ if { ! $nosmoverwrite } {
 	  if { [regexp "^FSMB_game" $line ] } {
 	    puts $sMN "FSMB_game=\"$game\""
           } elseif { [regexp "^FSMB_usefollowmacro" $line ] } {
-	    puts $sMN "FSMB_usefollowmacro=[isTrue usefollowmacro]"
+	    puts $sMN "FSMB_usefollowmacro=[toonlistKey usefollowmacro]"
           } elseif { [regexp "^FSMB_dontsetcamera" $line ] } {
-	    puts $sMN "FSMB_dontsetcamera=[isTrue dontsetcamera]"
+	    puts $sMN "FSMB_dontsetcamera=[toonlistKey dontsetcamera]"
           } elseif { [regexp "^FSMB_dontsetleadercamera" $line ] } {
-	    puts $sMN "FSMB_dontsetleadercamera=[isTrue dontsetleadercamera]"
+	    puts $sMN "FSMB_dontsetleadercamera=[toonlistKey dontsetleadercamera]"
           } elseif { [regexp "^FSMB_tank" $line ] } {
 	    puts -nonewline $sMN "FSMB_tank="
 	    set found_tank false
@@ -404,7 +404,7 @@ if { ! $nosmoverwrite } {
 	    }
 	    if { ! $found_tank } { puts $sMN \"\" }
           } elseif { [regexp "^FSMB_nomacros" $line ] } {
-	    if { [isTrue nomacros] } {
+	    if { [toonlistKey nomacros] } {
 	    	puts $sMN "FSMB_nomacros=true"
 	    } else { 
 		puts $sMN "FSMB_nomacros=nil"
@@ -460,13 +460,13 @@ if { ! $nosmoverwrite } {
 	      incr toonno
 	    }
 	    puts $sMN "\}"
-	 } elseif { [regexp "^FSMB_RAID" $line ] && [isTrue raidname] } {
+	 } elseif { [regexp "^FSMB_RAID" $line ] && [toonlistKey raidname] } {
 	    puts $sMN "FSMB_RAID = \"MULTIBOX_$raidname\""
-	  } elseif { [regexp "^FSMB_maxheal" $line ] && [isTrue maxheal] } {
+	  } elseif { [regexp "^FSMB_maxheal" $line ] && [toonlistKey maxheal] } {
 	    puts -nonewline $sMN "FSMB_maxheal=\{Druid=[lindex $maxheal 0],Priest=[lindex $maxheal 1],Shaman=[lindex $maxheal 2],Paladin=[lindex $maxheal 3]"
 	    puts $sMN "\}"
 	} elseif { [regexp "^FSMB_autodelete" $line ] } {
-	        puts $sMN "FSMB_autodelete=[isTrue useautodelete]"
+	        puts $sMN "FSMB_autodelete=[toonlistKey useautodelete]"
 	} else {
 	    puts $sMN $line
 	  }
@@ -951,10 +951,14 @@ while { ($game == "shadow" || $game == "classic")} {
 	5mmb_monitor "ALT 4" "reset_rotations"
 	5mmb_monitor -anypressed "ESC 1 " "switchwin full"
 	5mmb_monitor -anypressed "0x70 0x71 0x72 0x73 0x74" "switchwin heal"
-	5mmb_monitor -keyup "SPACE x q e 0x25 0x26 0x27 0x28" "switchwin full"
+	if { [toonlistKey demonhuntertank] } {
+		5mmb_monitor -keyup "x q e 0x25 0x26 0x27 0x28" "switchwin full"
+		5mmb_monitor "SPACE SHIFT" "switchwin full"
+	} else {
+		5mmb_monitor -keyup "SPACE x q e 0x25 0x26 0x27 0x28" "switchwin full"
+	}
 	5mmb_monitor -anypressed "TAB" "arrangewin $currlead"
 	5mmb_monitor "ALT 2" "arrangewin $currlead"
-	#5mmb_monitor "SPACE SHIFT" "switchwin full"
 	5mmb_monitor "CONTROL h" {help}
 	5mmb_monitor "CONTROL ALT o" {closeall}
 	#TRIGGER passes whatever numpad key is pressed to arrangewin
