@@ -25,35 +25,6 @@ Completing:Register ("ExampleAll", AUTOCOMPLETE_LIST.WHISPER)
 
 GSE.PrintDebugMessage("GSE Version " .. GSE.VersionString, Statics.SourceTransmission)
 
-
-
-
-function GSE:OnCommReceived(prefix, message, distribution, sender)
-  GSE.PrintDebugMessage("GSE:onCommReceived", Statics.SourceTransmission)
-  GSE.PrintDebugMessage(prefix .. " " .. message .. " " .. distribution .. " " .. sender, Statics.SourceTransmission)
-  local success, t = GSE.DecodeMessage(message)
-  if success then
-    if t.Command == "GS-E_VERSIONCHK" then
-      if not GSold then
-        GSE.performVersionCheck(t.Version)
-      end
-      GSE.storeSender(sender, t.Version)
-    elseif t.Command == "GS-E_TRANSMITSEQUENCE" then
-      if sender ~= GetUnitName("player", true) then
-        GSE.ReceiveSequence(t.ClassID, t.SequenceName, t.Sequence, sender)
-      else
-        GSE.PrintDebugMessage("Ignoring Sequence from me.", Statics.SourceTransmission)
-        GSE.PrintDebugMessage(GSE.ExportSequence(t.Sequence, t.SequenceName, false, "ID", false), Statics.SourceTransmission)
-      end
-    end
-  end
-end
-
-
-
-GSE:RegisterComm("GSE")
-
-
 local transSequencevalue = ""
 
 transmissionFrame:SetTitle(L["Send To"])
@@ -106,3 +77,6 @@ function GSE.GUIShowTransmissionGui(inckey)
   transmissionFrame:Show()
   GSE.GUITransmissionFrame:SetStatusText(L["Ready to Send"])
 end
+
+
+

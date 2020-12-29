@@ -14,8 +14,6 @@ end
 print(FSMB_game.." mode detected!")
 if FSMB_game=="classic" or FSMB_game=="shadow" then 
 	AceComm=LibStub("AceComm-3.0")
-	ActionButton1:RegisterForClicks("AnyDown","AnyUp")
-	SetOverrideBindingClick(UIParent, true,"1","ActionButton1")
 	ActionButton2:RegisterForClicks("AnyDown","AnyUp")
 	SetOverrideBindingClick(UIParent, true,"2","ActionButton2")
 	ActionButton3:RegisterForClicks("AnyDown","AnyUp")
@@ -26,18 +24,6 @@ if FSMB_game=="classic" or FSMB_game=="shadow" then
 	SetOverrideBindingClick(UIParent, true,"5","ActionButton5")
 	ActionButton6:RegisterForClicks("AnyDown","AnyUp")
 	SetOverrideBindingClick(UIParent, true,"6","ActionButton6")
-	MultiBarBottomLeftButton1:RegisterForClicks("AnyDown","AnyUp")
-	SetOverrideBindingClick(UIParent, true,"SHIFT-1","MultiBarBottomLeftButton1")
-	MultiBarBottomLeftButton2:RegisterForClicks("AnyDown","AnyUp")
-	SetOverrideBindingClick(UIParent, true,"SHIFT-2","MultiBarBottomLeftButton2")
-	MultiBarBottomLeftButton3:RegisterForClicks("AnyDown","AnyUp")
-	SetOverrideBindingClick(UIParent, true,"SHIFT-3","MultiBarBottomLeftButton3")
-	MultiBarBottomLeftButton4:RegisterForClicks("AnyDown","AnyUp")
-	SetOverrideBindingClick(UIParent, true,"SHIFT-4","MultiBarBottomLeftButton4")
-	MultiBarBottomLeftButton5:RegisterForClicks("AnyDown","AnyUp")
-	SetOverrideBindingClick(UIParent, true,"SHIFT-5","MultiBarBottomLeftButton5")
-	MultiBarBottomLeftButton6:RegisterForClicks("AnyDown","AnyUp")
-	SetOverrideBindingClick(UIParent, true,"SHIFT-6","MultiBarBottomLeftButton6")
 end
 print('Hello from 5mmb!')
 FSMB_dontsetcamera=false
@@ -1746,6 +1732,18 @@ FSMB:RegisterEvent("UNIT_ENTERING_VEHICLE")
 FSMB:RegisterEvent("UNIT_EXITING_VEHICLE")
 FSMB:RegisterEvent("UPDATE_POSSESS_BAR")
 FSMB:RegisterEvent("UPDATE_OVERRIDE_ACTIONBAR")
+FSMB:RegisterEvent("PLAYER_GAINS_VEHICLE_DATA")
+FSMB:RegisterEvent("PLAYER_LOSES_VEHICLE_DATA")
+FSMB:RegisterEvent("UPDATE_VEHICLE_ACTIONBAR")
+FSMB:RegisterEvent("UNIT_ENTERED_VEHICLE")
+FSMB:RegisterEvent("UNIT_EXITED_VEHICLE")
+FSMB:RegisterEvent("UNIT_ENTERING_VEHICLE")
+FSMB:RegisterEvent("UNIT_EXITING_VEHICLE")
+FSMB:RegisterEvent("VEHICLE_ANGLE_SHOW")
+FSMB:RegisterEvent("VEHICLE_ANGLE_UPDATE")
+FSMB:RegisterEvent("VEHICLE_UPDATE")
+FSMB:RegisterEvent("VEHICLE_POWER_SHOW")
+FSMB:RegisterEvent("ACTIONBAR_UPDATE_COOLDOWN")
 FSMBtooltip=CreateFrame("GAMETOOLTIP", "FSMBtooltip", UIParent, "GameTooltipTemplate")
 Print=print
 FSMB:SetScript("OnEvent", function(self,event, arg1, arg2, ...) -- event handler
@@ -1793,17 +1791,14 @@ FSMB:SetScript("OnEvent", function(self,event, arg1, arg2, ...) -- event handler
 			SetTrainerServiceTypeFilter("used", 0);
 			FsR_TrainerIsUP = true
 		end
-  	elseif event == "UPDATE_OVERRIDE_ACTIONBAR" then
-		if HasOverrideActionBar() then
-			SetOverrideBinding(UIParent, true,"1",nil)
+  	elseif event == "UPDATE_OVERRIDE_ACTIONBAR" or event == "PLAYER_GAINS_VEHICLE_DATA" or event == "PLAYER_LOSES_VEHICLE_DATA" or event == "UNIT_ENTERED_VEHICLE" or event == "UNIT_EXITED_VEHICLE" or event == "UNIT_ENTERING_VEHICLE" or event == "UNIT_EXITING_VEHICLE" or event == "VEHICLE_ANGLE_SHOW" or event == "VEHICLE_ANGLE_UPDATE" or event == "VEHICLE_UPDATE" or event == "VEHICLE_POWER_SHOW" or event == "UPDATE_VEHICLE_ACTION_BAR" or event == "ACTIONBAR_UPDATE_COOLDOWN" then
+		if HasOverrideActionBar() or HasBonusActionBar() or HasVehicleActionBar() or HasTempShapeshiftActionBar() then
 			SetOverrideBinding(UIParent, true,"2",nil)
 			SetOverrideBinding(UIParent, true,"3",nil)
 			SetOverrideBinding(UIParent, true,"4",nil)
 			SetOverrideBinding(UIParent, true,"5",nil)
 			SetOverrideBinding(UIParent, true,"6",nil)
 		else
-			ActionButton1:RegisterForClicks("AnyDown","AnyUp")
-			SetOverrideBindingClick(UIParent, true,"1","ActionButton1")
 			ActionButton2:RegisterForClicks("AnyDown","AnyUp")
 			SetOverrideBindingClick(UIParent, true,"2","ActionButton2")
 			ActionButton3:RegisterForClicks("AnyDown","AnyUp")

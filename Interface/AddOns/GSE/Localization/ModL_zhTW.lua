@@ -47,11 +47,11 @@ L["About GSE"] = "關於 GSE"
 L["Actions"] = "動作"
 L["Active Version: "] = "活動版本:"
 --[[Translation missing --]]
---[[ L["Add a substitution variable for this macro.  This can either be a straight string swap or can be a function.  If a lua function the function needs to return a value."] = ""--]] 
+L["Add a substitution variable for this macro.  This can either be a straight string swap or can be a function.  If a lua function the function needs to return a value."] = "Add a substitution variable for this macro.  This can either be a straight string swap or can be a function.  If a lua function the function needs to return a value."
 --[[Translation missing --]]
---[[ L["Add Variable"] = ""--]] 
+L["Add Variable"] = "Add Variable"
 --[[Translation missing --]]
---[[ L["Add WeakAura"] = ""--]] 
+L["Add WeakAura"] = "Add WeakAura"
 L["Addin Version %s contained versions for the following macros:"] = "加載版本 %s 包含於以下巨集:"
 L["All macros are now stored as upper case names.  You may need to re-add your old macros to your action bars."] = "所有的巨集現在被儲存為大寫.你也許需要重新添加舊的巨集到動作欄."
 L["Alt Keys."] = "Alt鍵."
@@ -63,7 +63,7 @@ L["Arena"] = "競技場"
 L["Arena setting changed to Default."] = "競技場設置更改為默認."
 L["As GS-E is updated, there may be left over macros that no longer relate to sequences.  This will check for these automatically on logout.  Alternatively this check can be run via /gs cleanorphans"] = "GS-E已更新,可能會有遺留的不再使用的巨集. 登出時會自動檢查. 另外這個檢查可以通過輸入 / GS cleanorphans 運行"
 --[[Translation missing --]]
---[[ L["Auras included in GSE Macros"] = ""--]] 
+L["Auras included in GSE Macros"] = "Auras included in GSE Macros"
 L["Author"] = "作者"
 L["Author Colour"] = "作者顏色"
 L["Auto Create Class Macro Stubs"] = "自動創建職業巨集存根"
@@ -78,16 +78,16 @@ L["By setting this value the Sequence Editor will show every macro for your clas
 L["Cancel"] = "撤銷/取消"
 L["CheckMacroCreated"] = "檢測已創建巨集"
 --[[Translation missing --]]
---[[ L["Checks to see if you have a Heart of Azeroth equipped and if so will insert '/cast Heart Essence' into the macro.  If not your macro will skip this line."] = ""--]] 
+L["Checks to see if you have a Heart of Azeroth equipped and if so will insert '/cast Heart Essence' into the macro.  If not your macro will skip this line."] = "Checks to see if you have a Heart of Azeroth equipped and if so will insert '/cast Heart Essence' into the macro.  If not your macro will skip this line."
 L["Choose import action:"] = "選擇導入動作:"
 L["Choose Language"] = "選擇語言"
 L["Classwide Macro"] = "職業通用巨集"
 L["Clear"] = "清除"
 --[[Translation missing --]]
---[[ L["Clear Common Keybindings"] = ""--]] 
+L["Clear Common Keybindings"] = "Clear Common Keybindings"
 L["Clear Errors"] = "清除錯誤"
 --[[Translation missing --]]
---[[ L["Clear Keybindings"] = ""--]] 
+L["Clear Keybindings"] = "Clear Keybindings"
 L["Close"] = "關閉"
 L["Close to Maximum Macros.|r  You can have a maximum of "] = "超過最大巨集上限.|r 你最多可以有"
 L["Close to Maximum Personal Macros.|r  You can have a maximum of "] = "超過最大角色巨集上限.|r 你最多可以有"
@@ -97,9 +97,9 @@ L["Combat"] = "戰鬥"
 L["Command Colour"] = "命令顏色"
 L["Completely New GS Macro."] = "全新的GS巨集."
 --[[Translation missing --]]
---[[ L["Compress"] = ""--]] 
+L["Compress"] = "Compress"
 --[[Translation missing --]]
---[[ L["Compress Sequence from Forums"] = ""--]] 
+L["Compress Sequence from Forums"] = "Compress Sequence from Forums"
 L["Conditionals Colour"] = "條件顏色"
 L["Configuration"] = "表面配置"
 L["Continue"] = "繼續"
@@ -114,49 +114,49 @@ L[ [=[Create or remove a Macro stub in /macro that can be dragged to your action
 GSE can store an unlimited number of macros however WOW's /macro interface can only store a limited number of macros.]=] ] = "在 /巨集 中創建或刪除可以拖動到操作欄的巨集存根.以便您可以使用此巨集. GSE可以存儲無限數量的巨集，但是WOW /巨集 接口只能存儲有限數量的巨集。"
 L["Creating New Sequence."] = "創建新序列."
 --[[Translation missing --]]
---[[ L["Current GCD"] = ""--]] 
+L["Current GCD"] = "Current GCD"
 --[[Translation missing --]]
---[[ L["Current GCD: %s"] = ""--]] 
+L["Current GCD: %s"] = "Current GCD: %s"
 L["Debug"] = "調試"
 L["Debug Mode Options"] = "調試模式設置"
 L["Debug Output Options"] = "調試輸出設置"
 L["Debug Sequence Execution"] = "調試序列執行"
 --[[Translation missing --]]
---[[ L["Decompress"] = ""--]] 
+L["Decompress"] = "Decompress"
 --[[Translation missing --]]
---[[ L["Default Editor Height"] = ""--]] 
+L["Default Editor Height"] = "Default Editor Height"
 --[[Translation missing --]]
---[[ L["Default Editor Width"] = ""--]] 
+L["Default Editor Width"] = "Default Editor Width"
 L["Default Import Action"] = "默認導入動作"
 L["Default Version"] = "默認版本"
 --[[Translation missing --]]
---[[ L["Del"] = ""--]] 
+L["Del"] = "Del"
 L["Delete"] = "刪除"
 L["Delete Icon"] = "刪除圖標"
 L["Delete Orphaned Macros on Logout"] = "登出時刪除獨立的巨集"
 L["Delete this macro.  This is not able to be undone."] = "刪除此巨集。 這是無法取消的。"
 --[[Translation missing --]]
---[[ L["Delete this variable from the sequence."] = ""--]] 
+L["Delete this variable from the sequence."] = "Delete this variable from the sequence."
 L[ [=[Delete this verion of the macro.  This can be undone by closing this window and not saving the change.  
 This is different to the Delete button below which will delete this entire macro.]=] ] = "刪除此版本的巨集. 關閉此窗口而不保存更改可以取消此操作. 這與下面的刪除按鈕不同.刪除按鈕將刪除整個巨集。"
 --[[Translation missing --]]
---[[ L["Delete this WeakAura from the sequence."] = ""--]] 
+L["Delete this WeakAura from the sequence."] = "Delete this WeakAura from the sequence."
 --[[Translation missing --]]
---[[ L["Delete Variable"] = ""--]] 
+L["Delete Variable"] = "Delete Variable"
 L["Delete Version"] = "刪除版本"
 --[[Translation missing --]]
---[[ L["Delete WeakAura"] = ""--]] 
+L["Delete WeakAura"] = "Delete WeakAura"
 L["Different helpTxt"] = "不同的幫助腳本"
 L["Disable"] = "禁用"
 --[[Translation missing --]]
---[[ L["Disable Editor"] = ""--]] 
+L["Disable Editor"] = "Disable Editor"
 L["Disable Sequence"] = "禁用序列"
 L["Display debug messages in Chat Window"] = "在聊天窗口中顯示調試信息"
 L["Don't Translate Sequences"] = "不要翻譯序列"
 L["Drag this icon to your action bar to use this macro. You can change this icon in the /macro window."] = "將此圖標拖到操作欄以使用此巨集. 您可以在 /巨集 窗口中更改此圖標."
 L["Dungeon"] = "地城版本"
 --[[Translation missing --]]
---[[ L["Dungeon setting changed to Default."] = ""--]] 
+L["Dungeon setting changed to Default."] = "Dungeon setting changed to Default."
 L["Edit"] = "編輯"
 L["Edit this macro.  To delete a macro, choose this edit option and then from inside hit the delete button."] = "編輯此巨集. 要刪除巨集.請選擇此編輯選項.然後從內部點擊刪除按鈕."
 L["Editor Colours"] = "編輯器顏色"
@@ -167,14 +167,14 @@ L["Enable Mod Debug Mode"] = "開啟模塊調試模式"
 L["Enable Sequence"] = "開啟巨集"
 L["Enable this option to stop automatically translating sequences from enUS to local language."] = "啟用此選項可以停止自動將序列從enUS (英文版本) 轉換為本地語言."
 --[[Translation missing --]]
---[[ L["Enable timing functions by using Click refresh speed as a pseudo timer."] = ""--]] 
+L["Enable timing functions by using Click refresh speed as a pseudo timer."] = "Enable timing functions by using Click refresh speed as a pseudo timer."
 --[[Translation missing --]]
---[[ L["Enforce GSE minimum version for this macro"] = ""--]] 
+L["Enforce GSE minimum version for this macro"] = "Enforce GSE minimum version for this macro"
 L["Error found in version %i of %s."] = "版本 %i 在序列 %s 中被發現錯誤."
 L["Export"] = "導出"
 L["Export a Sequence"] = "導出序列"
 --[[Translation missing --]]
---[[ L["Export Macro Read Only"] = ""--]] 
+L["Export Macro Read Only"] = "Export Macro Read Only"
 L["Export this Macro."] = "導出這個巨集"
 L["Extra Macro Versions of %s has been added."] = "額外巨集版本 %s 已被添加."
 L["Filter Macro Selection"] = "巨集過濾選擇器"
@@ -186,7 +186,7 @@ L["General"] = "常規"
 L["General Options"] = "常規設置"
 L["Global Macros are those that are valid for all classes.  GSE2 also imports unknown macros as Global.  This option will create a button for these macros so they can be called for any class.  Having all macros in this space is a performance loss hence having them saved with a the right specialisation is important."] = "全局巨集是對所有職業都有效的巨集.GSE2也導入未知的全局巨集.此選項將創建一個按鈕使它們可以被任何職業調用.所有巨集存在這個空間都會有性能損失.因此最好把它們保存在正確的專精下."
 --[[Translation missing --]]
---[[ L["Gnome Sequencer: Compress a Sequence String."] = ""--]] 
+L["Gnome Sequencer: Compress a Sequence String."] = "Gnome Sequencer: Compress a Sequence String."
 L["Gnome Sequencer: Export a Sequence String."] = "Gnome Sequencer: 輸出序列字符串."
 L["Gnome Sequencer: Import a Macro String."] = "Gnome Sequencer: 導入巨集字符串."
 L["Gnome Sequencer: Record your rotation to a macro."] = "Gnome Sequencer: 記錄你的循環到一個巨集."
@@ -198,6 +198,8 @@ L["GnomeSequencer was originally written by semlar of wowinterface.com."] = "Gno
 L["GnomeSequencer-Enhanced"] = "GnomeSequencer-增強"
 L["GnomeSequencer-Enhanced loaded.|r  Type "] = "GnomeSequencer-增強 加載.|r 輸入"
 L["GSE"] = "GSE"
+--[[Translation missing --]]
+L["GSE - %s's Macros"] = "GSE - %s's Macros"
 L["GSE allows plugins to load Macro Collections as plugins.  You can reload a collection by pressing the button below."] = "GSE允許插件加載巨集整合包作為插件. 你可以按下面的按鈕重新加載整合包."
 L["GS-E can save all macros or only those versions that you have created locally.  Turning this off will cache all macros in your WTF\\GS-Core.lua variables file but will increase load times and potentially cause colissions."] = "GS-E可以保存所有的巨集或只有那些你所創建的本地版本.關閉這個功能會在你的WTF \\ gs-core.lua變量文件緩存所有巨集,但會增加加載時間,並有可能引起衝突."
 L["GSE has a LibDataBroker (LDB) data feed.  List Other GSE Users and their version when in a group on the tooltip to this feed."] = "GSE有一個LibDataBroker（LDB）數據源. 當在提示這一組源時,列出其他GSE的用戶的版本."
@@ -205,18 +207,18 @@ L["GSE has a LibDataBroker (LDB) data feed.  Set this option to show queued Out 
 L["GSE is a complete rewrite of that addon that allows you create a sequence of macros to be executed at the push of a button."] = "GSE是這個插件的完整的重寫.這允許你創建一個巨集的序列,在按下按鈕時執行."
 L["GSE is out of date. You can download the newest version from https://mods.curse.com/addons/wow/gnomesequencer-enhanced."] = "GSE 已過期. 你可以在 https://mods.curse.com/addons/wow/gnomesequencer-enhanced 下載新版本."
 --[[Translation missing --]]
---[[ L["GSE is out of date. You can download the newest version from https://www.curseforge.com/wow/addons/gse-gnome-sequencer-enhanced-advanced-macros."] = ""--]] 
+L["GSE is out of date. You can download the newest version from https://www.curseforge.com/wow/addons/gse-gnome-sequencer-enhanced-advanced-macros."] = "GSE is out of date. You can download the newest version from https://www.curseforge.com/wow/addons/gse-gnome-sequencer-enhanced-advanced-macros."
 L["GSE Macro"] = "GSE 巨集"
 L["GS-E Plugins"] = "GS-E 插件"
 --[[Translation missing --]]
---[[ L["GSE stores the base spell and asks WoW to use that ability.  WoW will then choose the current version of the spell.  This toggle switches between showing the Base Spell or the Current Spell."] = ""--]] 
+L["GSE stores the base spell and asks WoW to use that ability.  WoW will then choose the current version of the spell.  This toggle switches between showing the Base Spell or the Current Spell."] = "GSE stores the base spell and asks WoW to use that ability.  WoW will then choose the current version of the spell.  This toggle switches between showing the Base Spell or the Current Spell."
 L["GSE Users"] = "GSE 用戶"
 L["GSE Version: %s"] = "GSE 版本: %s"
 L[ [=[GSE was originally forked from GnomeSequencer written by semlar.  It was enhanced by TImothyLuke to include a lot of configuration and boilerplate functionality with a GUI added.  The enhancements pushed the limits of what the original code could handle and was rewritten from scratch into GSE.
 
 GSE itself wouldn't be what it is without the efforts of the people who write macros with it.  Check out https://wowlazymacros.com for the things that make this mod work.  Special thanks to Lutechi for creating this community.]=] ] = "GSE最初是由semlar編寫的GnomeSequencer派生的,TImothyLuke對其進行了增強，包括許多配置和样板功能以及添加的GUI。 這些增強功能突破了原始代碼可以處理的限制，並從頭開始重寫為GSE。 如果沒有用它編寫巨集的人的努力，GSE本身就不會是它。 查看https://wowlazymacros.com了解這個mod的工作原理。 特別感謝Lutechi創建這個社區。"
 --[[Translation missing --]]
---[[ L["GSE: Import a Macro String."] = ""--]] 
+L["GSE: Import a Macro String."] = "GSE: Import a Macro String."
 L["GSE: Left Click to open the Sequence Editor"] = "GSE: 左鍵單擊以打開序列編輯器"
 L["GS-E: Left Click to open the Sequence Editor"] = "GS-E: 左鍵單擊以打開序列編輯器"
 L["GSE: Middle Click to open the Transmission Interface"] = "GSE: 中鍵單擊以打開傳輸接口"
@@ -230,16 +232,16 @@ L["Help Link"] = "幫助鏈接"
 L["Help URL"] = "幫助網址"
 L["Heroic"] = "英雄難度"
 --[[Translation missing --]]
---[[ L["Heroic setting changed to Default."] = ""--]] 
+L["Heroic setting changed to Default."] = "Heroic setting changed to Default."
 L["Hide Login Message"] = "隱藏加載信息"
 L["Hide Minimap Icon"] = "隱藏迷你地圖標"
 L["Hide Minimap Icon for LibDataBroker (LDB) data text."] = "隱藏LibDataBroker（LDB）資料夾的迷你地圖圖標。"
 L["Hides the message that GSE is loaded."] = "隱藏GSE加載的信息."
 L["History"] = "歷史"
 --[[Translation missing --]]
---[[ L["How many pixels high should the Editor start at.  Defaults to 700"] = ""--]] 
+L["How many pixels high should the Editor start at.  Defaults to 700"] = "How many pixels high should the Editor start at.  Defaults to 700"
 --[[Translation missing --]]
---[[ L["How many pixels wide should the Editor start at.  Defaults to 700"] = ""--]] 
+L["How many pixels wide should the Editor start at.  Defaults to 700"] = "How many pixels wide should the Editor start at.  Defaults to 700"
 L["Icon Colour"] = "圖標顏色"
 L["If you load Gnome Sequencer - Enhanced and the Sequence Editor and want to create new macros from scratch, this will enable a first cut sequenced template that you can load into the editor as a starting point.  This enables a Hello World macro called Draik01.  You will need to do a /console reloadui after this for this to take effect."] = "如果你加載Gnome Sequencer - Enhanced(侏儒序列器-增強) 和Sequence Editor(序列編輯器) 並希望從頭開始創建新的巨集, 這將啟用一個初始序列模板,你可以加載到編輯器作為起點. 它會啟動一個名為Draik01的巨集作為Hellow World巨集. 你需要輸入/console reloadui 之後使之生效."
 L["Ignore"] = "忽略"
@@ -270,21 +272,21 @@ L["Legacy GS/GSE1 Macro"] = "遺留的 GS/GSE1 巨集"
 L["Like a /castsequence macro, it cycles through a series of commands when the button is pushed. However, unlike castsequence, it uses macro text for the commands instead of spells, and it advances every time the button is pushed instead of stopping when it can't cast something."] = "像一個/castsequence 巨集, 它在按下按鈕時循環執行一系列命令. 然而, 與/castsequence 不同, 它嚴格使用巨集文本作為命令而不是根據法術狀態, 並且它每次按下按鈕時都會前進而不在它不能釋放時停止."
 L["Load"] = "讀取"
 --[[Translation missing --]]
---[[ L["Load or update this WeakAura into WeakAuras."] = ""--]] 
+L["Load or update this WeakAura into WeakAuras."] = "Load or update this WeakAura into WeakAuras."
 L["Load Sequence"] = "讀取序列"
 --[[Translation missing --]]
---[[ L["Load WeakAura"] = ""--]] 
+L["Load WeakAura"] = "Load WeakAura"
 L["Local Macro"] = "本地巨集"
 L["Macro Collection to Import."] = "巨集集合導入."
 --[[Translation missing --]]
---[[ L["Macro found by the name %sPVP%s. Rename this macro to a different name to be able to use it.  WOW has a global object called PVP that is referenced instead of this macro."] = ""--]] 
+L["Macro found by the name %sPVP%s. Rename this macro to a different name to be able to use it.  WOW has a global object called PVP that is referenced instead of this macro."] = "Macro found by the name %sPVP%s. Rename this macro to a different name to be able to use it.  WOW has a global object called PVP that is referenced instead of this macro."
 L["Macro found by the name %sWW%s. Rename this macro to a different name to be able to use it.  WOW has a hidden button called WW that is executed instead of this macro."] = "巨集被命名為 %sWW%s .重命名此巨集以能使用此巨集.魔獸世界有一個隱藏的名為\"WW\"的按鈕,使用此巨集實際上會點擊該按鈕而不是使用此巨集."
 L["Macro Icon"] = "巨集圖標"
 L["Macro Import Successful."] = "巨集導入成功."
 L["Macro Reset"] = "巨集重置"
 L["Macro unable to be imported."] = "無法導入巨集."
 --[[Translation missing --]]
---[[ L["Macro Variables"] = ""--]] 
+L["Macro Variables"] = "Macro Variables"
 L["Macro Version %d deleted."] = "巨集版本%d 已刪除."
 L["Make Active"] = "使它活動"
 L["Manage Versions"] = "管理版本"
@@ -293,20 +295,20 @@ L["Merge"] = "合併"
 L["MergeSequence"] = "合併序列"
 L["Middle Mouse Button"] = "鼠標中鍵"
 --[[Translation missing --]]
---[[ L["Millisecond click settings"] = ""--]] 
+L["Millisecond click settings"] = "Millisecond click settings"
 L["Mouse Button 4"] = "鼠標鍵4"
 L["Mouse Button 5"] = "鼠標鍵5"
 L["Mouse Buttons."] = "鼠標鍵."
 L["Moved %s to class %s."] = "移動 %s 到職業 %s ."
 --[[Translation missing --]]
---[[ L["MS Click Rate"] = ""--]] 
+L["MS Click Rate"] = "MS Click Rate"
 L["Mythic"] = "史詩難度"
 --[[Translation missing --]]
---[[ L["Mythic setting changed to Default."] = ""--]] 
+L["Mythic setting changed to Default."] = "Mythic setting changed to Default."
 L["Mythic+"] = "史詩難度+"
 L["Mythic+ setting changed to Default."] = "史詩難度+設置更改為默認."
 --[[Translation missing --]]
---[[ L["Name"] = ""--]] 
+L["Name"] = "Name"
 L["Neck"] = "頸部"
 L["New"] = "新"
 L["New Sequence Name"] = "新序列名稱"
@@ -316,7 +318,7 @@ L["No changes were made to "] = "沒有改變被應用到"
 L["No Help Information "] = "無幫助信息"
 L["No Help Information Available"] = "沒有幫助信息可用"
 --[[Translation missing --]]
---[[ L["No Sample Macros are available yet for this class."] = ""--]] 
+L["No Sample Macros are available yet for this class."] = "No Sample Macros are available yet for this class."
 L["No Sequences present so none displayed in the list."] = "當前沒有序列,因此列表中無內容."
 L["Normal Colour"] = "通常顏色"
 L["Notes and help on how this macro works.  What things to remember.  This information is shown in the sequence browser."] = "有關此巨集如何工作的註釋和幫助。 要記住什麼。 此信息顯示在序列瀏覽器中。"
@@ -328,9 +330,9 @@ L["Options have been reset to defaults."] = "設置已被重置為默認值."
 L["Output"] = "導出"
 L["Output the action for each button press to verify StepFunction and spell availability."] = "輸出按鈕按下後的每個的動作以驗證步驟方法和法術的可用性."
 --[[Translation missing --]]
---[[ L["Party"] = ""--]] 
+L["Party"] = "Party"
 --[[Translation missing --]]
---[[ L["Party setting changed to Default."] = ""--]] 
+L["Party setting changed to Default."] = "Party setting changed to Default."
 L["Pause"] = "暫停"
 L["Paused"] = "已暫停"
 L["Paused - In Combat"] = "已暫停 - 在戰鬥中"
@@ -363,10 +365,10 @@ L["PVP"] = "PVP"
 L["PVP setting changed to Default."] = "PVP設置更改為默認值."
 L["Raid"] = "Raid"
 --[[Translation missing --]]
---[[ L["Raid setting changed to Default."] = ""--]] 
+L["Raid setting changed to Default."] = "Raid setting changed to Default."
 L["Random - It will select .... a spell, any spell"] = "隨機 - 它將選擇......一個咒語，任何咒語"
 --[[Translation missing --]]
---[[ L["Rank"] = ""--]] 
+L["Rank"] = "Rank"
 L["Ready to Send"] = "準備發送"
 L["Received Sequence "] = "接收序列"
 L["Record"] = "記錄"
@@ -375,6 +377,10 @@ L["Record the spells and items you use into a new macro."] = "將您使用的法
 L["Registered Addons"] = "註冊插件"
 L["Rename New Macro"] = "重命名新巨集"
 L["Replace"] = "替換"
+--[[Translation missing --]]
+L["Request Macro"] = "Request Macro"
+--[[Translation missing --]]
+L["Request that the user sends you a copy of this macro."] = "Request that the user sends you a copy of this macro."
 L["Require Target to use"] = "需要使用目標"
 L["Reset Macro when out of combat"] = "當離開戰鬥時重置巨集"
 L["Reset this macro when you exit combat."] = "退出戰鬥時重置此巨集."
@@ -382,7 +388,7 @@ L["Resets"] = "重置"
 L["Resets macros back to the initial state when out of combat."] = "在退出戰鬥時巨集重置為初始狀態."
 L["Resume"] = "恢復"
 --[[Translation missing --]]
---[[ L["Returns your current Global Cooldown value accounting for your haste if that stat is present."] = ""--]] 
+L["Returns your current Global Cooldown value accounting for your haste if that stat is present."] = "Returns your current Global Cooldown value accounting for your haste if that stat is present."
 L["Right Alt Key"] = "右Alt鍵"
 L["Right Control Key"] = "右Ctrl鍵"
 L["Right Mouse Button"] = "鼠標右鍵"
@@ -393,10 +399,12 @@ L["Running"] = "運行"
 L["Save"] = "保存"
 L["Save the changes made to this macro"] = "保存對此巨集所做的更改"
 --[[Translation missing --]]
---[[ L["Scenario"] = ""--]] 
+L["Scenario"] = "Scenario"
 --[[Translation missing --]]
---[[ L["Scenario setting changed to Default."] = ""--]] 
+L["Scenario setting changed to Default."] = "Scenario setting changed to Default."
 L["Seed Initial Macro"] = "種子初始巨集"
+--[[Translation missing --]]
+L["Select a Sequence"] = "Select a Sequence"
 L["Select Other Version"] = "選擇其他版本"
 L["Send"] = "發送"
 L["Send this macro to another GSE player who is on the same server as you are."] = "將此巨集發送給與您在同一服務器上的另一個GSE播放器."
@@ -410,11 +418,11 @@ L["Sequence Editor"] = "序列編輯器"
 L["Sequence Name"] = "序列名稱"
 L["Sequence Name %s is in Use. Please choose a different name."] = "序列名稱 %s 已被使用.請選擇一個不同的名稱."
 --[[Translation missing --]]
---[[ L["Sequence Named %s was not specifically designed for this version of the game.  It may need adjustments."] = ""--]] 
+L["Sequence Named %s was not specifically designed for this version of the game.  It may need adjustments."] = "Sequence Named %s was not specifically designed for this version of the game.  It may need adjustments."
 L["Sequence Saved as version "] = "保存序列版本為"
 L["Sequence specID set to current spec of "] = "序列天賦ID設置為當前天賦"
 --[[Translation missing --]]
---[[ L["Sequence to Compress."] = ""--]] 
+L["Sequence to Compress."] = "Sequence to Compress."
 L["Sequence Viewer"] = "序列查看器"
 L["Sequential (1 2 3 4)"] = "順序 (1 2 3 4)"
 L["Set Default Icon QuestionMark"] = "設置默認圖標為問號"
@@ -422,12 +430,12 @@ L["Shift Keys."] = "Shift鍵."
 L["Show All Macros in Editor"] = "在編輯器顯示全部巨集"
 L["Show Class Macros in Editor"] = "在編輯器顯示職業巨集"
 --[[Translation missing --]]
---[[ L["Show Current Spells"] = ""--]] 
+L["Show Current Spells"] = "Show Current Spells"
 L["Show Global Macros in Editor"] = "在編輯器顯示全局巨集"
 L["Show GSE Users in LDB"] = "在LDB中顯示GSE用戶"
 L["Show OOC Queue in LDB"] = "在LDB中顯示OOC隊列"
 --[[Translation missing --]]
---[[ L["Show the current value of this variable."] = ""--]] 
+L["Show the current value of this variable."] = "Show the current value of this variable."
 L["Source Language "] = "語言來源"
 L["Specialisation / Class ID"] = "專精 / 職業 ID"
 L["Specialization Specific Macro"] = "專精特定巨集"
@@ -441,17 +449,17 @@ L["Store output of debug messages in a Global Variable that can be referrenced b
 L["String Colour"] = "字符串顏色"
 L["Supporters"] = "支持者"
 --[[Translation missing --]]
---[[ L["System Variables"] = ""--]] 
+L["System Variables"] = "System Variables"
 L["Talents"] = "天賦"
 L["Target"] = "目標"
 L["Target language "] = "目標語言"
 L["Target protection is currently %s"] = "目前保護目標是 %s"
 --[[Translation missing --]]
---[[ L["Test Variable"] = ""--]] 
+L["Test Variable"] = "Test Variable"
 L["The author of this macro."] = "這個巨集的作者."
 L["The command "] = "命令"
 --[[Translation missing --]]
---[[ L["The current result of variable |cff0000ff~~%s~~|r is |cFF00D1FF%s|r"] = ""--]] 
+L["The current result of variable |cff0000ff~~%s~~|r is |cFF00D1FF%s|r"] = "The current result of variable |cff0000ff~~%s~~|r is |cFF00D1FF%s|r"
 L["The Custom StepFunction Specified is not recognised and has been ignored."] = "指定的自定義步驟方法無法識別,並已被忽略."
 L["The following people donate monthly via Patreon for the ongoing maintenance and development of GSE.  Their support is greatly appreciated."] = "以下人員每月通過Patreon捐贈GSE的持續維護和開發. 非常感謝他們的支持."
 L["The GSE Out of Combat queue is %s"] = "GSE插件退出戰鬥序列於 %s"
@@ -459,7 +467,7 @@ L["The GUI has not been loaded.  Please activate this plugin amongst WoW's addon
 L["The Macro Translator will translate an English sequence to your local language for execution.  It can also be used to translate a sequence into a different language.  It is also used for syntax based colour markup of Sequences in the editor."] = "巨集翻譯器將英語序列翻譯成你的本地語言以供執行. 它也可以用於將序列翻譯成不同的語言. 同時可用於編輯器中基於語法的顏色標記."
 L["The main lines of the macro."] = "巨集的主線."
 --[[Translation missing --]]
---[[ L["The milliseconds being used in key click delay."] = ""--]] 
+L["The milliseconds being used in key click delay."] = "The milliseconds being used in key click delay."
 L[ [=[The name of your macro.  This name has to be unique and can only be used for one object.
 You can copy this entire macro by changing the name and choosing Save.]=] ] = "巨集的名稱. 此名稱必須是唯一的，並且只能用於一個對象. 您可以通過更改名稱並選擇保存來複製整個巨集."
 L["The Sample Macros have been reloaded."] = "示範巨集已重新加載."
@@ -477,7 +485,7 @@ L["The version of this macro to use in Mythic+ Dungeons."] = "這個巨集的版
 L["The version of this macro to use in normal dungeons."] = "這個巨集的版本在普通地城中使用。"
 L["The version of this macro to use in PVP."] = "要在PVP中使用的此巨集的版本."
 --[[Translation missing --]]
---[[ L["The version of this macro to use in Scenarios."] = ""--]] 
+L["The version of this macro to use in Scenarios."] = "The version of this macro to use in Scenarios."
 L["The version of this macro to use when in a party in the world."] = "在全世界中的隊伍中使用的這個巨集的版本。"
 L["The version of this macro to use when in time walking dungeons."] = "這個巨集的版本在隨機地城時使用."
 L["There are %i events in out of combat queue"] = "離開戰鬥的序列中有 %i 個事件"
@@ -495,12 +503,12 @@ L["These options combine to allow you to reset a macro while it is running.  The
 L["These tick boxes have three settings for each slot.  Gold = Definately use this item. Blank = Do not use this item automatically.  Silver = Either use or not based on my default settings store in GSE's Options."] = "這些複選框對每個插槽都有三個設置. 黃金=絕對使用此項目. 空白=不要自動使用此項目. 銀色 =根據我在GSE選項中的默認設置存儲使用與否."
 L["This change will not come into effect until you save this macro."] = "此更改將不會生效,直到你保存此巨集."
 --[[Translation missing --]]
---[[ L["This function will remove the SHIFT+N, ALT+N and CTRL+N keybindings for this character.  Useful if [mod:shift] etc conditions don't work in game."] = ""--]] 
+L["This function will remove the SHIFT+N, ALT+N and CTRL+N keybindings for this character.  Useful if [mod:shift] etc conditions don't work in game."] = "This function will remove the SHIFT+N, ALT+N and CTRL+N keybindings for this character.  Useful if [mod:shift] etc conditions don't work in game."
 L["This function will update macro stubs to support listening to the options below.  This is required to be completed 1 time per character."] = "此功能將更新巨集存根以支持下面的選項.每個角色都需要運行一次."
 L["This is a small addon that allows you create a sequence of macros to be executed at the push of a button."] = "這是一個小插件,允許你創建一個巨集序列以便在按下按鈕時執行."
 L["This is the only version of this macro.  Delete the entire macro to delete this version."] = "這是此巨集的唯一版本. 刪除整個巨集以刪除此版本."
 --[[Translation missing --]]
---[[ L["This macro uses features that are not available in this version. You need to update GSE to %s in order to use this macro."] = ""--]] 
+L["This macro uses features that are not available in this version. You need to update GSE to %s in order to use this macro."] = "This macro uses features that are not available in this version. You need to update GSE to %s in order to use this macro."
 L["This option clears errors and stack traces ingame.  This is the equivalent of /run UIErrorsFrame:Clear() in a KeyRelease.  Turning this on will trigger a Scam warning about running custom scripts."] = "該選項會清除遊戲中的錯誤追踪.這等於寫入 /run UIErrorsFrame:Clear() 在按鍵釋放. 打開這個將觸發一個關於運行自定義腳本的欺騙警告."
 L["This option dumps extra trace information to your chat window to help troubleshoot problems with the mod"] = "此選項將額外的跟踪信息轉儲到聊天窗口,以幫助解決模塊的問題"
 L["This option hide error sounds like \"That is out of range\" from being played while you are hitting a GS Macro.  This is the equivalent of /console Sound_EnableErrorSpeech lines within a Sequence.  Turning this on will trigger a Scam warning about running custom scripts."] = [=[顯示更多內容
@@ -508,7 +516,7 @@ L["This option hide error sounds like \"That is out of range\" from being played
 L["This option hides text error popups and dialogs and stack traces ingame.  This is the equivalent of /script UIErrorsFrame:Hide() in a KeyRelease.  Turning this on will trigger a Scam warning about running custom scripts."] = "該選項僵隱藏錯誤文本彈出和對話框和堆棧跟踪.這等於寫入 /script UIErrorsFrame:Hide() 在按鍵釋放. 打開這個將觸發一個關於運行自定義腳本的欺騙警告."
 L["This option prevents macros firing unless you have a target. Helps reduce mistaken targeting of other mobs/groups when your target dies."] = "該選項將禁止你在沒有目標的時候啟動巨集.有助於減少當你的目標死亡時錯誤的針對其他怪物/組."
 --[[Translation missing --]]
---[[ L["This sequence is Read Only and unable to be edited."] = ""--]] 
+L["This sequence is Read Only and unable to be edited."] = "This sequence is Read Only and unable to be edited."
 L["This Sequence was exported from GSE %s."] = "該序列導出自GSE %s."
 L["This shows the Global Macros available as well as those for your class."] = "這將顯示你當前職業可用的全局巨集"
 L["This version has been modified by TimothyLuke to make the power of GnomeSequencer avaialble to people who are not comfortable with lua programming."] = "這個版本已經被TimothyLuke修改,使GnomeSequencer的強大功能可以讓不習慣lua編程的人使用."
@@ -527,7 +535,7 @@ L["Trinket 1"] = "飾品 1"
 L["Trinket 2"] = "飾品 2"
 L["Two sequences with unknown sources found."] = "找到兩個未知來源的序列."
 --[[Translation missing --]]
---[[ L["Unable to interpret sequence."] = ""--]] 
+L["Unable to interpret sequence."] = "Unable to interpret sequence."
 L["Unknown Author|r "] = "未知作者|r"
 L["Unknown Colour"] = "未知顏色"
 L["Update"] = "更新"
@@ -539,7 +547,7 @@ L["Updating due to new version."] = "更新至新版本."
 L["Use"] = "使用"
 L["Use Belt Item in KeyRelease"] = "使用腰部物品在釋放按鍵"
 --[[Translation missing --]]
---[[ L["Use External MS Timings"] = ""--]] 
+L["Use External MS Timings"] = "Use External MS Timings"
 L["Use First Ring in KeyRelease"] = "使用第一個戒指在釋放按鍵"
 L["Use First Trinket in KeyRelease"] = "使用第一個飾品在釋放按鍵"
 L["Use Global Account Macros"] = "使用帳號全部巨集"
@@ -550,25 +558,25 @@ L["Use Realtime Parsing"] = "使用實時解析"
 L["Use Second Ring in KeyRelease"] = "使用第二個戒指在釋放按鍵"
 L["Use Second Trinket in KeyRelease"] = "使用第二個飾品在釋放按鍵"
 --[[Translation missing --]]
---[[ L["Use Verbose Export Sequence Format"] = ""--]] 
+L["Use Verbose Export Sequence Format"] = "Use Verbose Export Sequence Format"
 L["Use WLM Export Sequence Format"] = "使用WLM導出序列格式"
 --[[Translation missing --]]
---[[ L["Value"] = ""--]] 
+L["Value"] = "Value"
 --[[Translation missing --]]
---[[ L["Variables"] = ""--]] 
+L["Variables"] = "Variables"
 --[[Translation missing --]]
---[[ L["Version"] = ""--]] 
+L["Version"] = "Version"
 L["Version="] = "版本="
 --[[Translation missing --]]
---[[ L["WARNING ONLY"] = ""--]] 
+L["WARNING ONLY"] = "WARNING ONLY"
 --[[Translation missing --]]
---[[ L["WeakAuras"] = ""--]] 
+L["WeakAuras"] = "WeakAuras"
 --[[Translation missing --]]
---[[ L["WeakAuras is a mod that watches for certain conditions and actions and they alerts the player to them occuring.  These are included for convenience and still need to be copied from here and imported to the WeakAuras mod via the command /wa."] = ""--]] 
+L["WeakAuras is a mod that watches for certain conditions and actions and they alerts the player to them occuring.  These are included for convenience and still need to be copied from here and imported to the WeakAuras mod via the command /wa."] = "WeakAuras is a mod that watches for certain conditions and actions and they alerts the player to them occuring.  These are included for convenience and still need to be copied from here and imported to the WeakAuras mod via the command /wa."
 --[[Translation missing --]]
---[[ L["WeakAuras was not found."] = ""--]] 
+L["WeakAuras was not found."] = "WeakAuras was not found."
 --[[Translation missing --]]
---[[ L["WeakAuras was not found.  Reported error was %s"] = ""--]] 
+L["WeakAuras was not found.  Reported error was %s"] = "WeakAuras was not found.  Reported error was %s"
 L["Website or forum URL where a player can get more information or ask questions about this macro."] = "網站或論壇網址.玩家可以獲取更多信息或詢問有關此巨集的問題."
 L[ [=[What are the preferred talents for this macro?
 '1,2,3,1,2,3,1' means First row choose the first talent, Second row choose the second talent etc]=] ] = "這個巨集的首選天賦是什麼？ '1,2,3,1,2,3,1'表示第一排選擇第一天賦，第二排選擇第二天賦等"
@@ -576,7 +584,7 @@ L["What class or spec is this macro for?  If it is for all classes choose Global
 L["When creating a macro, if there is not a personal character macro space, create an account wide macro."] = "創建巨集時.如果沒有角色巨集空間.就創建帳號通用的巨集."
 L["When exporting a sequence create a stub entry to import for WLM's Website."] = "導出序列時.創建一個存根條目以導入WLM的網站."
 --[[Translation missing --]]
---[[ L["When exporting a sequence use a human readable verbose form."] = ""--]] 
+L["When exporting a sequence use a human readable verbose form."] = "When exporting a sequence use a human readable verbose form."
 L["When GSE imports a macro and it already exists locally and has local edits, what do you want the default action to be.  Merge - Add the new MacroVersions to the existing Macro.  Replace - Replace the existing macro with the new version. Ignore - ignore updates.  This default action will set the default on the Compare screen however if the GUI is not available this will be the action taken."] = "當GSE導入巨集並且已經有本地版本時,如何進行下一步.\"合併\"-將新版本添加到現有版本.\"替換\"-用新版本替換現有版本.\"忽略\"-忽略更新.默認操作將在屏幕上進行比較,但是如果GUI不可用,則會按照此處設定進行下一步."
 L["When loading or creating a sequence, if it is a global or the macro has an unknown specID automatically create the Macro Stub in Account Macros"] = "加載或創建序列時,如果它是全局巨集或巨集具有未知的天賦ID,則會自動在帳戶巨集中創建巨集存根"
 L["When loading or creating a sequence, if it is a macro of the same class automatically create the Macro Stub"] = "當加載或創建序列時,如果它是同職業的巨集,則自動創建巨集存根"
@@ -589,9 +597,8 @@ L["You need to reload the User Interface to complete this task.  Would you like 
 L["Your ClassID is "] = "你的 Class ID 是"
 L["Your current Specialisation is "] = "你當前的專精是"
 --[[Translation missing --]]
---[[ L["Your sequence name was longer than 27 characters.  It has been shortened from %s to %s so that your macro will work."] = ""--]] 
+L["Your sequence name was longer than 27 characters.  It has been shortened from %s to %s so that your macro will work."] = "Your sequence name was longer than 27 characters.  It has been shortened from %s to %s so that your macro will work."
 
 
 
---@do-not-package@
---@end-do-not-package@
+

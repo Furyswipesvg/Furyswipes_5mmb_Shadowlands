@@ -125,6 +125,7 @@ end
 
 
 function GSE.GUIUpdateSequenceDefinition(classid, SequenceName, sequence)
+  sequence.LastUpdated = GSE.GetTimestamp()
   -- Changes have been made, so save them
   for k,v in ipairs(sequence.MacroVersions) do
     sequence.MacroVersions[k] = GSE.TranslateSequence(v, SequenceName, "ID")
@@ -201,4 +202,20 @@ end
 function GSE.ClearTooltip(GSEFrame)
   LibQTip:Release(GSEFrame.tooltip)
   GSEFrame.tooltip = nil
+end
+
+function GSE.ShowSequenceList(SequenceTable, GSEUser)
+  if GSE.UnsavedOptions["GUI"] then
+    GSE.ShowRemoteWindow(SequenceTable, GSEUser)
+  else
+    for k,v in ipairs(SequenceTable) do
+      for i,j in pairs(v) do
+        local msg = i .. " "
+        if not GSE.isEmpty(j.Help) then
+          msg = msg .. j.Help
+        end
+        GSE.Print(msg, "TRANSMISSION")
+      end
+    end
+  end
 end

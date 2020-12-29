@@ -193,6 +193,9 @@ function GSE.PerformMergeAction(action, classid, sequenceName, newSequence)
 end
 
 function GSE.OOCPerformMergeAction(action, classid, sequenceName, newSequence)
+    if GSE.isEmpty(newSequence.LastUpdated) then
+        newSequence.LastUpdated = GSE.GetTimestamp()
+    end
     if sequenceName:len() > 28 then
         local tempseqName = sequenceName:sub(1,28)
         GSE.Print(string.format(L["Your sequence name was longer than 27 characters.  It has been shortened from %s to %s so that your macro will work."], sequenceName, tempseqName), "GSE Storage")
@@ -427,6 +430,13 @@ function GSE.ImportSequence(importStr, legacy, createicon)
 end
 
 function GSE.ReloadSequences()
+    if GSE.isEmpty (GSE.UnsavedOptions.ReloadQueued) then
+        GSE.PerformReloadSequences()
+        GSE.UnsavedOptions.ReloadQueued = true
+    end
+end
+
+function GSE.PerformReloadSequences()
     GSE.PrintDebugMessage("Reloading Sequences")
     for name, sequence in pairs(GSE.Library[GSE.GetCurrentClassID()]) do
         GSE.UpdateSequence(name, sequence.MacroVersions[GSE.GetActiveSequenceVersion(name)])
@@ -438,6 +448,9 @@ function GSE.ReloadSequences()
             end
         end
     end
+    local vals = {}
+    vals.action = "FinishReload"
+    table.insert(GSE.OOCQueue, vals)
 end
 
 function GSE.PrepareLogout(deletenonlocalmacros)
@@ -744,6 +757,8 @@ function GSE.ResetButtons()
         if gsebutton:GetAttribute("combatreset") == true then
             gsebutton:SetAttribute("step", 1)
             gsebutton:SetAttribute("clicks", 1)
+            gsebutton:SetAttribute("loopiter", 1)
+            gsebutton:SetAttribute("limit", 1)
             if GSEOptions.useExternalMSTimings then
                 gsebutton:SetAttribute("ms", GSEOptions.msClickRate)
             else
@@ -827,6 +842,7 @@ function GSE.OOCUpdateSequence(name, sequence)
                               strjoin(']=======],[=======[', unpack(executionseq)) .. ']=======])')
         gsebutton:SetAttribute("step", 1)
         gsebutton:SetAttribute("clicks", 1)
+        gsebutton:SetAttribute("limit", 1)
         if GSEOptions.useExternalMSTimings then
             gsebutton:SetAttribute("ms", GSEOptions.msClickRate)
         else
@@ -843,7 +859,7 @@ function GSE.OOCUpdateSequence(name, sequence)
         if (GSE.isEmpty(sequence.Combat) and GSEOptions.resetOOC) or sequence.Combat then
             gsebutton:SetAttribute("combatreset", true)
         else
-            gsebutton:SetAttribute("combatreset", true)
+            gsebutton:SetAttribute("combatreset", false)
         end
         gsebutton:WrapScript(gsebutton, 'OnClick', GSE.PrepareOnClickImplementation(sequence))
         if not GSE.isEmpty(sequence.LoopLimit) then
@@ -1611,7 +1627,7 @@ function GSE.ExportSequenceWLMFormat(sequence, sequencename)
                 end
             end
             if not GSE.isEmpty(sequence.Scenario) then
-                if sequence.Party == k then
+                if sequence.Scenario == k then
                     returnstring = returnstring .. "- Scenarios use version " .. k .. "\n"
                 end
             end
@@ -1661,4 +1677,17 @@ function GSE.ExportSequenceWLMFormat(sequence, sequencename)
     end
 
     return returnstring
+end
+
+
+function GSE.GetSequenceSummary()
+    local returntable = {}
+    for k,v in ipairs(GSE.Library) do
+        returntable[k]= {}
+        for i,j in pairs(v) do
+            returntable[k][i] = {}
+            returntable[k][i].Help = j.Help
+        end
+    end
+    return returntable
 end
