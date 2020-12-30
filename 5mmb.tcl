@@ -46,7 +46,6 @@ set raidname "myraid1"
 set maxheal "11 11 11 11"
 set clique_overlay "1 1 1 1"
 
-# Special Key Characters
 proc toonlistKey { var } {
 	if { ! [info exists ::$var] } { return false } 
 	upvar ::$var $var
