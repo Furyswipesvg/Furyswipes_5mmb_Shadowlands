@@ -45,7 +45,6 @@ set manalabels ""
 # Initialized keywords for toonlist
 set raidname "myraid1"
 set maxheal "11 11 11 11"
-set clique_overlay "1 1 1 1"
 
 
 proc toonlistKey { var } {
@@ -268,16 +267,6 @@ if { [toonlistKey monitor] && $monitor != "" } {
 #Third list is each monitor position in the set
 # Right now, 3d only fully used (window switching) for raidhash(5) one monitor.
 # 20 Window Raid
-if { $clique_overlay=="" } {
-	switch $monitor {
-		1280x1024 { set clique_overlay "33 84 21 106" }
-		1920x1080 { set clique_overlay "53 130 32 165" }
-		2560x1440 { set clique_overlay "67 172 46 219" }
-		3360x1440 { set clique_overlay "98 236 61 304" }
-		3840x2160 { set clique_overlay "105 260 65 330" }
-	}
-}
-
 if { $monitor == "3840x2160" } {
 	#3840x2160
 	if { [toonlistKey use2monitors] } {
