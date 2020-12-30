@@ -1,4 +1,4 @@
-set version 122720_SL_CLASSIC
+set version 123020_SL_CLASSIC
 lappend auto_path twapi
 lappend auto_path aabacus
 package require twapi
@@ -25,7 +25,7 @@ set winswapkeys "NumpadEnd NumpadDown NumpadPgDn NumpadLeft Clear"
 set extrawait1 300
 set extrawait2 300
 set idletimer [clock milliseconds]
-set returndelay 5000
+set returndelay 10000
 set curraid m
 set currlead 1
 set nosmoverwrite 0
@@ -386,8 +386,11 @@ if { $monitor == "3840x2160" } {
 		set raidhash(40) {{240 180 0 0} {480 360 480 720} {480 360 0 720} {480 360 960 720} {480 360 1440 720} {240 180 120 0} {240 180 240 0} {240 180 360 0} {240 180 480 0} {240 180 600 0} {240 180 720 0} {240 180 840 0} {240 180 960 0} {240 180 1200 0} {240 180 1440 0} {240 180 1680 0} {240 180 0 180} {240 180 240 180} {240 180 480 180} {240 180 720 180} {240 180 960 180} {240 180 1200 180} {240 180 1440 180} {240 180 1680 180} {240 180 0 360} {240 180 240 360} {240 180 480 360} {240 180 720 360} {240 180 960 360} {240 180 1200 360} {240 180 1440 360} {240 180 1680 360} {240 180 0 540} {240 180 240 540} {240 180 480 540} {240 180 720 540} {240 180 960 540} {240 180 1200 540} {240 180 1440 540} {240 180 1680 540}}
 	}
 }
-
-
+if {[toonlistKey windowplacement]} {
+	foreach {winnum positions} $windowplacement {
+  		set raidhash($winnum) $positions
+	}
+}
 if { ! $nosmoverwrite } {
 	set sM [open $SME r]
 	fconfigure $sM -encoding utf-8
@@ -492,6 +495,7 @@ if { ! $nosmoverwrite } {
 
 
 #------- START OF WINSWAP CODE FOR SHADOWLANDS/CLASSIC
+if {[toonlistKey usecapslock]} { set lock 0x14 } else { set lock 0x91 }
 proc pop { raid } {
 	global game allraids raidhash new_windows newwin order extrawait1 extrawait2 wowexe curraid rotation
 	array set rotation { dps 1 heal 1 full 1 melee 1 ranged 1}
@@ -779,7 +783,8 @@ proc 5mmb_update_keystate { {keylist ""} } {
 }
 
 proc 5mmb_monitor { args } {
-	if { [twapi::GetKeyState 0x91] == 0 } {
+	global lock
+	if { [twapi::GetKeyState $lock] == 0 } {
 		return
 	}
 	set keylist "" ; set script "" ; set KEYUP false ; set ANYPRESSED false ; set MOVEKEY false ; set add_key_as_script_arg false ; set notkeys "" ; set keys ""
@@ -864,8 +869,9 @@ proc resettimer {} {
 	set idletimer [clock milliseconds]
 }
 
-proc 5mmb_tilde { } {
-	if { [twapi::GetKeyState 0x91] == 0 } {
+proc 5mmb_tilde {} {
+	global lock
+	if { [twapi::GetKeyState $lock] == 0 } {
 		return
 	}
 	global oem prevoem oemdown
@@ -1023,8 +1029,8 @@ if { ($game == "shadow" || $game == "classic")} { help }
 while { ($game == "shadow" || $game == "classic")} {
 	after 1
 	#if { [mouse_buttons_pressed] } { continue }
-	5mmb_tilde #This cycles windows when tilde is pressed.
-	5mmb_update_keystate # Do not remove or move
+	5mmb_tilde ; #This cycles windows when tilde is pressed.
+	5mmb_update_keystate ; # Do not remove or move
 	#THESE KEY MONITORS ONLY WORK WHEN SCROLL LOCK IS ON!
 	5mmb_monitor -anypressed "2 5 !0x12" "switchwin dps"
 	5mmb_monitor -anypressed "3 !0x10 !0x12" "switchwin dps"
@@ -1051,7 +1057,7 @@ while { ($game == "shadow" || $game == "classic")} {
 		5mmb_monitor "CONTROL ALT $raid" "pop $raid"
 		5mmb_monitor "CONTROL SHIFT $raid" "arrangewin 1"
 	}
-	if { [twapi::GetKeyState 0x91] && [expr $idletimer + $returndelay] < [clock milliseconds] && [wow_is_focused] } {
+	if { [twapi::GetKeyState $lock] && [expr $idletimer + $returndelay] < [clock milliseconds] && [wow_is_focused] } {
 		resettimer
 		reset_rotations
 	}
