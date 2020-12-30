@@ -1,4 +1,4 @@
-set version 123020_SL_CLASSIC
+set version 123020b_SL_CLASSIC
 lappend auto_path twapi
 lappend auto_path aabacus
 package require twapi
