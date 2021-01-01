@@ -552,17 +552,9 @@ proc pop { raid } {
 		set pos [lindex $raidhash($wincount) $i]
 		if { [twapi::find_windows -single -messageonlywindow false -popup false -toplevel true -visible true -text $winname ] == "" } {
 			if { $numwins == 1 } {
-				if { $game=="classic" } {
-					twapi::shell_execute -waitforinputidle true -path wowClassic.exe
-				} else {
-					twapi::shell_execute -waitforinputidle true -path wow.exe
-				}
+				twapi::shell_execute -waitforinputidle true -path $wowexe
 			} else {
-				if { $game=="classic" } {
-					twapi::shell_execute -path wowClassic.exe
-				} else {
-					twapi::shell_execute -path wow.exe
-				}
+				twapi::shell_execute -path $wowexe
 			}
 			lappend new_windows "$winname $i"
 			incr numwins -1
