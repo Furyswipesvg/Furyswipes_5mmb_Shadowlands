@@ -151,11 +151,13 @@ while { [gets $tL line] >= 0 } {
 				regexp {([a-z]|)([0-9])?} $userraid match userraid cpunum
 				if { $cpunum=="" } { set cpunum 1 }
 				lappend raids ${userraid}${cpunum}
-				dict lappend allraids ${userraid}${cpunum} "${name}_1${acctnick} $bnet_account $license $passwd $name $role $raids"
+				set winname "${name}_1${acctnick}"
+				dict lappend allraids ${userraid}${cpunum} "$winname $bnet_account $license $passwd $name $role $raids"
 			}
 			if { ! [regexp m $raids] } {
 				lappend raids m1
-				dict lappend allraids m1 "${name}_1${acctnick} $bnet_account $license $passwd $name $role $raids"
+				set winname "${name}_1${acctnick}"
+				dict lappend allraids m1 "$winname $bnet_account $license $passwd $name $role $raids"
 			}
 			set toons($numtoons) "$bnet_account $license $passwd $name $role $raids"
 			incr numtoons
