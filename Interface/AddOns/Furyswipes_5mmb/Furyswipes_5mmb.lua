@@ -1,4 +1,4 @@
-FSMB_version="010220"
+FSMB_version="010220b_SL_CLASSIC"
 FSMB_game="classic"
 FSMB_RAID = "MULTIBOX_myraid1"
 if FSMB_game=="tbc" then
@@ -1734,7 +1734,7 @@ FSMB:RegisterEvent("TAXIMAP_OPENED")
 FSMB:RegisterEvent("PLAYER_LOGIN")
 FSMB:RegisterEvent("UI_ERROR_MESSAGE")
 FSMB:RegisterEvent("AUTOFOLLOW_END")
-if FSMB_game=="shadowlands" then
+if FSMB_game=="shadow" then
 	FSMB:RegisterEvent("UPDATE_POSSESS_BAR")
 	FSMB:RegisterEvent("UPDATE_OVERRIDE_ACTIONBAR")
 	FSMB:RegisterEvent("PLAYER_GAINS_VEHICLE_DATA")
@@ -1797,7 +1797,7 @@ FSMB:SetScript("OnEvent", function(self,event, arg1, arg2, ...) -- event handler
 			SetTrainerServiceTypeFilter("used", 0);
 			FsR_TrainerIsUP = true
 		end
-  	elseif FSMB_game=="shadowlands" and event == "UPDATE_OVERRIDE_ACTIONBAR" or event == "PLAYER_GAINS_VEHICLE_DATA" or event == "PLAYER_LOSES_VEHICLE_DATA" or event == "UNIT_ENTERED_VEHICLE" or event == "UNIT_EXITED_VEHICLE" or event == "UNIT_ENTERING_VEHICLE" or event == "UNIT_EXITING_VEHICLE" or event == "VEHICLE_ANGLE_SHOW" or event == "VEHICLE_ANGLE_UPDATE" or event == "VEHICLE_UPDATE" or event == "VEHICLE_POWER_SHOW" or event == "UPDATE_VEHICLE_ACTION_BAR" or event == "ACTIONBAR_UPDATE_COOLDOWN" then
+  	elseif FSMB_game=="shadow" and event == "UPDATE_OVERRIDE_ACTIONBAR" or event == "PLAYER_GAINS_VEHICLE_DATA" or event == "PLAYER_LOSES_VEHICLE_DATA" or event == "UNIT_ENTERED_VEHICLE" or event == "UNIT_EXITED_VEHICLE" or event == "UNIT_ENTERING_VEHICLE" or event == "UNIT_EXITING_VEHICLE" or event == "VEHICLE_ANGLE_SHOW" or event == "VEHICLE_ANGLE_UPDATE" or event == "VEHICLE_UPDATE" or event == "VEHICLE_POWER_SHOW" or event == "UPDATE_VEHICLE_ACTION_BAR" or event == "ACTIONBAR_UPDATE_COOLDOWN" then
 		if HasOverrideActionBar() or HasBonusActionBar() or HasVehicleActionBar() or HasTempShapeshiftActionBar() then
 			SetOverrideBinding(UIParent, true,"2",nil)
 			SetOverrideBinding(UIParent, true,"3",nil)
