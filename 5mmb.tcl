@@ -1,4 +1,4 @@
-set version 010220_SL_CLASSIC
+set version 010220c_SL_CLASSIC
 lappend auto_path twapi
 lappend auto_path aabacus
 package require twapi
@@ -105,7 +105,7 @@ if { ! [file exist $toonlistf ] } {
 	puts "# <-this is a comment. It is ignored by the program"
 	puts "You need to specify your multibox accounts with 5 words starting with box"
 	puts "box <accountname> <password> <toon name> <role>"
-	puts "Role can be tank / melee/ caster / hunter /healer / casterhealer / meleehealer / tankhealer"
+	puts "Role can be tank / melee/ caster / hunter / healer / casterhealer / meleehealer / tankhealer"
 	puts "EVERY TOON must have a role"
 	puts "Windows for the toons will come out on the screen in the order you list them."
 	puts "Tanks will get bigger windows, if possible"
@@ -998,7 +998,7 @@ proc nextwin { rotation_type } {
 	#melee: rotates through melee/tank only
 	#ranged: rotates through caster/hunter only
 	global allraids raidhash winhandles wowexe healerskip curraid rotation winroles
-	array set roles { dps { melee tank caster healer casterhealer meleehealer hunter} heal { healer casterhealer meleehealer } melee { tank melee meleehealer } ranged { caster casterhealer hunter }}
+	array set roles { dps { melee tank caster tankhealer healer casterhealer meleehealer hunter} heal { healer tankhealer casterhealer meleehealer } melee { tank tankhealer melee meleehealer } ranged { caster casterhealer hunter }}
 	set wow_pids [twapi::get_process_ids -glob -name $wowexe]
 	set existing_wins ""
 	foreach mypid $wow_pids {
