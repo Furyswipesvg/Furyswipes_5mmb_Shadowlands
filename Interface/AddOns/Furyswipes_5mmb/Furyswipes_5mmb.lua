@@ -1,5 +1,5 @@
-FSMB_version="122720"
-FSMB_game="shadow"
+FSMB_version="010220"
+FSMB_game="classic"
 FSMB_RAID = "MULTIBOX_myraid1"
 if FSMB_game=="tbc" then
 	function print(msg)
@@ -384,13 +384,13 @@ if FSMB_game=="tbc" then
 	victoryRush = GetSpellInfo(34428)
 end
 --
-FSMB_toonlist={[1]="Me",[2]="Im",[3]="Earthshock",[4]="Palia",[5]="Snöbgoblin"}
-FSMB_invitelist={[1]="Me-nathrezim",[2]="Im-nathrezim",[3]="Earthshock-cenarius",[4]="Palia-nathrezim",[5]="Snöbgoblin-illidan"}
-FSMB_tank="Me"
+FSMB_toonlist={[1]="Keella",[2]="Polly",[3]="Silli",[4]="Frandy",[5]="Ailde"}
+FSMB_invitelist={[1]="Keella",[2]="Polly",[3]="Silli",[4]="Frandy",[5]="Ailde"}
+FSMB_tank="Keella"
 FSMB_clothto="Vaj"
 FSMB_tradeopen=nil
 FSMB_nomacros=nil
-FSMB_healerlist={"Im","Earthshock"}
+FSMB_healerlist={"Keella","Silli"}
 FSMB_maxheal={Druid=11,Priest=11,Shaman=11,Paladin=11}
 FSMB_myrez={["PALADIN"]=(redemption),["SHAMAN"]=(ancestralSpirit),["DRUID"]=(revive),["MONK"]=(resuscitate),["PRIEST"]=(resurrection),["DEATHKNIGHT"]=(raiseAlly)}
 FSMB_mypoly={["HUNTER"]=(freezingTrap),["SHAMAN"]=(hex),["ROGUE"]=(sap),["DEATHKNIGHT"]=("NONE"),["DEMONHUNTER"]=(imprison),["MONK"]=(paralysis),["PRIEST"]=(shackleUndead),["MAGE"]=(magePoly),["DRUID"]=(druidHibernate),["WARLOCK"]=(warlockBanish)}
@@ -511,6 +511,14 @@ function farm()
 			PlaceAction(109)
 		end
 		ClearCursor()
+end
+function FindInTable(table,string)
+	--only works on 1D tables
+	if not table then return end
+	for i,v in pairs(table) do
+		if v==string then return i end
+	end
+	return nil
 end
 function init()
 	if UnitAffectingCombat("player") then return end
@@ -1271,7 +1279,7 @@ function init()
 		PlaceAction(29)
 		ClearCursor()
 	end
-	LoadBindings(1)
+	LoadBindings(2)
 	SetBinding("1","ACTIONBUTTON1")
 	SetBinding("2","ACTIONBUTTON2")
 	SetBinding("3","ACTIONBUTTON3")
@@ -1359,7 +1367,7 @@ function init()
 	SetBinding("SHIFT-MOUSEWHEELUP")
 	SetBinding("SHIFT-MOUSEWHEELDOWN")
 	SetBinding("B","OPENALLBAGS")
-	SaveBindings(1)
+	SaveBindings(2)
 	if FSMB_game=="wotlk" then 
 		SetCVar("UnitNameNPC", true)
 	end
@@ -1726,24 +1734,22 @@ FSMB:RegisterEvent("TAXIMAP_OPENED")
 FSMB:RegisterEvent("PLAYER_LOGIN")
 FSMB:RegisterEvent("UI_ERROR_MESSAGE")
 FSMB:RegisterEvent("AUTOFOLLOW_END")
-FSMB:RegisterEvent("PLAYER_GAINS_VEHICLE_DATA")
-FSMB:RegisterEvent("PLAYER_LOSES_VEHICLE_DATA")
-FSMB:RegisterEvent("UNIT_ENTERING_VEHICLE")
-FSMB:RegisterEvent("UNIT_EXITING_VEHICLE")
-FSMB:RegisterEvent("UPDATE_POSSESS_BAR")
-FSMB:RegisterEvent("UPDATE_OVERRIDE_ACTIONBAR")
-FSMB:RegisterEvent("PLAYER_GAINS_VEHICLE_DATA")
-FSMB:RegisterEvent("PLAYER_LOSES_VEHICLE_DATA")
-FSMB:RegisterEvent("UPDATE_VEHICLE_ACTIONBAR")
-FSMB:RegisterEvent("UNIT_ENTERED_VEHICLE")
-FSMB:RegisterEvent("UNIT_EXITED_VEHICLE")
-FSMB:RegisterEvent("UNIT_ENTERING_VEHICLE")
-FSMB:RegisterEvent("UNIT_EXITING_VEHICLE")
-FSMB:RegisterEvent("VEHICLE_ANGLE_SHOW")
-FSMB:RegisterEvent("VEHICLE_ANGLE_UPDATE")
-FSMB:RegisterEvent("VEHICLE_UPDATE")
-FSMB:RegisterEvent("VEHICLE_POWER_SHOW")
-FSMB:RegisterEvent("ACTIONBAR_UPDATE_COOLDOWN")
+if FSMB_game=="shadowlands" then
+	FSMB:RegisterEvent("UPDATE_POSSESS_BAR")
+	FSMB:RegisterEvent("UPDATE_OVERRIDE_ACTIONBAR")
+	FSMB:RegisterEvent("PLAYER_GAINS_VEHICLE_DATA")
+	FSMB:RegisterEvent("PLAYER_LOSES_VEHICLE_DATA")
+	FSMB:RegisterEvent("UPDATE_VEHICLE_ACTIONBAR")
+	FSMB:RegisterEvent("UNIT_ENTERED_VEHICLE")
+	FSMB:RegisterEvent("UNIT_EXITED_VEHICLE")
+	FSMB:RegisterEvent("UNIT_ENTERING_VEHICLE")
+	FSMB:RegisterEvent("UNIT_EXITING_VEHICLE")
+	FSMB:RegisterEvent("VEHICLE_ANGLE_SHOW")
+	FSMB:RegisterEvent("VEHICLE_ANGLE_UPDATE")
+	FSMB:RegisterEvent("VEHICLE_UPDATE")
+	FSMB:RegisterEvent("VEHICLE_POWER_SHOW")
+	FSMB:RegisterEvent("ACTIONBAR_UPDATE_COOLDOWN")
+end
 FSMBtooltip=CreateFrame("GAMETOOLTIP", "FSMBtooltip", UIParent, "GameTooltipTemplate")
 Print=print
 FSMB:SetScript("OnEvent", function(self,event, arg1, arg2, ...) -- event handler
@@ -1791,7 +1797,7 @@ FSMB:SetScript("OnEvent", function(self,event, arg1, arg2, ...) -- event handler
 			SetTrainerServiceTypeFilter("used", 0);
 			FsR_TrainerIsUP = true
 		end
-  	elseif event == "UPDATE_OVERRIDE_ACTIONBAR" or event == "PLAYER_GAINS_VEHICLE_DATA" or event == "PLAYER_LOSES_VEHICLE_DATA" or event == "UNIT_ENTERED_VEHICLE" or event == "UNIT_EXITED_VEHICLE" or event == "UNIT_ENTERING_VEHICLE" or event == "UNIT_EXITING_VEHICLE" or event == "VEHICLE_ANGLE_SHOW" or event == "VEHICLE_ANGLE_UPDATE" or event == "VEHICLE_UPDATE" or event == "VEHICLE_POWER_SHOW" or event == "UPDATE_VEHICLE_ACTION_BAR" or event == "ACTIONBAR_UPDATE_COOLDOWN" then
+  	elseif FSMB_game=="shadowlands" and event == "UPDATE_OVERRIDE_ACTIONBAR" or event == "PLAYER_GAINS_VEHICLE_DATA" or event == "PLAYER_LOSES_VEHICLE_DATA" or event == "UNIT_ENTERED_VEHICLE" or event == "UNIT_EXITED_VEHICLE" or event == "UNIT_ENTERING_VEHICLE" or event == "UNIT_EXITING_VEHICLE" or event == "VEHICLE_ANGLE_SHOW" or event == "VEHICLE_ANGLE_UPDATE" or event == "VEHICLE_UPDATE" or event == "VEHICLE_POWER_SHOW" or event == "UPDATE_VEHICLE_ACTION_BAR" or event == "ACTIONBAR_UPDATE_COOLDOWN" then
 		if HasOverrideActionBar() or HasBonusActionBar() or HasVehicleActionBar() or HasTempShapeshiftActionBar() then
 			SetOverrideBinding(UIParent, true,"2",nil)
 			SetOverrideBinding(UIParent, true,"3",nil)

@@ -1,4 +1,4 @@
-set version 123020b_SL_CLASSIC
+set version 010220_SL_CLASSIC
 lappend auto_path twapi
 lappend auto_path aabacus
 package require twapi
@@ -31,6 +31,7 @@ set currlead 1
 set nosmoverwrite 0
 set healerskip 1
 array set rotation { dps 1 heal 1 full 1 melee 1 ranged 1}
+array set prev_rotation { dps 1 heal 1 full 1 melee 1 ranged 1}
 set prevoem 0
 set oemdown 0
 set keystate {}
@@ -409,7 +410,7 @@ if { ! $nosmoverwrite } {
 			puts -nonewline $sMN "FSMB_tank="
 			set found_tank false
 			for { set i 0 } { $i<[array size toons] } { incr i } {
-				if { ! $found_tank && [string tolower [lindex $toons($i) 4]] == "tank" } {
+				if { ! $found_tank && [regexp "^tank" [string tolower [lindex $toons($i) 4]] ] } {
 					set name [string totitle [ string tolower [lindex $toons($i) 3]]]
 					if { [regexp {\-} $name] } {
 						regexp "(.*)-" $name match name
@@ -982,6 +983,12 @@ proc getwin { name } {
 	}
 }
 
+proc vmonitor {} {
+	global rotation prev_rotation currlead
+	if { $rotation(full) != $prev_rotation(full) } { puts "Rotation full = $rotation(full)" ; puts "Currlead = $currlead" } 
+	set prev_rotation(full) $rotation(full)
+}
+
 proc nextwin { rotation_type } {
 	#returns the number of the next window in the rotation
 	#Rotation types:
@@ -1032,21 +1039,22 @@ while { ($game == "shadow" || $game == "classic")} {
 	5mmb_tilde ; #This cycles windows when tilde is pressed.
 	5mmb_update_keystate ; # Do not remove or move
 	#THESE KEY MONITORS ONLY WORK WHEN SCROLL LOCK IS ON!
-	5mmb_monitor -anypressed "2 5 !0x12" "switchwin dps"
+	5mmb_monitor -anypressed "2 5 0x10 !0x12" "switchwin dps"
 	5mmb_monitor -anypressed "3 !0x10 !0x12" "switchwin dps"
 	5mmb_monitor "3 0x10 !0x12" "switchwin full"
-	5mmb_monitor -anypressed "4 6 7 f l !0x12" "switchwin full"
-	5mmb_monitor -anypressed "0x75 0x76 0x77 0x79 0x7a 0x7b 0x7c TRIGGER" "switchwin full ; changelead"
+	5mmb_monitor -anypressed "4 6 c b f l 0x7a 0x7b !0x12" "switchwin full"
+	5mmb_monitor -anypressed "0x75 0x76 0x77 0x78 0x79 TRIGGER" "switchwin full ; changelead"
 	5mmb_monitor "ALT 4" "reset_rotations"
 	5mmb_monitor -anypressed "ESC 1 " "switchwin full"
 	5mmb_monitor -anypressed "0x70 0x71 0x72 0x73 0x74" "switchwin heal"
+	5mmb_monitor -keyup "7" "switchwin full"
 	if { [toonlistKey demonhuntertank] } {
 		5mmb_monitor -keyup "x q e 0x25 0x26 0x27 0x28" "switchwin full"
 		5mmb_monitor "SPACE SHIFT" "switchwin full"
 	} else {
 		5mmb_monitor -keyup "SPACE x q e 0x25 0x26 0x27 0x28" "switchwin full"
 	}
-	5mmb_monitor -anypressed "TAB" "arrangewin $currlead"
+	5mmb_monitor -keyup "TAB" "arrangewin $currlead ; reset_rotations"
 	5mmb_monitor "ALT 2" "arrangewin $currlead"
 	5mmb_monitor "CONTROL h" {help}
 	5mmb_monitor "CONTROL ALT o" {closeall}
@@ -1061,4 +1069,5 @@ while { ($game == "shadow" || $game == "classic")} {
 		resettimer
 		reset_rotations
 	}
+	#vmonitor
 }
