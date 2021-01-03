@@ -1,4 +1,4 @@
-set version 010220c_SL_CLASSIC
+set version 010220d_SL_CLASSIC
 lappend auto_path twapi
 lappend auto_path aabacus
 package require twapi
@@ -496,6 +496,7 @@ if { ! $nosmoverwrite } {
 
 
 #------- START OF WINSWAP CODE FOR SHADOWLANDS/CLASSIC
+# Use scroll_lock to turn swapping on, unless you want capslock
 if {[toonlistKey usecapslock]} { set lock 0x14 } else { set lock 0x91 }
 proc pop { raid } {
 	global game allraids raidhash new_windows newwin order extrawait1 extrawait2 wowexe curraid rotation
@@ -788,7 +789,7 @@ proc 5mmb_monitor { args } {
 	if { [twapi::GetKeyState $lock] == 0 } {
 		return
 	}
-	set keylist "" ; set script "" ; set KEYUP false ; set ANYPRESSED false ; set MOVEKEY false ; set add_key_as_script_arg false ; set notkeys "" ; set keys ""
+	set keylist "" ; set script "" ; set KEYUP false ; set ANYPRESSED false ; set KEYDOWN false ; set add_key_as_script_arg false ; set modifiers "" ; set notkeys "" ; set keys ""
 	foreach arg $args {
 		if { $arg=="-anypressed" } {
 			set ANYPRESSED true
@@ -798,8 +799,8 @@ proc 5mmb_monitor { args } {
 			set KEYUP true
 			continue
 		}
-		if { $arg=="-movekey" } {
-			set MOVEKEY true
+		if { $arg=="-keydown" } {
+			set KEYDOWN true
 			continue
 		}
 		if { $keylist=="" } {
@@ -816,8 +817,13 @@ proc 5mmb_monitor { args } {
 			set add_key_as_script_arg true
 			continue
 		}
+		if {$key == "SHIFT" || $key == "ALT" || $key == "CONTROL" } {
+			lappend modifiers [lindex [twapi::_hotkeysyms_to_vk $key] 1]
+			continue
+		}
 		if { [regexp "^!" $key] } {
 			set key [regsub "!" $key ""]
+			# Not keys are always assumed to be modifiers.
 			lappend notkeys [lindex [twapi::_hotkeysyms_to_vk $key] 1]
 		} else {
 			lappend keys [lindex [twapi::_hotkeysyms_to_vk $key] 1]
@@ -836,7 +842,7 @@ proc 5mmb_monitor { args } {
 		}
 	} elseif { $KEYUP } {
 		set pressed [anykeyup $keys]
-		if { ($keys=="" || $pressed!="") && ($notkeys=="" || ![ispressed $notkeys]) } {
+		if { ($keys=="" || $pressed!="") && ($notkeys=="" || ![ispressed $notkeys]) && ($modifiers=="" || [ispressed $modifiers]) } {
 			if $add_key_as_script_arg {
 				resettimer
 				eval "$script $pressed"
@@ -845,9 +851,9 @@ proc 5mmb_monitor { args } {
 				eval $script
 			}
 		}
-	} elseif { $MOVEKEY } {
+	} elseif { $KEYDOWN } {
 		set pressed [anykeydown $keys]
-		if { ($keys=="" || $pressed!="") && ($notkeys=="" || ![ispressed $notkeys]) } {
+		if { ($keys=="" || $pressed!="") && ($notkeys=="" || ![ispressed $notkeys]) && ($modifiers=="" || [ispressed $modifiers]) } {
 			if $add_key_as_script_arg {
 				resettimer
 				eval "$script $pressed"
@@ -858,7 +864,7 @@ proc 5mmb_monitor { args } {
 		}
 	} else {
 		# requires ALL KEYS PRESSED SIMULTANEOUSLY
-		if { ($keys=="" || [ispressed $keys]) && ($notkeys=="" || ![ispressed $notkeys]) } {
+		if { ($keys=="" || [ispressed $keys]) && ($notkeys=="" || ![ispressed $notkeys]) && ($modifiers=="" || [ispressed $modifiers]) } {
 			resettimer
 			eval $script
 		}
@@ -923,7 +929,8 @@ proc arrangewin { numpadkey } {
 
 proc changelead { fkey } {
 	global currlead
-	set currlead [expr $fkey - 0x74]
+	set key [lindex [twapi::_hotkeysyms_to_vk $fkey] 1]
+	set currlead [expr $key - 0x74]
 }
 
 proc switchwin { rotation_type } {
@@ -1039,27 +1046,27 @@ while { ($game == "shadow" || $game == "classic")} {
 	5mmb_tilde ; #This cycles windows when tilde is pressed.
 	5mmb_update_keystate ; # Do not remove or move
 	#THESE KEY MONITORS ONLY WORK WHEN SCROLL LOCK IS ON!
-	5mmb_monitor -anypressed "2 5 0x10 !0x12" "switchwin dps"
-	5mmb_monitor -anypressed "3 !0x10 !0x12" "switchwin dps"
-	5mmb_monitor "3 0x10 !0x12" "switchwin full"
-	5mmb_monitor -anypressed "4 6 c b f l 0x7a 0x7b !0x12" "switchwin full"
-	5mmb_monitor -anypressed "0x75 0x76 0x77 0x78 0x79 TRIGGER" "switchwin full ; changelead"
+	5mmb_monitor -keydown "2 5 SHIFT !ALT" "switchwin dps"
+	5mmb_monitor -keydown "3 !SHIFT !ALT" "switchwin dps"
+	5mmb_monitor "3 SHIFT !ALT" "switchwin full"
+	5mmb_monitor -keydown "4 6 c b f l F11 F12 !ALT" "switchwin full"
+	5mmb_monitor -keydown "F6 F7 F8 F9 F10 TRIGGER" "switchwin full ; changelead"
 	5mmb_monitor "ALT 4" "reset_rotations"
-	5mmb_monitor -anypressed "ESC 1 " "switchwin full"
-	5mmb_monitor -anypressed "0x70 0x71 0x72 0x73 0x74" "switchwin heal"
+	5mmb_monitor -keydown "ESC 1 " "switchwin full"
+	5mmb_monitor -keydown "F1 F2 F3 F4 F5" "switchwin heal"
 	5mmb_monitor -keyup "7" "switchwin full"
 	if { [toonlistKey demonhuntertank] } {
-		5mmb_monitor -keyup "x q e 0x25 0x26 0x27 0x28" "switchwin full"
+		5mmb_monitor -keyup "x q e LEFT UP RIGHT DOWN" "switchwin full"
 		5mmb_monitor "SPACE SHIFT" "switchwin full"
 	} else {
-		5mmb_monitor -keyup "SPACE x q e 0x25 0x26 0x27 0x28" "switchwin full"
+		5mmb_monitor -keyup "SPACE x q e LEFT UP RIGHT DOWN" "switchwin full"
 	}
 	5mmb_monitor -keyup "TAB" "arrangewin $currlead ; reset_rotations"
 	5mmb_monitor "ALT 2" "arrangewin $currlead"
 	5mmb_monitor "CONTROL h" {help}
 	5mmb_monitor "CONTROL ALT o" {closeall}
 	#TRIGGER passes whatever numpad key is pressed to arrangewin
-	5mmb_monitor -anypressed "0x61 0x62 0x63 0x64 0x65 0x66 0x67 0x68 0x69 0x60 TRIGGER" "arrangewin"
+	5mmb_monitor -anypressed "NUMPAD0 NUMPAD1 NUMPAD2 NUMPAD3 NUMPAD4 NUMPAD5 NUMPAD6 NUMPAD7 NUMPAD8 NUMPAD9 TRIGGER" "arrangewin"
 	foreach raid [dict keys $allraids] {
 		set raid [string index $raid 0]
 		5mmb_monitor "CONTROL ALT $raid" "pop $raid"
