@@ -508,16 +508,15 @@ if { ! $nosmoverwrite } {
 #------- START OF WINSWAP CODE FOR SHADOWLANDS/CLASSIC
 # Use scroll_lock to turn swapping on, unless you want capslock
 if {[toonlistKey usecapslock]} { set lock 0x14 } else { set lock 0x91 }
-proc pop { raid } {
-	global game allraids raidhash new_windows newwin order extrawait1 extrawait2 wowexe curraid rotation
-	array set rotation { dps 1 heal 1 full 1 melee 1 ranged 1}
-	set wow_name "World of Warcraft"
-	set curraid $raid
-	if { ! [ dict exists $allraids ${raid}1] } {
-		puts "Error, no such raid $raid"
-		return
-	}
-	set raidsize [llength [dict get $allraids ${curraid}1]]
+
+proc get_wow_pids { } {
+	global wowexe
+	return [twapi::get_process_ids -glob -name $wowexe]
+}
+
+proc get_wincount { raid } {
+	global allraids
+	set raidsize [llength [dict get $allraids ${raid}1]]
 	if {$raidsize > 40} {
 		set wincount 80
 	} elseif {$raidsize > 25} {
@@ -531,6 +530,19 @@ proc pop { raid } {
 	} else {
 		set wincount $raidsize
 	}
+	return $wincount
+}
+
+proc pop { raid } {
+	global game allraids raidhash new_windows newwin order extrawait1 extrawait2 wowexe curraid rotation
+	array set rotation { dps 1 heal 1 full 1 melee 1 ranged 1}
+	set wow_name "World of Warcraft"
+	set curraid $raid
+	if { ! [ dict exists $allraids ${raid}1] } {
+		puts "Error, no such raid $raid"
+		return
+	}
+	set wincount [get_wincount $curraid]
 	# Open any new wow wins.
 	set new_windows ""
 	set numwins 0
@@ -561,7 +573,7 @@ proc pop { raid } {
 		}
 		incr i
 	}
-	set wow_pids [twapi::get_process_ids -glob -name $wowexe]
+	set wow_pids [get_wow_pids]
 	puts $wow_pids
 	puts "Extrawait1"
 	fswait $extrawait1
@@ -604,7 +616,7 @@ proc pop { raid } {
 proc closeall {} {
 	global wowexe
 	puts "CLOSING"
-	set wow_pids [twapi::get_process_ids -glob -name $wowexe]
+	set wow_pids [get_wow_pids]
 	foreach mypid $wow_pids {
 		set mywin [twapi::find_windows -single -messageonlywindow false -popup false -toplevel true -visible true -pids $mypid ]
 		if { $mywin != "" } {
@@ -787,8 +799,7 @@ proc 5mmb_update_keystate { {keylist ""} } {
 }
 
 proc 5mmb_monitor { args } {
-	global lock
-	if { [twapi::GetKeyState $lock] == 0 } {
+	if { ! [lock_key_is_on] } {
 		return
 	}
 	set keylist "" ; set script "" ; set KEYUP false ; set ANYPRESSED false ; set KEYDOWN false ; set add_key_as_script_arg false ; set modifiers "" ; set notkeys "" ; set keys ""
@@ -878,9 +889,13 @@ proc resettimer {} {
 	set idletimer [clock milliseconds]
 }
 
-proc 5mmb_tilde {} {
+proc lock_key_is_on { } {
 	global lock
-	if { [twapi::GetKeyState $lock] == 0 } {
+	return [twapi::GetKeyState $lock]
+}
+
+proc 5mmb_tilde {} {
+	if { ! [lock_key_is_on] } {
 		return
 	}
 	global oem prevoem oemdown
@@ -907,13 +922,7 @@ proc arrangewin { numpadkey } {
 	set winnum [string index $numpadkey end]
 	if { $winnum == 1 } { array set rotation { dps 1 heal 1 full 1 melee 1 ranged 1} }
 	array set winorder "1 {0 1 2 3 4 5 6 7 8 9} 2 {1 0 2 3 4 5 6 7 8 9} 3 {2 1 0 3 4 5 6 7 8 9} 4 {3 1 2 0 4 5 6 7 8 9} 5 {4 1 2 3 0 5 6 7 8 9} 6 {5 1 2 3 4 0 6 7 8 9} 7 {6 1 2 3 4 5 0 7 8 9} 8 {7 1 2 3 4 5 6 0 8 9} 9 {8 1 2 3 4 5 6 7 0 9} 0 {9 1 2 3 4 5 6 7 8 0}"
-	set raidsize [llength [dict get $allraids ${curraid}1]]
-	if {$raidsize > 40} { set wincount 80
-	} elseif {$raidsize > 25} { set wincount 40
-	} elseif {$raidsize > 20 } { set wincount 25
-	} elseif {$raidsize > 10 } { set wincount 20
-	} elseif {$raidsize > 5 } { set wincount 10
-	} else { set wincount $raidsize }
+	set wincount [get_wincount $curraid]
 	set raiders [dict get $allraids ${curraid}1]
 	for {set i [expr [llength $raiders]-1]} {$i>-1} {incr i -1} {
 		set toon [lindex $raiders [lindex $winorder($winnum) $i]]
@@ -970,7 +979,7 @@ proc wow_is_focused { } {
 	foreach toon [dict get $allraids ${curraid}1] {
 		lappend mytoons [lindex $toon 0]
 	}
-	set wow_pids [twapi::get_process_ids -glob -name $wowexe]
+	set wow_pids [get_wow_pids]
 	set existing_wins ""
 	set mywin [twapi::get_foreground_window]
 	if { $mywin!="" } {
@@ -983,7 +992,7 @@ proc wow_is_focused { } {
 
 proc getwin { name } {
 	global wowexe
-	set wow_pids [twapi::get_process_ids -glob -name $wowexe]
+	set wow_pids [get_wow_pids]
 	set existing_wins ""
 	foreach mypid $wow_pids {
 		if { [set mywin [twapi::find_windows -single -messageonlywindow false -popup false -toplevel true -visible true -pids $mypid -text $name]] != "" } {
@@ -1006,9 +1015,9 @@ proc nextwin { rotation_type } {
 	#heal: rotates through healer casterhealer meleehealer only
 	#melee: rotates through melee/tank only
 	#ranged: rotates through caster/hunter only
-	global allraids raidhash winhandles wowexe healerskip curraid rotation winroles
-	array set roles { dps { melee tank caster tankhealer healer casterhealer meleehealer hunter} heal { healer tankhealer casterhealer meleehealer } melee { tank tankhealer melee meleehealer } ranged { caster casterhealer hunter }}
-	set wow_pids [twapi::get_process_ids -glob -name $wowexe]
+	global allraids raidhash wowexe healerskip curraid rotation winroles
+	array set roles { dps { melee tank caster healer casterhealer meleehealer hunter} heal { healer casterhealer meleehealer } melee { tank melee meleehealer } ranged { caster casterhealer hunter }}
+	set wow_pids [get_wow_pids]
 	set existing_wins ""
 	foreach mypid $wow_pids {
 		set thishwin [twapi::find_windows -single -messageonlywindow false -popup false -toplevel true -visible true -pids $mypid]
@@ -1074,7 +1083,7 @@ while { ($game == "shadow" || $game == "classic")} {
 		5mmb_monitor "CONTROL ALT $raid" "pop $raid"
 		5mmb_monitor "CONTROL SHIFT $raid" "arrangewin 1"
 	}
-	if { [twapi::GetKeyState $lock] && [expr $idletimer + $returndelay] < [clock milliseconds] && [wow_is_focused] } {
+	if { [lock_key_is_on] && [expr $idletimer + $returndelay] < [clock milliseconds] && [wow_is_focused] } {
 		resettimer
 		reset_rotations
 	}
