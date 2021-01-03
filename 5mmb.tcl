@@ -1046,8 +1046,8 @@ while { ($game == "shadow" || $game == "classic")} {
 	5mmb_tilde ; #This cycles windows when tilde is pressed.
 	5mmb_update_keystate ; # Do not remove or move
 	#THESE KEY MONITORS ONLY WORK WHEN SCROLL LOCK IS ON!
-	5mmb_monitor -keydown "2 5 SHIFT !ALT" "switchwin dps"
-	5mmb_monitor -keydown "3 !SHIFT !ALT" "switchwin dps"
+	5mmb_monitor -keydown "2 5 !ALT" "switchwin dps"
+	5mmb_monitor -keydown "3 !ALT" "switchwin dps"
 	5mmb_monitor "3 SHIFT !ALT" "switchwin full"
 	5mmb_monitor -keydown "4 6 c b f l F11 F12 !ALT" "switchwin full"
 	5mmb_monitor -keydown "F6 F7 F8 F9 F10 TRIGGER" "switchwin full ; changelead"
@@ -1057,7 +1057,7 @@ while { ($game == "shadow" || $game == "classic")} {
 	5mmb_monitor -keyup "7" "switchwin full"
 	if { [toonlistKey demonhuntertank] } {
 		5mmb_monitor -keyup "x q e LEFT UP RIGHT DOWN" "switchwin full"
-		5mmb_monitor "SPACE SHIFT" "switchwin full"
+		5mmb_monitor -keydown "SPACE SHIFT" "switchwin full"
 	} else {
 		5mmb_monitor -keyup "SPACE x q e LEFT UP RIGHT DOWN" "switchwin full"
 	}
