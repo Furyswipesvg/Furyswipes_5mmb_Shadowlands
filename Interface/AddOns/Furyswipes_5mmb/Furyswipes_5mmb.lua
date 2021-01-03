@@ -1,5 +1,5 @@
 FSMB_version="010220b_SL_CLASSIC"
-FSMB_game="classic"
+FSMB_game="shadow"
 FSMB_RAID = "MULTIBOX_myraid1"
 if FSMB_game=="tbc" then
 	function print(msg)
@@ -384,13 +384,13 @@ if FSMB_game=="tbc" then
 	victoryRush = GetSpellInfo(34428)
 end
 --
-FSMB_toonlist={[1]="Keella",[2]="Polly",[3]="Silli",[4]="Frandy",[5]="Ailde"}
-FSMB_invitelist={[1]="Keella",[2]="Polly",[3]="Silli",[4]="Frandy",[5]="Ailde"}
-FSMB_tank="Keella"
+FSMB_toonlist={[1]="Me",[2]="Im",[3]="Earthshock",[4]="Palia",[5]="Snöbgoblin"}
+FSMB_invitelist={[1]="Me-nathrezim",[2]="Im-nathrezim",[3]="Earthshock-cenarius",[4]="Palia-nathrezim",[5]="Snöbgoblin-illidan"}
+FSMB_tank="Me"
 FSMB_clothto="Vaj"
 FSMB_tradeopen=nil
 FSMB_nomacros=nil
-FSMB_healerlist={"Keella","Silli"}
+FSMB_healerlist={"Im","Earthshock"}
 FSMB_maxheal={Druid=11,Priest=11,Shaman=11,Paladin=11}
 FSMB_myrez={["PALADIN"]=(redemption),["SHAMAN"]=(ancestralSpirit),["DRUID"]=(revive),["MONK"]=(resuscitate),["PRIEST"]=(resurrection),["DEATHKNIGHT"]=(raiseAlly)}
 FSMB_mypoly={["HUNTER"]=(freezingTrap),["SHAMAN"]=(hex),["ROGUE"]=(sap),["DEATHKNIGHT"]=("NONE"),["DEMONHUNTER"]=(imprison),["MONK"]=(paralysis),["PRIEST"]=(shackleUndead),["MAGE"]=(magePoly),["DRUID"]=(druidHibernate),["WARLOCK"]=(warlockBanish)}
@@ -1051,14 +1051,18 @@ function init()
 		elseif FSMB_game=="shadow" then
 			if myname==FSMB_tank then
 				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/assist [@focus,exists][notarget,@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n",nil)
-			else
+			elseif FindInTable(FSMB_toonlist,myname) then
 				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/assist [@focus,exists][@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n",nil)
+			else
+				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n",nil)
 			end
 		elseif FSMB_game=="classic" then
 			if myname==FSMB_tank then
 				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/assist [notarget,@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n",nil)
-			else
+			elseif FindInTable(FSMB_toonlist,myname) then
 				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/assist [@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n",nil)
+			else
+				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n",nil)
 			end
 		elseif FSMB_IsMelee then
 			index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n/run melee_follow()",nil)
@@ -1082,15 +1086,19 @@ function init()
 		ClearCursor()
 		if (FSMB_game=="shadow") then
 			if myname==FSMB_tank then
-				index=CreateMacroFS("single_fs","ability_searingarrow","\n/assist [@focus,exists][notarget,@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SINGLE",nil)
+				index=CreateMacroFS("single_fs","ability_searingarrow","/assist [@focus,exists][notarget,@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SINGLE",nil)
+			elseif FindInTable(FSMB_toonlist,myname) then
+				index=CreateMacroFS("single_fs","ability_searingarrow","/assist [@focus,exists][@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SINGLE",nil)
 			else
-				index=CreateMacroFS("single_fs","ability_searingarrow","\n/assist [@focus,exists][@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SINGLE",nil)
+				index=CreateMacroFS("single_fs","ability_searingarrow","/click "..prefix..myspec.."_SINGLE",nil)
 			end
 		elseif (FSMB_game=="classic") then
 			if myname==FSMB_tank then
-				index=CreateMacroFS("single_fs","ability_searingarrow","\n/assist [notarget,@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SINGLE",nil)
+				index=CreateMacroFS("single_fs","ability_searingarrow","/assist [notarget,@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SINGLE",nil)
+			elseif FindInTable(FSMB_toonlist,myname) then
+				index=CreateMacroFS("single_fs","ability_searingarrow","/assist [@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SINGLE",nil)
 			else
-				index=CreateMacroFS("single_fs","ability_searingarrow","\n/assist [@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SINGLE",nil)
+				index=CreateMacroFS("single_fs","ability_searingarrow","/click "..prefix..myspec.."_SINGLE",nil)
 			end
 		else	
 			index=CreateMacroFS("single_fs","ability_searingarrow","/click "..prefix..myspec.."_SINGLE",nil)
@@ -1149,14 +1157,18 @@ function init()
 		if (FSMB_game=="shadow") then
 			if myname==FSMB_tank then
 				index=CreateMacroFS("multi_fs","ability_upgrademoonglaive","/assist [@focus,exists][notarget,@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_MULTI",nil)
-			else
+			elseif FindInTable(FSMB_toonlist,myname) then
 				index=CreateMacroFS("multi_fs","ability_upgrademoonglaive","/assist [@focus,exists][@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_MULTI",nil)
+			else
+				index=CreateMacroFS("multi_fs","ability_upgrademoonglaive","/click "..prefix..myspec.."_MULTI",nil)
 			end
 		elseif (FSMB_game=="classic") then
 			if myname==FSMB_tank then
 				index=CreateMacroFS("multi_fs","ability_upgrademoonglaive","/assist [notarget,@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_MULTI",nil)
-			else
+			elseif FindInTable(FSMB_toonlist,myname) then
 				index=CreateMacroFS("multi_fs","ability_upgrademoonglaive","/assist [@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_MULTI",nil)
+			else
+				index=CreateMacroFS("multi_fs","ability_upgrademoonglaive","/click "..prefix..myspec.."_MULTI",nil)
 			end
 		else
 			index=CreateMacroFS("multi_fs","ability_upgrademoonglaive","/click "..prefix..myspec.."_MULTI",nil)
@@ -1203,15 +1215,19 @@ function init()
 		if FSMB_game=="shadow" then
 			if myname==FSMB_tank then
 				index=CreateMacroFS("aoe_fs","spell_fire_selfdestruct","/assist [@focus,exists][notarget,@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_AOE",nil)
-			else
+			elseif FindInTable(FSMB_toonlist,myname) then
 				index=CreateMacroFS("aoe_fs","spell_fire_selfdestruct","/assist [@focus,exists][@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_AOE",nil)
+			else
+				index=CreateMacroFS("aoe_fs","spell_fire_selfdestruct","/click "..prefix..myspec.."_AOE",nil)
 			end
 
 		elseif FSMB_game=="classic" then
 			if myname==FSMB_tank then
 				index=CreateMacroFS("aoe_fs","spell_fire_selfdestruct","/assist [notarget,@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_AOE",nil)
-			else
+			elseif FindInTable(FSMB_toonlist,myname) then
 				index=CreateMacroFS("aoe_fs","spell_fire_selfdestruct","/assist [@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_AOE",nil)
+			else
+				index=CreateMacroFS("aoe_fs","spell_fire_selfdestruct","/click "..prefix..myspec.."_AOE",nil)
 			end
 		end
 		PickupMacro(index)
