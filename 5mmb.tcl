@@ -1,4 +1,4 @@
-set version 010220d_SL_CLASSIC
+set version 010421_SL_CLASSIC
 lappend auto_path twapi
 lappend auto_path aabacus
 package require twapi
@@ -32,6 +32,7 @@ set nosmoverwrite 0
 set healerskip 1
 array set rotation { dps 1 heal 1 full 1 melee 1 ranged 1}
 array set prev_rotation { dps 1 heal 1 full 1 melee 1 ranged 1}
+array set pids {}
 set prevoem 0
 set oemdown 0
 set keystate {}
@@ -532,9 +533,25 @@ proc get_wincount { raid } {
 	}
 	return $wincount
 }
-
+proc strip_acct_from_cfg { {filename WTF/config.wtf} } {
+	set cfgF [open $filename r]
+	fconfigure $cfgF -encoding utf-8
+#SET accountName "neeks1@comcast.net"
+#SET accountList "WoW1|!WoW2|NEEKS1|SIXTYFOREVER|TODDTOPE|ELITOPE|WoW4|WoW3|"
+	set cfgO [open tmp w+]
+	fconfigure $cfgO -encoding utf-8
+	while { [gets $cfgF line] >= 0 } {
+		if { [regexp "^set accountname" [string tolower $line]] } { continue }
+		if { [regexp "^set accountlist" [string tolower $line]] } { continue }
+		puts $cfgO $line
+	}
+	close $cfgO
+	close $cfgF
+	file copy -force tmp $filename
+	file delete tmp
+}
 proc pop { raid } {
-	global game allraids raidhash new_windows newwin order extrawait1 extrawait2 wowexe curraid rotation
+	global game allraids raidhash new_windows newwin order extrawait1 extrawait2 wowexe curraid rotation pids
 	array set rotation { dps 1 heal 1 full 1 melee 1 ranged 1}
 	set wow_name "World of Warcraft"
 	set curraid $raid
@@ -550,7 +567,8 @@ proc pop { raid } {
 	#Count how many to pop
 	foreach mywin [dict get $allraids ${curraid}1] {
 		set winname [lindex $mywin 0]
-		if { [twapi::find_windows -single -messageonlywindow false -popup false -toplevel true -visible true -text $winname ] == "" } {
+		set toonname [lindex $mywin 3]
+		if { [twapi::find_windows -single -messageonlywindow false  -toplevel true -visible true -text $winname ] == "" } {
 			incr numwins
 		} else {
 			lappend existing_wins $winname
@@ -559,22 +577,38 @@ proc pop { raid } {
 	puts "Popping $numwins wow shells."
 	if {$numwins==0} {return}
 	set i 0
+	strip_acct_from_cfg
 	foreach win [dict get $allraids ${curraid}1] {
 		set winname [lindex $win 0]
+		set acctname [lindex $win 1]
+		set toonname [lindex $win 4]
+		set lic [string toupper [lindex $win 2]]
+		set lic [regsub "^WOW" $lic "WoW"]
+		if { ![file exists WTF/$toonname.wtf] } {
+			file copy WTF/Config.wtf WTF/$toonname.wtf
+		} else {
+			strip_acct_from_cfg WTF/$toonname.wtf
+		}
+	        set wtfF [open WTF/$toonname.wtf a]	
+		puts $wtfF "set accountName \"$acctname\""
+		puts $wtfF "set accountList \"\!$lic\""
+		close $wtfF
 		set pos [lindex $raidhash($wincount) $i]
-		if { [twapi::find_windows -single -messageonlywindow false -popup false -toplevel true -visible true -text $winname ] == "" } {
+                
+		if { [twapi::find_windows -single -messageonlywindow false  -toplevel true -visible true -text $winname ] == "" } {
 			if { $numwins == 1 } {
-				twapi::shell_execute -waitforinputidle true -path $wowexe
+				set pids($winname) [twapi::get_pid_from_handle [twapi::shell_execute -getprocesshandle true -waitforinputidle true -path "$wowexe" -params "-config WTF/$toonname.wtf"]]
+				puts "Handle is maybe $pids($winname)"
 			} else {
-				twapi::shell_execute -path $wowexe
+				set pids($winname) [twapi::get_pid_from_handle [twapi::shell_execute -getprocesshandle true -path "$wowexe" -params "-config WTF/$toonname.wtf"]]
+				puts "Handle is maybe $pids($winname)"
 			}
 			lappend new_windows "$winname $i"
 			incr numwins -1
 		}
 		incr i
 	}
-	set wow_pids [get_wow_pids]
-	puts $wow_pids
+	puts "Wow PIDS = [get_wow_pids]"
 	puts "Extrawait1"
 	fswait $extrawait1
 	puts "done!"
@@ -590,7 +624,7 @@ proc pop { raid } {
 		set y [lindex $raidhash($wincount) $order 1]
 		set xpos [lindex $raidhash($wincount) $order 2]
 		set ypos [lindex $raidhash($wincount) $order 3]
-		set mywin [twapi::find_windows -single -messageonlywindow false -popup false -toplevel true -visible true -text $wow_name]
+		set mywin [twapi::find_windows -single -messageonlywindow false -pids $pids($newwin)  -toplevel true -visible true -text $wow_name]
 		twapi::set_foreground_window $mywin
 		twapi::resize_window $mywin $x $y
 		twapi::move_window $mywin $xpos $ypos
@@ -601,14 +635,14 @@ proc pop { raid } {
 		twapi::set_focus $mywin
 		twapi::set_foreground_window $mywin
 		twapi::enable_window_input $mywin
-		twapi::send_input_text "$acct"
-		twapi::enable_window_input $mywin
-		twapi::send_keys \{tab\}
-		twapi::enable_window_input $mywin
+		#twapi::send_input_text "$acct"
+		#twapi::enable_window_input $mywin
+		#twapi::send_keys \{tab\}
+		#twapi::enable_window_input $mywin
 		twapi::send_input_text "$pw"
 		twapi::enable_window_input $mywin
 		twapi::send_keys ~
-		incr i
+		incr i 
 		#if {$i > 3 } { break }
 	}
 }
@@ -618,7 +652,7 @@ proc closeall {} {
 	puts "CLOSING"
 	set wow_pids [get_wow_pids]
 	foreach mypid $wow_pids {
-		set mywin [twapi::find_windows -single -messageonlywindow false -popup false -toplevel true -visible true -pids $mypid ]
+		set mywin [twapi::find_windows -single -messageonlywindow false  -toplevel true -visible true -pids $mypid ]
 		if { $mywin != "" } {
 			twapi::close_window $mywin
 		}
@@ -928,7 +962,7 @@ proc arrangewin { numpadkey } {
 		set toon [lindex $raiders [lindex $winorder($winnum) $i]]
 		set winname [lindex $toon 0]
 		set pos [lindex $raidhash($wincount) $i]
-		set mywinh [twapi::find_windows -single -messageonlywindow false -popup false -toplevel true -visible true -text $winname ]
+		set mywinh [twapi::find_windows -single -messageonlywindow false  -toplevel true -visible true -text $winname ]
 		if { $mywinh != "" } {
 			twapi::restore_window $mywinh
 			twapi::resize_window $mywinh [lindex $pos 0] [lindex $pos 1]
@@ -995,7 +1029,7 @@ proc getwin { name } {
 	set wow_pids [get_wow_pids]
 	set existing_wins ""
 	foreach mypid $wow_pids {
-		if { [set mywin [twapi::find_windows -single -messageonlywindow false -popup false -toplevel true -visible true -pids $mypid -text $name]] != "" } {
+		if { [set mywin [twapi::find_windows -single -messageonlywindow false  -toplevel true -visible true -pids $mypid -text $name]] != "" } {
 			return $mywin
 		}
 	}
@@ -1020,7 +1054,7 @@ proc nextwin { rotation_type } {
 	set wow_pids [get_wow_pids]
 	set existing_wins ""
 	foreach mypid $wow_pids {
-		set thishwin [twapi::find_windows -single -messageonlywindow false -popup false -toplevel true -visible true -pids $mypid]
+		set thishwin [twapi::find_windows -single -messageonlywindow false  -toplevel true -visible true -pids $mypid]
 		if { $thishwin != "" } {
 			lappend existing_wins [twapi::get_window_text $thishwin]
 		}
