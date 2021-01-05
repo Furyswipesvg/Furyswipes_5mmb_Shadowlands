@@ -6,7 +6,7 @@ HEY! LISTEN! Download the latest release as a zip file over there on the release
 
 5-minute-multiboxing is a set of files you can download into your wow directory that allows you to control up to 10 or more boxes at a time by helping you send a key one at a time to each box and changing the window that gets the next key automatically.
 
-This does NOT clone keys or generate keys of any kind. (Exception: Fills in login info, one window at a time).
+This does NOT clone keys or generate keys of any kind. (Exception: Fills in password, one window at a time).
 
 This is a window swapping routine that runs while you play.
 
