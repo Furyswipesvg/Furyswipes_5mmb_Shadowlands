@@ -508,7 +508,7 @@ if { ! $nosmoverwrite } {
 
 #------- START OF WINSWAP CODE FOR SHADOWLANDS/CLASSIC
 # Use scroll_lock to turn swapping on, unless you want capslock
-if {[toonlistKey usecapslock]} { set lock 0x14 } else { set lock 0x91 }
+if {[toonlistKey usecapslock]} { set lock 0x14 ; set lockname "CAPS_LOCK" } else { set lock 0x91 ; set lockname "SCROLL_LOCK" }
 
 proc get_wow_pids { } {
 	global wowexe
@@ -598,10 +598,8 @@ proc pop { raid } {
 		if { [twapi::find_windows -single -messageonlywindow false  -toplevel true -visible true -text $winname ] == "" } {
 			if { $numwins == 1 } {
 				set pids($winname) [twapi::get_pid_from_handle [twapi::shell_execute -getprocesshandle true -waitforinputidle true -path "$wowexe" -params "-config WTF/$toonname.wtf"]]
-				puts "Handle is maybe $pids($winname)"
 			} else {
 				set pids($winname) [twapi::get_pid_from_handle [twapi::shell_execute -getprocesshandle true -path "$wowexe" -params "-config WTF/$toonname.wtf"]]
-				puts "Handle is maybe $pids($winname)"
 			}
 			lappend new_windows "$winname $i"
 			incr numwins -1
@@ -612,9 +610,13 @@ proc pop { raid } {
 	puts "Extrawait1"
 	fswait $extrawait1
 	puts "done!"
+	#set first_window [lrange $new_windows 0 1]
+	#set other_windows [lrange $new_windows 2 end]
+	#set new_windows "$other_windows $first_window"
 	set i 0
 	foreach win $new_windows {
 		set newwin [lindex $win 0]
+		puts "Setting up $win"
 		set order [lindex $win 1]
 		set toon [lindex [dict get $allraids ${curraid}1] $order]
 		set rename_to [lindex $toon 0]
@@ -628,22 +630,21 @@ proc pop { raid } {
 		twapi::set_foreground_window $mywin
 		twapi::resize_window $mywin $x $y
 		twapi::move_window $mywin $xpos $ypos
-		puts "Extrawait2"
-		fswait $extrawait2
-		puts "done!"
 		twapi::set_window_text $mywin "$rename_to"
-		twapi::set_focus $mywin
 		twapi::set_foreground_window $mywin
 		twapi::enable_window_input $mywin
-		#twapi::send_input_text "$acct"
-		#twapi::enable_window_input $mywin
-		#twapi::send_keys \{tab\}
-		#twapi::enable_window_input $mywin
+		puts "Extrawait2"
+		fswait $extrawait2
+		if {$i == 0 } {
+			fswait $extrawait2
+			fswait $extrawait2
+			fswait $extrawait2
+		}
+		puts "done!"
 		twapi::send_input_text "$pw"
 		twapi::enable_window_input $mywin
 		twapi::send_keys ~
-		incr i 
-		#if {$i > 3 } { break }
+		incr i
 	}
 }
 
@@ -670,8 +671,9 @@ proc fswait { ms } {
 }
 
 proc help {} {
+	global lockname
 	puts "COMMANDS:"
-	puts "REMEMBER SUCKA! SCROLL LOCK MUST BE _ON_ FOR THESE TO WORK."
+	puts "REMEMBER SUCKA! $lockname MUST BE _ON_ FOR THESE TO WORK."
 	puts "IMPORTANT: You must DISABLE focus-follows-mouse for 5mmb to work on retail/classic."
 	puts "New roles supported in toonlist: casterhealer meleehealer -- USE THEM, otherwise those slots won't heal"
 	puts "ctrl-h: list these commands"
@@ -1037,8 +1039,12 @@ proc getwin { name } {
 
 proc vmonitor {} {
 	global rotation prev_rotation currlead
-	if { $rotation(full) != $prev_rotation(full) } { puts "Rotation full = $rotation(full)" ; puts "Currlead = $currlead" } 
+	if { $rotation(full) != $prev_rotation(full) } { puts "Rotation full = $rotation(full)" ; puts "Currlead = $currlead" }
+	if { $rotation(heal) != $prev_rotation(heal) } { puts "Rotation heal = $rotation(heal)" ; puts "Currlead = $currlead" }
+	if { $rotation(dps) != $prev_rotation(dps) } { puts "Rotation heal = $rotation(dps)" ; puts "Currlead = $currlead" }
 	set prev_rotation(full) $rotation(full)
+	set prev_rotation(heal) $rotation(heal)
+	set prev_rotation(dps) $rotation(dps)
 }
 
 proc nextwin { rotation_type } {
@@ -1085,29 +1091,109 @@ proc nextwin { rotation_type } {
 if { ($game == "shadow" || $game == "classic")} { {closeall} }
 if { ($game == "shadow" || $game == "classic")} { help }
 # if you don't use the full rotation for 500ms, it will switch back to main
-while { ($game == "shadow" || $game == "classic")} {
-	after 1
-	#if { [mouse_buttons_pressed] } { continue }
-	5mmb_tilde ; #This cycles windows when tilde is pressed.
+while { ($game == "shadow" || $game == "classic") } {
+
+	#How often to check keys in milliseconds. Increase for lower CPU use
+	if { ![toonlistKey checkrate] } {
+		after 1
+	} elseif { [llength checkrate] == 1] } {
+		after $checkrate
+	} else { 
+		puts "ERROR: checkrate must be set to a number."
+	}
+
+	# If any mouse buttons are pressed, no swap will occur if you use this key in toonlist. I find it not helpful.
+	if { [toonlistKey noswaponmousepressed] } {
+		if { [mouse_buttons_pressed] } { continue }
+	}
+
+	# If for some reason you don't want tilde used for anything, use this key.
+	if { ![toonlistKey noswapontilde] } {
+		5mmb_tilde ; #This cycles windows when tilde is pressed.
+	}
+
 	5mmb_update_keystate ; # Do not remove or move
-	#THESE KEY MONITORS ONLY WORK WHEN SCROLL LOCK IS ON!
-	5mmb_monitor -keydown "2 5 !ALT" "switchwin dps"
-	5mmb_monitor -keydown "3 !ALT" "switchwin dps"
-	5mmb_monitor "3 SHIFT !ALT" "switchwin full"
-	5mmb_monitor -keydown "4 6 c b f l F11 F12 !ALT" "switchwin full"
-	5mmb_monitor -keydown "F6 F7 F8 F9 F10 TRIGGER" "switchwin full ; changelead"
-	5mmb_monitor "ALT 4" "reset_rotations"
-	5mmb_monitor -keydown "ESC 1 " "switchwin full"
-	5mmb_monitor -keydown "F1 F2 F3 F4 F5" "switchwin heal"
-	5mmb_monitor -keyup "7" "switchwin full"
+
+	# You can replace the dps key swap list completely with override.
+	if { ![toonlistKey swapkeydowndps] } {
+		5mmb_monitor -keydown "2 3 5 !ALT" "switchwin dps"
+	} elseif { [llength $swapkeydowndps] > 0 } {
+		foreach combo $swapkeydowndps {
+			5mmb_monitor -keydown $combo "switchwin dps"
+		}
+	} else {
+		puts "ERROR, swapkeydowndps takes arguments: \{ <keys in combo> \} \{ <keys in different combo \}"
+	}
+
+	# You can replace the full key swap list completely with override.
+	if { ![toonlistKey swapkeydownfull] } {
+		5mmb_monitor -keydown "4 6 7 c b f l F11 F12 !ALT" "switchwin full"
+	} elseif { [llength $swapkeydownfull] > 0 } { 
+		foreach combo $swapkeydownfull {
+			5mmb_monitor -keydown $combo "switchwin full"
+		}
+	} else {
+		puts "ERROR, swapkeydownfull takes arguments: \{ <keys in combo> \} \{ <keys in different combo \}"
+	}
+
+	# You can replace the full key changleader list with override...the buttons will swap to windows in order listed.
+	# Example, say instead of F6 - F10 for window 1-5 as leader, you want y u i o p... y will be window 1, u will be window 2, etc
+	if { ![toonlistKey swapleaderkeys] } {
+		5mmb_monitor -keydown "F6 F7 F8 F9 F10 TRIGGER" "switchwin full ; changelead [list F6 F7 F8 F9 F10] "
+	} elseif { [llength $swapleaderkeys] < 6 && [llength $swapleaderkeys] > 0 } {
+		5mmb_monitor -keydown "$swapleaderkeys TRIGGER" "switchwin full ; changelead $swapleaderkeys"
+	} else {
+		puts "ERROR: swapleaderkeys takes from 1-5 keys"
+	}
+
+	# You can change the rotation reset key combo with override.
+	if { ![toonlistKey resetrotations] } {
+		5mmb_monitor "ALT 4" "reset_rotations"
+	} elseif { [llength $resetrotations ] > 0 } {
+		5mmb_monitor $resetrotations "reset_rotataions"
+	} else {
+		puts "ERROR: resetrotations takes a list of keys"
+	}
+
+	if { ![toonlistKey swapkeydownfull] } {
+		5mmb_monitor -keydown "ESC 1 " "switchwin full"
+	}
+	if { ![toonlistKey swapkeydownheal] } {
+		5mmb_monitor -keydown "F1 F2 F3 F4 F5" "switchwin heal"
+	} elseif { $swapkeydownheal != "" } {
+		foreach combo $swapkeydownheal {
+			5mmb_monitor -keydown $combo "switchwin heal"
+		}
+	} else {
+		puts "ERROR, swapkeydownheal takes arguments: \{ <keys in combo> \} \{ <keys in different combo \}"
+	}
+
+	# You can change the full keyup swap list completely with override
+	if { ![toonlistKey swapkeyupfull] } {
+	} elseif { [llength $swapkeyupfull] > 0 } { 
+		foreach combo $swapkeyupfull {
+			5mmb_monitor -keyup $combo "switchwin full"
+		}
+	} else {
+		puts "ERROR, swapkeyupfull takes arguments: \{ <keys in combo> \} \{ <keys in different combo \}"
+	}
+
+	# If you use demonhuntertank you will be using my movekeys for x q e arrows and space
 	if { [toonlistKey demonhuntertank] } {
 		5mmb_monitor -keyup "x q e LEFT UP RIGHT DOWN" "switchwin full"
 		5mmb_monitor -keydown "SPACE SHIFT" "switchwin full"
-	} else {
+	} elseif { ![toonlistKey swapkeyupfull] } {
 		5mmb_monitor -keyup "SPACE x q e LEFT UP RIGHT DOWN" "switchwin full"
 	}
-	5mmb_monitor -keyup "TAB" "arrangewin $currlead ; reset_rotations"
-	5mmb_monitor "ALT 2" "arrangewin $currlead"
+
+	# You can pick a different leader key by override
+	if { ![toonlistKey switchtoleader] } {
+		5mmb_monitor -keyup "TAB" "arrangewin $currlead ; reset_rotations"
+		5mmb_monitor "ALT 2" "arrangewin $currlead"
+	} elseif { [llength $switchtoleader] == 1 } {
+		5mmb_monitor -keyup $switchtoleader "arrangewin $currlead ; reset_rotations"
+	}
+
 	5mmb_monitor "CONTROL h" {help}
 	5mmb_monitor "CONTROL ALT o" {closeall}
 	#TRIGGER passes whatever numpad key is pressed to arrangewin
@@ -1117,9 +1203,11 @@ while { ($game == "shadow" || $game == "classic")} {
 		5mmb_monitor "CONTROL ALT $raid" "pop $raid"
 		5mmb_monitor "CONTROL SHIFT $raid" "arrangewin 1"
 	}
-	if { [lock_key_is_on] && [expr $idletimer + $returndelay] < [clock milliseconds] && [wow_is_focused] } {
+	if { ![toonlistKey dontresetrotations] && [lock_key_is_on] && [expr $idletimer + $returndelay] < [clock milliseconds] && [wow_is_focused] } {
 		resettimer
 		reset_rotations
 	}
-	#vmonitor
+	if { [toonlistKey displayrotations] } {
+		vmonitor
+	}
 }
