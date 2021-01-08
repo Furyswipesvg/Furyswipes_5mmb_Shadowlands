@@ -488,6 +488,20 @@ if { ! $nosmoverwrite } {
 				incr toonno
 			}
 			puts $sMN "\}"
+		} elseif { [regexp "^FSMB_turbokeys" $line ] && [toonlistKey turbokeys] && $turbokeys!="" } {
+			set toonno 1
+			puts -nonewline $sMN "FSMB_turbokeys=\{"
+			set first false
+			foreach key $turbokeys {
+				set keyname [ string toupper $key]
+				if { $first=="false" } {
+					puts -nonewline $sMN \"$keyname\"
+					set first true
+				} else {
+					puts -nonewline $sMN ,"$keyname\"
+				}
+			}
+			puts $sMN "\}"
 		} elseif { [regexp "^FSMB_RAID" $line ] && [toonlistKey raidname] } {
 			puts $sMN "FSMB_RAID = \"MULTIBOX_$raidname\""
 		} elseif { [regexp "^FSMB_maxheal" $line ] && [toonlistKey maxheal] } {

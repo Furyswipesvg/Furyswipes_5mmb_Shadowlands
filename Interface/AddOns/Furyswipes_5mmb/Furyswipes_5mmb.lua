@@ -1,4 +1,4 @@
-FSMB_version="010220b_SL_CLASSIC"
+FSMB_version="010721_SL_CLASSIC"
 FSMB_game="shadow"
 FSMB_RAID = "MULTIBOX_myraid1"
 if FSMB_game=="tbc" then
@@ -12,18 +12,26 @@ if FSMB_game=="tbc" then
 	end
 end
 print(FSMB_game.." mode detected!")
+FSMB_turbokeys={"2","3","4","5","6"}
 if FSMB_game=="classic" or FSMB_game=="shadow" then 
 	AceComm=LibStub("AceComm-3.0")
-	ActionButton2:RegisterForClicks("AnyDown","AnyUp")
-	SetOverrideBindingClick(UIParent, true,"2","ActionButton2")
-	ActionButton3:RegisterForClicks("AnyDown","AnyUp")
-	SetOverrideBindingClick(UIParent, true,"3","ActionButton3")
-	ActionButton4:RegisterForClicks("AnyDown","AnyUp")
-	SetOverrideBindingClick(UIParent, true,"4","ActionButton4")
-	ActionButton5:RegisterForClicks("AnyDown","AnyUp")
-	SetOverrideBindingClick(UIParent, true,"5","ActionButton5")
-	ActionButton6:RegisterForClicks("AnyDown","AnyUp")
-	SetOverrideBindingClick(UIParent, true,"6","ActionButton6")
+	if not UnitAffectingCombat("player") then 
+		for _,v in pairs(FSMB_turbokeys) do
+			print("Making "..v.." a turbo button!")
+			_G["ActionButton"..v]:RegisterForClicks("AnyDown","AnyUp")
+			SetOverrideBindingClick(UIParent, true,v,"ActionButton"..v)
+		end
+	end
+	--ActionButton2:RegisterForClicks("AnyDown","AnyUp")
+	--SetOverrideBindingClick(UIParent, true,"2","ActionButton2")
+	--ActionButton3:RegisterForClicks("AnyDown","AnyUp")
+	--SetOverrideBindingClick(UIParent, true,"3","ActionButton3")
+	--ActionButton4:RegisterForClicks("AnyDown","AnyUp")
+	--SetOverrideBindingClick(UIParent, true,"4","ActionButton4")
+	--ActionButton5:RegisterForClicks("AnyDown","AnyUp")
+	--SetOverrideBindingClick(UIParent, true,"5","ActionButton5")
+	--ActionButton6:RegisterForClicks("AnyDown","AnyUp")
+	--SetOverrideBindingClick(UIParent, true,"6","ActionButton6")
 end
 print('Hello from 5mmb!')
 FSMB_dontsetcamera=false
@@ -1814,23 +1822,30 @@ FSMB:SetScript("OnEvent", function(self,event, arg1, arg2, ...) -- event handler
 			FsR_TrainerIsUP = true
 		end
   	elseif FSMB_game=="shadow" and event == "UPDATE_OVERRIDE_ACTIONBAR" or event == "PLAYER_GAINS_VEHICLE_DATA" or event == "PLAYER_LOSES_VEHICLE_DATA" or event == "UNIT_ENTERED_VEHICLE" or event == "UNIT_EXITED_VEHICLE" or event == "UNIT_ENTERING_VEHICLE" or event == "UNIT_EXITING_VEHICLE" or event == "VEHICLE_ANGLE_SHOW" or event == "VEHICLE_ANGLE_UPDATE" or event == "VEHICLE_UPDATE" or event == "VEHICLE_POWER_SHOW" or event == "UPDATE_VEHICLE_ACTION_BAR" or event == "ACTIONBAR_UPDATE_COOLDOWN" then
-		if HasOverrideActionBar() or HasBonusActionBar() or HasVehicleActionBar() or HasTempShapeshiftActionBar() then
-			SetOverrideBinding(UIParent, true,"2",nil)
-			SetOverrideBinding(UIParent, true,"3",nil)
-			SetOverrideBinding(UIParent, true,"4",nil)
-			SetOverrideBinding(UIParent, true,"5",nil)
-			SetOverrideBinding(UIParent, true,"6",nil)
-		else
-			ActionButton2:RegisterForClicks("AnyDown","AnyUp")
-			SetOverrideBindingClick(UIParent, true,"2","ActionButton2")
-			ActionButton3:RegisterForClicks("AnyDown","AnyUp")
-			SetOverrideBindingClick(UIParent, true,"3","ActionButton3")
-			ActionButton4:RegisterForClicks("AnyDown","AnyUp")
-			SetOverrideBindingClick(UIParent, true,"4","ActionButton4")
-			ActionButton5:RegisterForClicks("AnyDown","AnyUp")
-			SetOverrideBindingClick(UIParent, true,"5","ActionButton5")
-			ActionButton6:RegisterForClicks("AnyDown","AnyUp")
-			SetOverrideBindingClick(UIParent, true,"6","ActionButton6")
+		if not UnitAffectingCombat("player") and (HasOverrideActionBar() or HasBonusActionBar() or HasVehicleActionBar() or HasTempShapeshiftActionBar()) then
+			for _,v in pairs(FSMB_turbokeys) do
+				SetOverrideBinding(UIParent, true,v,nil)
+			end
+			--SetOverrideBinding(UIParent, true,"2",nil)
+			--SetOverrideBinding(UIParent, true,"3",nil)
+			--SetOverrideBinding(UIParent, true,"4",nil)
+			--SetOverrideBinding(UIParent, true,"5",nil)
+			--SetOverrideBinding(UIParent, true,"6",nil)
+		elseif not UnitAffectingCombat("player") then 	
+			for _,v in pairs(FSMB_turbokeys) do
+				_G["ActionButton"..v]:RegisterForClicks("AnyDown","AnyUp")
+				SetOverrideBindingClick(UIParent, true,v,"ActionButton"..v)
+			end
+			--ActionButton2:RegisterForClicks("AnyDown","AnyUp")
+			--SetOverrideBindingClick(UIParent, true,"2","ActionButton2")
+			--ActionButton3:RegisterForClicks("AnyDown","AnyUp")
+			--SetOverrideBindingClick(UIParent, true,"3","ActionButton3")
+			--ActionButton4:RegisterForClicks("AnyDown","AnyUp")
+			--SetOverrideBindingClick(UIParent, true,"4","ActionButton4")
+			--ActionButton5:RegisterForClicks("AnyDown","AnyUp")
+			--SetOverrideBindingClick(UIParent, true,"5","ActionButton5")
+			--ActionButton6:RegisterForClicks("AnyDown","AnyUp")
+			--SetOverrideBindingClick(UIParent, true,"6","ActionButton6")
 		end
   	elseif event == "TRAINER_CLOSED" then
 		FsR_TrainerIsUP = false
