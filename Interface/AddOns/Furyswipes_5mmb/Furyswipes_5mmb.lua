@@ -1,8 +1,5 @@
-FSMB_version="011021_SL_CLASSIC"
-FSMB_game="classic"
-FSMB_RAID = "MULTIBOX_myraid1"
-if FSMB_game=="tbc" then
-	function print(msg)
+FSMB_version="011021b_SL_CLASSIC"
+FSMB_game="classic" FSMB_RAID = "MULTIBOX_myraid1" if FSMB_game=="tbc" then function print(msg)
 		DEFAULT_CHAT_FRAME:AddMessage(msg);
 		--DEFAULT_CHAT_FRAME:AddMessage(msg, SM_VARS.printColor.r, SM_VARS.printColor.g, SM_VARS.printColor.b);
 	end
@@ -16,7 +13,7 @@ FSMB_turbokeys={"2","3","4","5","6"}
 if FSMB_game=="shadow" or FSMB_game=="classic" then 
 	AceComm=LibStub("AceComm-3.0")
 end
-if FSMB_game=="shadow" then 
+if FSMB_game=="shadow" or FSMB_game=="classic" then 
 	if not UnitAffectingCombat("player") then 
 		for _,v in pairs(FSMB_turbokeys) do
 			print("Making "..v.." a turbo button!")
@@ -710,13 +707,13 @@ function init()
 				else
 					heallist="\n/target "..FSMB_toonlist[i].."\n/castsequence [nomod] reset=combat/10 "..riptide..","..healingSurge..","..healingSurge..","..healingSurge..","..healingSurge..","..healingSurge..","..healingWave
 				end
-			elseif myClass=="DRUID" and myspec=="RESTORATION" then
+			elseif FSMB_game=="shadow" and myClass=="DRUID" and myspec=="RESTORATION" then
 				if FSMB_toonlist[i]==myname then
 					heallist="\n/castsequence [@player] reset=combat/30 "..efflorescence..","..swiftmend..","..rejuvenation..","..","..lifebloom..","..rejuvenation..","..regrowth..","..regrowth.."\n/cast [@player] ironbark"
 				else
 					heallist="\n/target "..FSMB_toonlist[i].."\n/castsequence [nomod] reset=combat/10 "..efflorescence..","..swiftmend..","..rejuvenation..","..lifebloom..","..rejuvenation..","..regrowth..","..regrowth..","..regrowth.."\n/cast ironbark"
 				end
-			elseif myClass=="MONK" and myspec=="BREWMASTER" and FSMB_toonlist[i]==myname then
+			elseif FSMB_game=="shadow" and myClass=="MONK" and myspec=="BREWMASTER" and FSMB_toonlist[i]==myname then
 				heallist="\n/cast [nochanneling] Expel Harm\n/cast [@player,nochanneling] vivify"
 			else
 				heallist="\n/cast [@"..FSMB_toonlist[i].."] "..FSMB_heal_names[myClass]

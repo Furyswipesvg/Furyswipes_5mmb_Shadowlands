@@ -1073,7 +1073,7 @@ proc vmonitor {} {
 	global rotation prev_rotation currlead
 	if { $rotation(full) != $prev_rotation(full) } { puts "Rotation full = $rotation(full)" ; puts "Currlead = $currlead" }
 	if { $rotation(heal) != $prev_rotation(heal) } { puts "Rotation heal = $rotation(heal)" ; puts "Currlead = $currlead" }
-	if { $rotation(dps) != $prev_rotation(dps) } { puts "Rotation heal = $rotation(dps)" ; puts "Currlead = $currlead" }
+	if { $rotation(dps) != $prev_rotation(dps) } { puts "Rotation dps = $rotation(dps)" ; puts "Currlead = $currlead" }
 	set prev_rotation(full) $rotation(full)
 	set prev_rotation(heal) $rotation(heal)
 	set prev_rotation(dps) $rotation(dps)
