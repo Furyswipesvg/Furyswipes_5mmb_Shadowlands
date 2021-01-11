@@ -43,21 +43,21 @@ Seperate multiple lists with a space, example: "2 3 5 !ALT" "1 SPACE"
 
 noswapontilde   (don't swap which window is big when you press the key to the left of 1)  
 noswaponmousepressed   (stop swapping windows if you have a mouse button down)  
-swapkeydownfull <one or more lists of key combos>  (swap when you press any one of these keys down, round-robin between the full set of windows)  
-swapkeydownheal <one or more lists of key combos>  (swap when you press any one of these keys down, round-robin only between roles with healer in the name)  
-swapkeydowndps <one or more lists of key combos> (swap when you press any one of these keys down, round-robin between the full set of windows, skipping role "healer" 2/3 times)    
+swapkeydownfull \<one or more lists of key combos>  (swap when you press any one of these keys down, round-robin between the full set of windows)  
+swapkeydownheal \<one or more lists of key combos>  (swap when you press any one of these keys down, round-robin only between roles with healer in the name)  
+swapkeydowndps \<one or more lists of key combos> (swap when you press any one of these keys down, round-robin between the full set of windows, skipping role "healer" 2/3 times)    
 swapkeyupfull (same as previous, but key up)  
 swapkeyupheal (ditto)  
 swapkeyupdps  (ditto)  
-resetrotations <key combo or list> (When these keys are pressed, reset the rotations back to window 1, example, I use tab key)  
+resetrotations \<key combo or list> (When these keys are pressed, reset the rotations back to window 1, example, I use tab key)  
 dontresetrotations (This keyword refers to me resetting the rotations if you don't hit a button in 10 seconds)  
 displayrotations (debug command, helps understand the rotations)  
-switchtoleader <key or list of keys> (named key switches to leader window--I use tab)  
+switchtoleader \<key or list of keys> (named key switches to leader window--I use tab)  
 demonhuntertank (space bar doesn't switch windows)  
-swapleaderkeys <list of 1-5 keys (depending on your party size)> (which keys to use to change main assist, default F6-F10)  
-checkrate <milliseconds> (how often to check keys default 1)  
+swapleaderkeys \<list of 1-5 keys (depending on your party size)> (which keys to use to change main assist, default F6-F10)  
+checkrate \<milliseconds> (how often to check keys default 1)  
 usecapslock (use caps lock to enable multiboxing instead of scroll lock)  
-turbokeys <list of keys  to activate on keyup AND keydown> (only 1-9,0 supported)  
+turbokeys \<list of keys  to activate on keyup AND keydown> (only 1-9,0 supported)  
   
 Examples and notes:  
   
@@ -98,7 +98,7 @@ I guess you could swap on key down and key up for reeeeeally fast window swappin
 --------------------------
 There is a special keyword, windowplacement, to allow you to completly customize your windows:  
 
-Usage: windowplacement <number of windows> <pattern of placement>  
+Usage: windowplacement \<number of windows> \<pattern of placement>  
 
 Example:  
 windowplacement 5 {{1720 1440 860 0} {860 720 0 0} {860 720 0 720} {860 720 2560 0} {860 720 2560 720}}  
