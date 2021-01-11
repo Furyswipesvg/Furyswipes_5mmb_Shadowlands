@@ -95,6 +95,26 @@ swapkeyupfull "LEFT RIGHT UP DOWN SPACE"
 in fact, all keys could swap on key up and you probably wouldn't notice a difference  
 I guess you could swap on key down and key up for reeeeeally fast window swapping!  
   
+--------------------------
+There is a special keyword, windowplacement, to allow you to completly customize your windows:  
+
+Usage: windowplacement <number of windows> <pattern of placement>  
+
+Example:  
+windowplacement 5 {{1720 1440 860 0} {860 720 0 0} {860 720 0 720} {860 720 2560 0} {860 720 2560 720}}  
+
+The 5 in the example above tells 5mmb when to use this pattern--in this case, if you are popping 5 windows, use this pattern. You can make a different pattern for any other count of windows. But you have to put it all on the same line of windowplacement.  
+
+Example: windowplacement 4 xxxxx 5 xxxxx 3 xxxxx  
+Where xxxxx=the numbers in the window sizes.  
+  
+Each group of 4 numbers is  a window , e.g. {1720 1440 860 0}  
+  
+The numbers are:
+{**x-size    y-size    pixels-from-left    pixels-from-top**}  
+they are sized in the order they are listed in your toonlist  
+Each set needs to go in braces, and there needs to be braces around the set.  
+   
 --Furyswipes, Dec. 2020.  
 
 FULL VIDEO TUTORIAL:
