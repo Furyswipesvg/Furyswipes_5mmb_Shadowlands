@@ -1,4 +1,4 @@
-## Interface: 90001
+## Interface: 11306
 ## Title: Furyswipes_5mmb
 ## Author: Furyswipes of Youtube with Papaancake for GSE macro load
 ## Version: 0.1
