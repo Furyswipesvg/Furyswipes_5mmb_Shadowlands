@@ -1,4 +1,4 @@
-FSMB_version="010721_SL_CLASSIC"
+FSMB_version="011021_SL_CLASSIC"
 FSMB_game="shadow"
 FSMB_RAID = "MULTIBOX_myraid1"
 if FSMB_game=="tbc" then
@@ -13,8 +13,10 @@ if FSMB_game=="tbc" then
 end
 print(FSMB_game.." mode detected!")
 FSMB_turbokeys={"2","3","4","5","6"}
-if FSMB_game=="classic" or FSMB_game=="shadow" then 
+if FSMB_game=="shadow" or FSMB_game=="classic" then 
 	AceComm=LibStub("AceComm-3.0")
+end
+if FSMB_game=="shadow" then 
 	if not UnitAffectingCombat("player") then 
 		for _,v in pairs(FSMB_turbokeys) do
 			print("Making "..v.." a turbo button!")
@@ -399,6 +401,7 @@ FSMB_clothto="Vaj"
 FSMB_tradeopen=nil
 FSMB_nomacros=nil
 FSMB_healerlist={"Im","Earthshock"}
+FSMB_meleelist={"Earthshock"}
 FSMB_maxheal={Druid=11,Priest=11,Shaman=11,Paladin=11}
 FSMB_myrez={["PALADIN"]=(redemption),["SHAMAN"]=(ancestralSpirit),["DRUID"]=(revive),["MONK"]=(resuscitate),["PRIEST"]=(resurrection),["DEATHKNIGHT"]=(raiseAlly)}
 FSMB_mypoly={["HUNTER"]=(freezingTrap),["SHAMAN"]=(hex),["ROGUE"]=(sap),["DEATHKNIGHT"]=("NONE"),["DEMONHUNTER"]=(imprison),["MONK"]=(paralysis),["PRIEST"]=(shackleUndead),["MAGE"]=(magePoly),["DRUID"]=(druidHibernate),["WARLOCK"]=(warlockBanish)}
@@ -660,9 +663,11 @@ function init()
 			PlaceAction(slot+i)
 			ClearCursor()
 		end
-		macroId = CreateMacroFS("init_fs", "Ability_HUNTER_pathfinding", "/init" , hunterpersonal);
-	else
+	end
+	if FSMB_game~="classic" and FSMB_game~="shadow" then
 		macroId = CreateMacroFS("focus_fs", "Ability_HUNTER_pathfinding", "/run focusme()" , hunterpersonal);
+	else
+		macroId = CreateMacroFS("init_fs", "Ability_HUNTER_pathfinding", "/init" , hunterpersonal);
 	end
 	PickupMacro(macroId)
 	PlaceAction(43)
@@ -722,7 +727,7 @@ function init()
 				ClearCursor()
 				idx=idx+1
 		end
-	else
+	elseif myname~="Mootalia" then 
 		local slot=49
 		local idx=0
 		local i
@@ -898,11 +903,18 @@ function init()
 					GrabSpell(massRes)
 					PlaceAction(68)
 					ClearCursor()
-				elseif myClass=="SHAMAN" and myspec=="RESTOSHAM" then 
+				elseif FSMB_game=="shadow" and myClass=="SHAMAN" and myspec=="RESTOSHAM" then 
 					macroId = CreateMacroFS("rez_fs", "INV_Misc_QuestionMark", "/cast "..ancestralVision, nil);
 					PickupMacro(macroId)
 					PlaceAction(8)
 					GrabSpell(ancestralVision)
+					PlaceAction(68)
+					ClearCursor()
+				elseif FSMB_game~="shadow" and myClass=="SHAMAN" and myspec=="RESTOSHAM" then 
+					macroId = CreateMacroFS("rez_fs", "INV_Misc_QuestionMark", "/cast "..ancestralSpirit, nil);
+					PickupMacro(macroId)
+					PlaceAction(8)
+					GrabSpell(ancestralSpirit)
 					PlaceAction(68)
 					ClearCursor()
 				else
@@ -1058,17 +1070,17 @@ function init()
 			index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/click "..prefix..myspec.."_SETUP",nil)
 		elseif FSMB_game=="shadow" then
 			if myname==FSMB_tank then
-				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/assist [@focus,exists][notarget,@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n",nil)
+				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/assist [@focus,exists][notarget,@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n/run melee_follow()",nil)
 			elseif FindInTable(FSMB_toonlist,myname) then
-				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/assist [@focus,exists][@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n",nil)
+				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/assist [@focus,exists][@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n/run melee_follow()",nil)
 			else
 				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n",nil)
 			end
 		elseif FSMB_game=="classic" then
 			if myname==FSMB_tank then
-				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/assist [notarget,@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n",nil)
+				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/assist [notarget,@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n/run melee_follow()",nil)
 			elseif FindInTable(FSMB_toonlist,myname) then
-				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/assist [@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n",nil)
+				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/assist [@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n/run melee_follow()",nil)
 			else
 				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n",nil)
 			end
@@ -1721,6 +1733,9 @@ function FSMB:OnCommReceived(prefix,msg)
 		FSMB_raidleader=msg
 		follow()
 		--if not UnitAffectingCombat("player") then FocusUnit(unitname(FSMB_raidleader)) end
+	elseif prefix=="FSMB_MELEEFOLLOW" then
+		print(FSMB_RAID.." Melee Following!")
+		if FindInTable(FSMB_meleelist,myname) then follow() end
 	end
 end
 FSMB:SetScript("OnUpdate",function()
@@ -1740,6 +1755,7 @@ end)
 if FSMB_game=="shadow" or FSMB_game=="classic" then 
 	AceComm.RegisterComm(FSMB,"FSMB_FIND")
 	AceComm.RegisterComm(FSMB,"FSMB_FOCUS")
+	AceComm.RegisterComm(FSMB,"FSMB_MELEEFOLLOW")
 end
 FSMB:RegisterEvent("ADDON_LOADED") -- register event "ADDON_LOADED"
 FSMB:RegisterEvent("CHAT_MSG_ADDON")
@@ -2274,10 +2290,14 @@ function follow()
 	end
 end
 function melee_follow()
-	--This is meant to be in your alt-4 macro, and gets everyone to follow and assist the focus (meant to be your current window toon)
-	if not IAmFocus() and FSMB_raidleader and not IsAltKeyDown() and not IsControlKeyDown() then
-		FollowUnit(unitname(FSMB_raidleader))
-
+        if FSMB_game=="classic" or FSMB_game=="shadow" then 
+		if IsAltKeyDown() or IsControlKeyDown() then return end
+		AceComm.SendCommMessage(FSMB,"FSMB_MELEEFOLLOW", UnitName("player"),"RAID")
+	else
+		if not IAmFocus() and FSMB_raidleader and not IsAltKeyDown() and not IsControlKeyDown() then
+			FollowUnit(unitname(FSMB_raidleader))
+	
+		end
 	end
 end
 function unitname(inname)

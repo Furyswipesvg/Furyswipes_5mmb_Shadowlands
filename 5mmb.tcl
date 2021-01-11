@@ -1,4 +1,4 @@
-set version 010421_SL_CLASSIC
+set version 011021_SL_CLASSIC
 lappend auto_path twapi
 lappend auto_path aabacus
 package require twapi
@@ -442,6 +442,24 @@ if { ! $nosmoverwrite } {
 			set first false
 			for { set i 0 } { $i<[array size toons] } { incr i } {
 				if { [regexp "healer" [ string tolower [lindex $toons($i) 4]]] } {
+					set name [string totitle [ string tolower [lindex $toons($i) 3]]]
+					if { [regexp {\-} $name] } {
+						regexp "(.*)-" $name match name
+					}
+					if { $first=="false" } {
+						puts -nonewline $sMN \"$name\"
+						set first true
+					} else {
+						puts -nonewline $sMN ,\"$name\"
+					}
+				}
+			}
+			puts $sMN "\}"
+		} elseif { [regexp "^FSMB_meleelist" $line ] } {
+			puts -nonewline $sMN "FSMB_meleelist=\{"
+			set first false
+			for { set i 0 } { $i<[array size toons] } { incr i } {
+				if { [regexp "melee" [ string tolower [lindex $toons($i) 4]]] } {
 					set name [string totitle [ string tolower [lindex $toons($i) 3]]]
 					if { [regexp {\-} $name] } {
 						regexp "(.*)-" $name match name
@@ -1095,6 +1113,7 @@ proc nextwin { rotation_type } {
 	} else {
 		incr rotation($rotation_type)
 	}
+	if { [array size winroles] == 0 } { return 1 } ; # No windows open yet.
 	if { ! [info exists winroles($rotation($rotation_type))] } { set rotation($rotation_type) 1 }
 	if { $rotation_type=="dps" && [lindex $winroles($rotation($rotation_type)) 1]==1 } { incr healerskip }
 	if { [lindex $winroles($rotation($rotation_type)) 1]==1 } { set rotation(full) 1 }
@@ -1153,9 +1172,9 @@ while { ($game == "shadow" || $game == "classic") } {
 	# You can replace the full key changleader list with override...the buttons will swap to windows in order listed.
 	# Example, say instead of F6 - F10 for window 1-5 as leader, you want y u i o p... y will be window 1, u will be window 2, etc
 	if { ![toonlistKey swapleaderkeys] } {
-		5mmb_monitor -keydown "F6 F7 F8 F9 F10 TRIGGER" "switchwin full ; changelead [list F6 F7 F8 F9 F10] "
+		5mmb_monitor -keydown "F6 F7 F8 F9 F10 TRIGGER" "switchwin full ; changelead"
 	} elseif { [llength $swapleaderkeys] < 6 && [llength $swapleaderkeys] > 0 } {
-		5mmb_monitor -keydown "$swapleaderkeys TRIGGER" "switchwin full ; changelead $swapleaderkeys"
+		5mmb_monitor -keydown "$swapleaderkeys TRIGGER" "switchwin full ; changelead"
 	} else {
 		puts "ERROR: swapleaderkeys takes from 1-5 keys"
 	}
@@ -1170,7 +1189,7 @@ while { ($game == "shadow" || $game == "classic") } {
 	}
 
 	if { ![toonlistKey swapkeydownfull] } {
-		5mmb_monitor -keydown "ESC 1 " "switchwin full"
+		5mmb_monitor -keydown "ESC" "switchwin full"
 	}
 	if { ![toonlistKey swapkeydownheal] } {
 		5mmb_monitor -keydown "F1 F2 F3 F4 F5" "switchwin heal"
@@ -1194,10 +1213,10 @@ while { ($game == "shadow" || $game == "classic") } {
 
 	# If you use demonhuntertank you will be using my movekeys for x q e arrows and space
 	if { [toonlistKey demonhuntertank] } {
-		5mmb_monitor -keyup "x q e LEFT UP RIGHT DOWN" "switchwin full"
+		5mmb_monitor -keyup "1 x q e LEFT UP RIGHT DOWN" "switchwin full"
 		5mmb_monitor -keydown "SPACE SHIFT" "switchwin full"
 	} elseif { ![toonlistKey swapkeyupfull] } {
-		5mmb_monitor -keyup "SPACE x q e LEFT UP RIGHT DOWN" "switchwin full"
+		5mmb_monitor -keyup "1 SPACE x q e LEFT UP RIGHT DOWN" "switchwin full"
 	}
 
 	# You can pick a different leader key by override
