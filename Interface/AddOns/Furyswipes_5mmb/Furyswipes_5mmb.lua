@@ -1,5 +1,7 @@
-FSMB_version="011021b_SL_CLASSIC"
-FSMB_game="classic" FSMB_RAID = "MULTIBOX_myraid1" if FSMB_game=="tbc" then function print(msg)
+FSMB_version="011121_SL_CLASSIC"
+FSMB_game="classic" FSMB_RAID = "MULTIBOX_myraid1" 
+if FSMB_game=="tbc" then 
+	function print(msg)
 		DEFAULT_CHAT_FRAME:AddMessage(msg);
 		--DEFAULT_CHAT_FRAME:AddMessage(msg, SM_VARS.printColor.r, SM_VARS.printColor.g, SM_VARS.printColor.b);
 	end
