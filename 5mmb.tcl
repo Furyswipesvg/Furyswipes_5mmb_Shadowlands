@@ -510,7 +510,7 @@ if { ! $nosmoverwrite } {
 			set toonno 1
 			puts -nonewline $sMN "FSMB_turbokeys=\{"
 			set first false
-			foreach key $turbokeys {
+			foreach key [join $turbokeys] {
 				set keyname [ string toupper $key]
 				if { $first=="false" } {
 					puts -nonewline $sMN \"$keyname\"
@@ -1152,7 +1152,7 @@ while { ($game == "shadow" || $game == "classic") } {
 		5mmb_monitor -keydown "2 3 5 !ALT" "switchwin dps"
 	} elseif { [llength $swapkeydowndps] > 0 } {
 		foreach combo $swapkeydowndps {
-			5mmb_monitor -keydown $combo "switchwin dps"
+			5mmb_monitor -keydown [join $combo] "switchwin dps"
 		}
 	} else {
 		puts "ERROR, swapkeydowndps takes arguments: \{ <keys in combo> \} \{ <keys in different combo \}"
@@ -1163,7 +1163,7 @@ while { ($game == "shadow" || $game == "classic") } {
 		5mmb_monitor -keydown "4 6 7 c b f l F11 F12 !ALT" "switchwin full"
 	} elseif { [llength $swapkeydownfull] > 0 } { 
 		foreach combo $swapkeydownfull {
-			5mmb_monitor -keydown $combo "switchwin full"
+			5mmb_monitor -keydown [join $combo] "switchwin full"
 		}
 	} else {
 		puts "ERROR, swapkeydownfull takes arguments: \{ <keys in combo> \} \{ <keys in different combo \}"
@@ -1174,7 +1174,7 @@ while { ($game == "shadow" || $game == "classic") } {
 	if { ![toonlistKey swapleaderkeys] } {
 		5mmb_monitor -keydown "F6 F7 F8 F9 F10 TRIGGER" "switchwin full ; changelead"
 	} elseif { [llength $swapleaderkeys] < 6 && [llength $swapleaderkeys] > 0 } {
-		5mmb_monitor -keydown "$swapleaderkeys TRIGGER" "switchwin full ; changelead"
+		5mmb_monitor -keydown "[join $swapleaderkeys] TRIGGER" "switchwin full ; changelead"
 	} else {
 		puts "ERROR: swapleaderkeys takes from 1-5 keys"
 	}
@@ -1183,7 +1183,7 @@ while { ($game == "shadow" || $game == "classic") } {
 	if { ![toonlistKey resetrotations] } {
 		5mmb_monitor "ALT 4" "reset_rotations"
 	} elseif { [llength $resetrotations ] > 0 } {
-		5mmb_monitor $resetrotations "reset_rotataions"
+		5mmb_monitor [join $resetrotations] "reset_rotations"
 	} else {
 		puts "ERROR: resetrotations takes a list of keys"
 	}
@@ -1195,28 +1195,24 @@ while { ($game == "shadow" || $game == "classic") } {
 		5mmb_monitor -keydown "F1 F2 F3 F4 F5" "switchwin heal"
 	} elseif { $swapkeydownheal != "" } {
 		foreach combo $swapkeydownheal {
-			5mmb_monitor -keydown $combo "switchwin heal"
+			5mmb_monitor -keydown [join $combo] "switchwin heal"
 		}
 	} else {
 		puts "ERROR, swapkeydownheal takes arguments: \{ <keys in combo> \} \{ <keys in different combo \}"
 	}
 
-	# You can change the full keyup swap list completely with override
-	if { ![toonlistKey swapkeyupfull] } {
-	} elseif { [llength $swapkeyupfull] > 0 } { 
-		foreach combo $swapkeyupfull {
-			5mmb_monitor -keyup $combo "switchwin full"
-		}
-	} else {
-		puts "ERROR, swapkeyupfull takes arguments: \{ <keys in combo> \} \{ <keys in different combo \}"
-	}
-
 	# If you use demonhuntertank you will be using my movekeys for x q e arrows and space
 	if { [toonlistKey demonhuntertank] } {
 		5mmb_monitor -keyup "1 x q e LEFT UP RIGHT DOWN" "switchwin full"
-		5mmb_monitor -keydown "SPACE SHIFT" "switchwin full"
+		5mmb_monitor -keyup "SPACE SHIFT" "switchwin full"
 	} elseif { ![toonlistKey swapkeyupfull] } {
 		5mmb_monitor -keyup "1 SPACE x q e LEFT UP RIGHT DOWN" "switchwin full"
+	} elseif { [llength $swapkeyupfull] > 0 } { 
+		foreach combo $swapkeyupfull {
+			5mmb_monitor -keyup [join $combo] "switchwin full"
+		}
+	} else {
+		puts "ERROR, swapkeyupfull takes arguments: \{ <keys in combo> \} \{ <keys in different combo \}"
 	}
 
 	# You can pick a different leader key by override
@@ -1224,7 +1220,8 @@ while { ($game == "shadow" || $game == "classic") } {
 		5mmb_monitor -keyup "TAB" "arrangewin $currlead ; reset_rotations"
 		5mmb_monitor "ALT 2" "arrangewin $currlead"
 	} elseif { [llength $switchtoleader] == 1 } {
-		5mmb_monitor -keyup $switchtoleader "arrangewin $currlead ; reset_rotations"
+		5mmb_monitor -keyup [join $switchtoleader] "arrangewin $currlead ; reset_rotations"
+		5mmb_monitor "ALT 2" "arrangewin $currlead"
 	}
 
 	5mmb_monitor "CONTROL h" {help}

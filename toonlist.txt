@@ -1,31 +1,22 @@
-box bnetacctname <password> license cheat-cenarius tank g p
-box bnetacctname <password> license im-nathrezim healer g
-box bnetacctname <password> license earthshock-cenarius healer
-box bnetacctname <password> license palia-nathrezim caster p
-box bnetacctname <password> license monique-nathrezim hunter p
-extrawait1 3000 
-extrawait2 600
-
-# Other toonlist commands ... remove # to use
-#keyboard us|uk|de|other
-#monitor 1280x1024|1920x1080|2560x1440|3360x1440|3840x2160
-#raidname <made up name>
-#oemkey oem3|oem4|oem5|oem6|oem7|oem8
-#use2monitors
-#windowplacement <numwindows> <placement info> <numwindows> <placement info>
-#nomacros
-#usecapslock
-#checkrate <milliseconds default:1>
-#noswaponmousepressed
-#noswapontilde
-#swapkeydowndps <list of keys> <list of keys with different modifiers SHIFT/ALT/CONTROL> <keys with different modifiers>
-#swapkeydownfull <list of keys> <list of keys with different modifiers SHIFT/ALT/CONTROL> <keys with different modifiers>
-#swapleaderkeys <list of keys> <list of keys with different modifiers SHIFT/ALT/CONTROL> <keys with different modifiers>
-#resetrotations <list of keys> <list of keys with different modifiers SHIFT/ALT/CONTROL> <keys with different modifiers>
-#swapkeydownfull <list of keys> <list of keys with different modifiers SHIFT/ALT/CONTROL> <keys with different modifiers>
-#swapkeydownheal <list of keys> <list of keys with different modifiers SHIFT/ALT/CONTROL> <keys with different modifiers>
-#swapkeyupfull <list of keys> <list of keys with different modifiers SHIFT/ALT/CONTROL> <keys with different modifiers>
+box account password wow1 me-nathrezim tank g
+box account password wow2 im-nathrezim casterhealer g
+box account password wow3 earthshock-cenarius casterhealer n s
+box account password wow4 palia-nathrezim caster p
+box account password wow5 Snöbgoblin-illidan caster p s
+usecapslock
 #demonhuntertank
-#switchtoleader <list of keys>
-#dontresetrotations
-#displayrotations
+#hivemind
+extrawait1 0 
+extrawait2 300
+#windowplacement 5 {{1720 1440 860 0} {860 720 0 0} {860 720 0 720} {860 720 2560 0} {860 720 2560 720}}
+displayrotations
+dontresetrotations
+turbokeys "2 3 4 5 6"
+swapkeydowndps "2 3 5 !ALT"
+swapkeydownfull "4 6 7 c b f l F11 F12 !ALT"
+swapleaderkeys "F6 F7 F8 F9 F10"
+resetrotations "ALT 4"
+swapkeydownheal "F1 F2 F3 F4 F5"
+swapkeyupfull "1 SPACE x q e LEFT UP RIGHT DOWN"
+switchtoleader "TAB"
+
