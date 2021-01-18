@@ -1,4 +1,4 @@
-﻿FSMB_version="011621_SL_CLASSIC"
+﻿FSMB_version="011721_SL_CLASSIC"
 FSMB_game="shadow"
 FSMB_RAID = "MULTIBOX_myraid1"
 if FSMB_game=="tbc" then 
@@ -36,6 +36,7 @@ if FSMB_game=="shadow" or FSMB_game=="classic" then
 	--SetOverrideBindingClick(UIParent, true,"6","ActionButton6")
 end
 print('Hello from 5mmb!')
+FSMB_hivemind=true
 FSMB_dontsetcamera=false
 FSMB_dontsetleadercamera=false
 FSMB_spellTable={}
@@ -1071,11 +1072,11 @@ function init()
 			index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/click "..prefix..myspec.."_SETUP",nil)
 		elseif FSMB_game=="shadow" then
 			if myname==FSMB_tank then
-				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/assist [@focus,exists][notarget,@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n/run melee_follow()",nil)
+				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/assist [@focus,exists][notarget,@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n/run melee_follow()\n/run mountup()",nil)
 			elseif FindInTable(FSMB_toonlist,myname) then
-				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/assist [@focus,exists][@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n/run melee_follow()",nil)
+				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/assist [@focus,exists][@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n/run melee_follow()\n/run mountup()",nil)
 			else
-				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n",nil)
+				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n/run mountup()",nil)
 			end
 		elseif FSMB_game=="classic" then
 			if myname==FSMB_tank then
@@ -1737,6 +1738,12 @@ function FSMB:OnCommReceived(prefix,msg)
 	elseif prefix=="FSMB_MELEEFOLLOW" then
 		print(FSMB_RAID.." Melee Following!")
 		if FindInTable(FSMB_meleelist,myname) then follow() end
+	elseif prefix=="FSMB_AUTOMOUNT" then
+		print(FSMB_RAID.." Mounting!")
+		automount()
+	elseif prefix=="FSMB_DISMOUNT" then
+		print(FSMB_RAID.." Dismounting.")
+		Dismount()
 	end
 end
 FSMB:SetScript("OnUpdate",function()
@@ -1757,6 +1764,8 @@ if FSMB_game=="shadow" or FSMB_game=="classic" then
 	AceComm.RegisterComm(FSMB,"FSMB_FIND")
 	AceComm.RegisterComm(FSMB,"FSMB_FOCUS")
 	AceComm.RegisterComm(FSMB,"FSMB_MELEEFOLLOW")
+	AceComm.RegisterComm(FSMB,"FSMB_AUTOMOUNT")
+	AceComm.RegisterComm(FSMB,"FSMB_DISMOUNT")
 end
 FSMB:RegisterEvent("ADDON_LOADED") -- register event "ADDON_LOADED"
 FSMB:RegisterEvent("CHAT_MSG_ADDON")
@@ -2280,6 +2289,16 @@ function focusme()
 	end
 
 end
+function mountup()
+        if FSMB_game~="shadow" then return end
+	if IsControlKeyDown() then 
+		Dismount()
+		AceComm.SendCommMessage(FSMB,"FSMB_DISMOUNT", UnitName("player"),"RAID")
+	else
+		automount()
+		AceComm.SendCommMessage(FSMB,"FSMB_AUTOMOUNT", UnitName("player"),"RAID")
+	end
+end
 function follow()
 	--This is meant to be in your alt-4 macro, and gets everyone to follow and assist the focus (meant to be your current window toon)
 	if FSMB_game == "shadow" or FSMB_game=="classic" then
@@ -2289,6 +2308,15 @@ function follow()
 	elseif not IAmFocus() and FSMB_raidleader and IsAltKeyDown() then
 		FollowUnit(unitname(FSMB_raidleader))
 	end
+end
+function automount()
+	if FSMB_game ~= "shadow"  then return end
+	if GetZoneText()=="The Maw" and SecureCmdOptionParse"[nodead,nomod,nocombat,nomounted]" then C_MountJournal.SummonByID(1442) 
+	elseif FSMB_hivemind then
+		if FSMB_raidleader==myname or FSMB_tank==myname then 
+			if SecureCmdOptionParse"[nodead,nomod,nocombat,nomounted]" then C_MountJournal.SummonByID(1025) end
+		end
+	elseif SecureCmdOptionParse"[nodead,nomod,nocombat,outdoors,nomounted]"then C_MountJournal.SummonByID(0)end
 end
 function melee_follow()
         if FSMB_game=="classic" or FSMB_game=="shadow" then 

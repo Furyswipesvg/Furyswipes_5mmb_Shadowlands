@@ -561,6 +561,14 @@ L["There are No Macros Loaded for this class.  Would you like to load the Sample
 L["There is an issue with sequence %s.  It has not been loaded to prevent the mod from failing."] = "There is an issue with sequence %s.  It has not been loaded to prevent the mod from failing."
 L[ [=[These lines are executed after the lines in the Sequence Box have been repeated Inner Loop Limit number of times.  If an Inner Loop Limit is not set, these are never executed as the sequence will never stop repeating.
 The Sequence will then go on to the PreMacro if it exists then back to the Sequence.]=] ] = "Essas linhas são executadas depois que as linhas na Caixa de Sequências forem repetidas pelas vezes definidas no Limite do Ciclo Interno. Se um Limite do Ciclo Interno não for definido, isto nunca será executado, pois a sequência nunca irá parar de repetir. A Sequência irá para o PréMacro, se este existir, e então retornará à Sequência."
+--[[Translation missing --]]
+L[ [=[These lines are executed after the lines in the Sequence Box have been repeated Inner Loop Limit number of times.  If an Inner Loop Limit is not set, this box will be disabled as these are never executed as the sequence will never stop repeating.
+The Sequence will then go on to the PreMacro if it exists then back to the Sequence.]=] ] = [=[These lines are executed after the lines in the Sequence Box have been repeated Inner Loop Limit number of times.  If an Inner Loop Limit is not set, this box will be disabled as these are never executed as the sequence will never stop repeating.
+The Sequence will then go on to the PreMacro if it exists then back to the Sequence.]=]
+--[[Translation missing --]]
+L[ [=[These lines are executed after the lines in the Sequence Box have been repeated Inner Loop Limit number of times.
+The Sequence will then go on to the PreMacro if it exists then back to the Sequence.]=] ] = [=[These lines are executed after the lines in the Sequence Box have been repeated Inner Loop Limit number of times.
+The Sequence will then go on to the PreMacro if it exists then back to the Sequence.]=]
 L[ [=[These lines are executed before the lines in the Sequence Box.  If an Inner Loop Limit is not set, these are executed only once.  
 If an Inner Loop Limit has been set these are executed after the Sequence has been looped through the number of times.  
 The Sequence will then go on to the Post Macro if it exists then back to the PreMacro.]=] ] = "Estas linhas são executadas antes das linhas na Caixa de Sequências. Se um Limite do Ciclo Interno não for definido, elas serão executadas apenas uma vez. Se um Limite do Ciclo Interno tiver sido definido, elas serão executadas após a Sequência ter sido repetida por esse número de vezes. A Sequência continuará então para o PósMacro, se este existir, e voltará para o PréMacro."
@@ -570,6 +578,8 @@ L["These lines are executed every time you click this macro.  They are evaluated
 L["These options combine to allow you to reset a macro while it is running.  These options are Cumulative ie they add to each other.  Options Like LeftClick and RightClick won't work together very well."] = "These options combine to allow you to reset a macro while it is running.  These options are Cumulative ie they add to each other.  Options Like LeftClick and RightClick won't work together very well."
 --[[Translation missing --]]
 L["These tick boxes have three settings for each slot.  Gold = Definately use this item. Blank = Do not use this item automatically.  Silver = Either use or not based on my default settings store in GSE's Options."] = "These tick boxes have three settings for each slot.  Gold = Definately use this item. Blank = Do not use this item automatically.  Silver = Either use or not based on my default settings store in GSE's Options."
+--[[Translation missing --]]
+L["This box is disabled as no Inner Loop Limit has been set.  It will never be called without it."] = "This box is disabled as no Inner Loop Limit has been set.  It will never be called without it."
 --[[Translation missing --]]
 L["This change will not come into effect until you save this macro."] = "This change will not come into effect until you save this macro."
 --[[Translation missing --]]

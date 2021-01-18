@@ -1,4 +1,4 @@
-set version 011021_SL_CLASSIC
+set version 011721_SL_CLASSIC
 lappend auto_path twapi
 lappend auto_path aabacus
 package require twapi
@@ -417,6 +417,8 @@ if { ! $nosmoverwrite } {
 			puts $sMN "FSMB_dontsetcamera=[toonlistKey dontsetcamera]"
 		} elseif { [regexp "^FSMB_dontsetleadercamera" $line ] } {
 			puts $sMN "FSMB_dontsetleadercamera=[toonlistKey dontsetleadercamera]"
+		} elseif { [regexp "^FSMB_hivemind" $line ] } {
+			puts $sMN "FSMB_hivemind=[toonlistKey hivemind]"
 		} elseif { [regexp "^FSMB_tank" $line ] } {
 			puts -nonewline $sMN "FSMB_tank="
 			set found_tank false
@@ -1172,7 +1174,7 @@ while { ($game == "shadow" || $game == "classic") } {
 	# You can replace the full key changleader list with override...the buttons will swap to windows in order listed.
 	# Example, say instead of F6 - F10 for window 1-5 as leader, you want y u i o p... y will be window 1, u will be window 2, etc
 	if { ![toonlistKey swapleaderkeys] } {
-		5mmb_monitor -keydown "F6 F7 F8 F9 F10 TRIGGER" "switchwin full ; changelead"
+		if { game=="shadow" } { 5mmb_monitor -keydown "F6 F7 F8 F9 F10 TRIGGER" "switchwin full ; changelead" }
 	} elseif { [llength $swapleaderkeys] < 6 && [llength $swapleaderkeys] > 0 } {
 		5mmb_monitor -keydown "[join $swapleaderkeys] TRIGGER" "switchwin full ; changelead"
 	} else {
