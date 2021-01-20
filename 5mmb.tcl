@@ -1175,7 +1175,7 @@ while { ($game == "shadow" || $game == "classic") } {
 	# You can replace the full key changleader list with override...the buttons will swap to windows in order listed.
 	# Example, say instead of F6 - F10 for window 1-5 as leader, you want y u i o p... y will be window 1, u will be window 2, etc
 	if { ![toonlistKey swapleaderkeys] } {
-		if { game=="shadow" } { 5mmb_monitor -keydown "F6 F7 F8 F9 F10 TRIGGER" "switchwin full ; changelead" }
+		if { $game=="shadow" } { 5mmb_monitor -keydown "F6 F7 F8 F9 F10 TRIGGER" "switchwin full ; changelead" }
 	} elseif { [llength $swapleaderkeys] < 6 && [llength $swapleaderkeys] > 0 } {
 		5mmb_monitor -keydown "[join $swapleaderkeys] TRIGGER" "switchwin full ; changelead"
 	} else {
