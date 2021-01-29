@@ -1,4 +1,4 @@
-﻿FSMB_version="011721_SL_CLASSIC"
+﻿FSMB_version="012921_SL_CLASSIC"
 FSMB_game="shadow"
 FSMB_RAID = "MULTIBOX_myraid1"
 if FSMB_game=="tbc" then 
@@ -1324,7 +1324,7 @@ function init()
 	SetBinding("4","ACTIONBUTTON4")
 	SetBinding("5","ACTIONBUTTON5")
 	SetBinding("6","ACTIONBUTTON6")
-	SetBinding("7","ACTIONBUTTON7")
+	SetBinding("7","TOGGLEAUTORUN")
 	SetBinding("8","ACTIONBUTTON8")
 	SetBinding("9","ACTIONBUTTON9")
 	SetBinding("0","ACTIONBUTTON10")
@@ -1416,7 +1416,6 @@ function init()
 		SetCVar("statusText", true)
 		SetCVar("statusTextDisplay", "NUMERIC")
 		SetCVar("useCompactPartyFrames", 1)
-		SetCVar("blockChannelInvites", true)
 		SetCVar("instantQuestText", true)
 		SetCVar("nameplateMotion", true)
 		SetCVar("expandUpgradePanel", 0)
@@ -1427,7 +1426,7 @@ function init()
 	if FSMB_game~="tbc" then 
 		SetCVar("Sound_EnablePetSounds", 0)
 		SetCVar("nameplateShowEnemies", true)
-		SetCVar("nameplateShowFriends", true)
+		SetCVar("nameplateShowFriends", false)
 		SetCVar("autoLootDefault", true)
 		SetCVar("showTutorials", false)
 		SetCVar("Sound_EnablePetSounds", false)
@@ -2310,9 +2309,10 @@ function follow()
 	end
 end
 function automount()
+	inInst,instType=IsInInstance()
 	if FSMB_game ~= "shadow"  then return end
 	if GetZoneText()=="The Maw" and SecureCmdOptionParse"[nodead,nomod,nocombat,nomounted]" then C_MountJournal.SummonByID(1442) 
-	elseif FSMB_hivemind then
+	elseif FSMB_hivemind and myname~="Mootalia" and not (inInst and instType=="party") then
 		if FSMB_raidleader==myname or FSMB_tank==myname then 
 			if SecureCmdOptionParse"[nodead,nomod,nocombat,nomounted]" then C_MountJournal.SummonByID(1025) end
 		end
