@@ -1,4 +1,4 @@
-﻿FSMB_version="012921_SL_CLASSIC"
+﻿FSMB_version="021021_SL_CLASSIC"
 FSMB_game="shadow"
 FSMB_RAID = "MULTIBOX_myraid1"
 if FSMB_game=="tbc" then 
@@ -36,6 +36,8 @@ if FSMB_game=="shadow" or FSMB_game=="classic" then
 	--SetOverrideBindingClick(UIParent, true,"6","ActionButton6")
 end
 print('Hello from 5mmb!')
+FSMB_clicktotal=1
+FSMB_clicktimes={}
 FSMB_hivemind=true
 FSMB_dontsetcamera=false
 FSMB_dontsetleadercamera=false
@@ -1071,12 +1073,13 @@ function init()
 		if myname==FSMB_tank and (FSMB_game~="shadow" and FSMB_game~="classic") then			
 			index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/click "..prefix..myspec.."_SETUP",nil)
 		elseif FSMB_game=="shadow" then
+				--index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/run PrintClicksPerSecond()",nil)
 			if myname==FSMB_tank then
-				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/assist [@focus,exists][notarget,@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n/run melee_follow()\n/run mountup()",nil)
+				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/assist [@focus,exists][notarget,@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n/run melee_follow()\n/cast [combat] "..FSMB_myint[myClass].."\n/run mountup()",nil)
 			elseif FindInTable(FSMB_toonlist,myname) then
-				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/assist [@focus,exists][@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n/run melee_follow()\n/run mountup()",nil)
+				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/assist [@focus,exists][@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n/run melee_follow()\n/cast [combat] "..FSMB_myint[myClass].."\n/run mountup()",nil)
 			else
-				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n/run mountup()",nil)
+				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n/cast [combat] "..FSMB_myint[myClass].."\n/run mountup()",nil)
 			end
 		elseif FSMB_game=="classic" then
 			if myname==FSMB_tank then
@@ -1454,6 +1457,29 @@ function init()
 	ClearTutorials()
 	ReloadUI()
 end
+function TablePush(table,value,elements)
+	if TableLength(table)==0 then
+		table[1]=value
+		return
+	end
+	for i=elements,1,-1 do
+		if i==1 then table[1]=value return end
+		if i~=elements then 
+			if TableLength(table)>=i-1 then  
+				table[i]=table[i-1]
+			end
+		end
+	end
+	return table
+end
+
+function PrintClicksPerSecond()
+	--Track last 20 clicks
+	TablePush(FSMB_clicktimes,GetTime(),20)
+	local cps=TableLength(FSMB_clicktimes)/(FSMB_clicktimes[1] - FSMB_clicktimes[TableLength(FSMB_clicktimes)])
+	Print("Clicks Per Second = "..cps)
+end
+	
 function PartyUp()
 	local partymac=""
 	FSMB_raidleader=myname
@@ -2029,7 +2055,11 @@ function FSMB_Find(item)
 					local bsnum=string.gsub(itemLink,".-\124H([^\124]*)\124h.*", "%1")
 					local itemName, _, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount, itemEquipLoc, itemIcon = GetItemInfo(bsnum)
 					local match=nil
-					links=string.lower(itemName)
+					if itemName then
+						links=string.lower(itemName)
+					else
+						links=string.lower(itemLink)
+					end
 					items=string.lower(item)
 					match = string.find(links, items)
 					if itemEquipLoc then
@@ -2301,6 +2331,8 @@ end
 function follow()
 	--This is meant to be in your alt-4 macro, and gets everyone to follow and assist the focus (meant to be your current window toon)
 	if FSMB_game == "shadow" or FSMB_game=="classic" then
+		inInst,instType=IsInInstance()
+		if FSMB_tank==myname and (inInst and instType=="party") then return end
 		if not IsAltKeyDown() and not IsControlKeyDown() and not IsShiftKeyDown() then
 			FollowUnit(unitname(FSMB_raidleader))
 		end
