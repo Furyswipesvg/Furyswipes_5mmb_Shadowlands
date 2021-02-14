@@ -33,6 +33,8 @@ L[" was imported with the following errors."] = " was imported with the followin
 --[[Translation missing --]]
 L[" was updated to new version."] = " was updated to new version."
 --[[Translation missing --]]
+L["%sMACRO VALIDATION ERROR|r - PostMacro found with invalid LoopLimit.  PostMacro will not be saved for version %s"] = "%sMACRO VALIDATION ERROR|r - PostMacro found with invalid LoopLimit.  PostMacro will not be saved for version %s"
+--[[Translation missing --]]
 L[". This version was not loaded."] = ". This version was not loaded."
 --[[Translation missing --]]
 L["/gs |r to get started."] = "/gs |r to get started."

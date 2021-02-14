@@ -1,4 +1,4 @@
-set version 011721_SL_CLASSIC
+set version 021421_SL_CLASSIC
 lappend auto_path twapi
 lappend auto_path aabacus
 package require twapi
@@ -123,6 +123,8 @@ if { $tL != "" } {
 }
 set numtoons 0
 set allraids {}
+#User can't use focus follows mouse for this to work
+twapi::set_system_parameters_info SPI_SETACTIVEWINDOWTRACKING false
 while { [gets $tL line] >= 0 } {
 	set line [regsub "\n" $line "" ]
 	if { $line == "" } { continue }
@@ -251,7 +253,7 @@ if { [toonlistKey monitor] && $monitor != "" } {
 			set monitor $size
 		}
 	}
-	if { $monitor == "" } {
+	if { ![info exists monitor] || $monitor == "" } {
 		puts "****************************************"
 		puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 		puts "WARNING: Supported monitor size not found. Check that windows scaling is 100%!"
@@ -568,7 +570,7 @@ proc get_wincount { raid } {
 	}
 	return $wincount
 }
-proc strip_acct_from_cfg { {filename WTF/config.wtf} } {
+proc strip_acct_from_cfg { {filename WTF/Config.wtf} } {
 	set cfgF [open $filename r]
 	fconfigure $cfgF -encoding utf-8
 #SET accountName "neeks1@comcast.net"
@@ -578,6 +580,24 @@ proc strip_acct_from_cfg { {filename WTF/config.wtf} } {
 	while { [gets $cfgF line] >= 0 } {
 		if { [regexp "^set accountname" [string tolower $line]] } { continue }
 		if { [regexp "^set accountlist" [string tolower $line]] } { continue }
+		puts $cfgO $line
+	}
+	close $cfgO
+	close $cfgF
+	file copy -force tmp $filename
+	file delete tmp
+}
+proc disable_fullscreen_cfg { {filename WTF/Config.wtf} } {
+	return
+	set cfgF [open $filename r]
+	fconfigure $cfgF -encoding utf-8
+	set cfgO [open tmp w+]
+	fconfigure $cfgO -encoding utf-8
+	while { [gets $cfgF line] >= 0 } {
+		if { [regexp "^set gxmaximize" [string tolower $line]] } { 
+			puts $cfgO "SET gxMaximize \"0\"" 
+			continue 
+		}
 		puts $cfgO $line
 	}
 	close $cfgO
@@ -613,17 +633,14 @@ proc pop { raid } {
 	if {$numwins==0} {return}
 	set i 0
 	strip_acct_from_cfg
+	disable_fullscreen_cfg
 	foreach win [dict get $allraids ${curraid}1] {
 		set winname [lindex $win 0]
 		set acctname [lindex $win 1]
 		set toonname [lindex $win 4]
 		set lic [string toupper [lindex $win 2]]
 		set lic [regsub "^WOW" $lic "WoW"]
-		if { ![file exists WTF/$toonname.wtf] } {
-			file copy WTF/Config.wtf WTF/$toonname.wtf
-		} else {
-			strip_acct_from_cfg WTF/$toonname.wtf
-		}
+		file copy -force WTF/Config.wtf WTF/$toonname.wtf
 	        set wtfF [open WTF/$toonname.wtf a]	
 		puts $wtfF "set accountName \"$acctname\""
 		puts $wtfF "set accountList \"\!$lic\""
@@ -662,25 +679,55 @@ proc pop { raid } {
 		set xpos [lindex $raidhash($wincount) $order 2]
 		set ypos [lindex $raidhash($wincount) $order 3]
 		set mywin [twapi::find_windows -single -messageonlywindow false -pids $pids($newwin)  -toplevel true -visible true -text $wow_name]
-		twapi::set_foreground_window $mywin
-		twapi::resize_window $mywin $x $y
-		twapi::move_window $mywin $xpos $ypos
-		twapi::set_window_text $mywin "$rename_to"
-		twapi::set_foreground_window $mywin
-		twapi::enable_window_input $mywin
-		puts "Extrawait2"
-		fswait $extrawait2
-		if {$i == 0 } {
+		if { $mywin != "" } {
+			twapi::set_foreground_window $mywin
+			twapi::resize_window $mywin $x $y
+			twapi::move_window $mywin $xpos $ypos
+			twapi::set_window_text $mywin "$rename_to"
+			twapi::set_foreground_window $mywin
+			twapi::enable_window_input $mywin
+			puts "Extrawait2"
 			fswait $extrawait2
-			fswait $extrawait2
-			fswait $extrawait2
+			if {$i == 0 } {
+				fswait $extrawait2
+				fswait $extrawait2
+				fswait $extrawait2
+			}
+			puts "done!"
+			twapi::send_input_text "$pw"
+			twapi::enable_window_input $mywin
+			twapi::send_keys ~
+			if { [toonlistKey noframes] } { BorderLess $mywin 1 }
+			incr i
 		}
-		puts "done!"
-		twapi::send_input_text "$pw"
-		twapi::enable_window_input $mywin
-		twapi::send_keys ~
-		incr i
 	}
+}
+proc BorderLess {w resize} {
+    # This function thanks to @mooreatv of discord!
+    global savedWindowStyle
+    set stL [twapi::get_window_style $w]
+    if {![info exist savedWindowStyle($w)]} {
+        # Used to restore style in Forget
+        set savedWindowStyle($w) $stL
+    }
+    lassign $stL style exstyle
+    # style & 
+    # ~(WS_CAPTION | WS_THICKFRAME)
+    #   0x00C00000L  0x00040000L 
+    # exstyle & 
+    # ~(WS_EX_DLGMODALFRAME | WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE | WS_EX_STATICEDGE)
+    #    0x00000001L          0x00000100L         0x00000200L       0x00020000L
+    lassign [twapi::get_window_client_area_size $w] w1 h1
+    puts "Client area : $w1 x $h1"
+    lassign [twapi::get_window_coordinates $w] x1 y1 x2 y2
+    set w2 [expr {$x2-$x1}]
+    set h2 [expr {$y2-$y1}]
+    puts "Size $x1 $y1 $x2 $y2 -> $w2 x $h2"
+    twapi::set_window_style $w [expr {$style & ~ 0xc40000}] [expr {$exstyle & ~ 0x20301}]
+    if {$resize} {
+        twapi::resize_window $w $w1 $h1
+        twapi::resize_window $w $w2 $h2
+    }
 }
 
 proc closeall {} {
@@ -691,6 +738,14 @@ proc closeall {} {
 		set mywin [twapi::find_windows -single -messageonlywindow false  -toplevel true -visible true -pids $mypid ]
 		if { $mywin != "" } {
 			twapi::close_window $mywin
+		}
+	}
+}
+proc close5mmb {} {
+	set mywin [twapi::find_windows -messageonlywindow false  -toplevel true -visible true -text {C:\WINDOWS\system32\cmd.exe}]
+	if { $mywin != "" } {
+		foreach win $mywin {
+			twapi::close_window [lindex $mywin 0]
 		}
 	}
 }
@@ -810,6 +865,30 @@ proc mouse_buttons_pressed { } {
 		if { [expr [twapi::GetAsyncKeyState $mystat] & 0x80000000] } {
 			return true
 		}
+	}
+	return false
+}
+proc f_pressed { } {
+	if { [expr [twapi::GetAsyncKeyState 0x46] & 0x80000000] } {
+		return true
+	}
+	return false
+}
+proc g_pressed { } {
+	if { [expr [twapi::GetAsyncKeyState 0x47] & 0x80000000] } {
+		return true
+	}
+	return false
+}
+proc h_pressed { } {
+	if { [expr [twapi::GetAsyncKeyState 0x48] & 0x80000000] } {
+		return true
+	}
+	return false
+}
+proc i_pressed { } {
+	if { [expr [twapi::GetAsyncKeyState 0x49] & 0x80000000] } {
+		return true
 	}
 	return false
 }
@@ -1124,11 +1203,25 @@ proc nextwin { rotation_type } {
 }
 
 # YOU MUST CLOSE ALL EXISTING WOW WINDOWS EACH TIME YOU RUN. WINDOWS MUST BE SPAWNED FROM THIS SHELL.
-if { ($game == "shadow" || $game == "classic")} { {closeall} }
+if { ($game == "shadow" || $game == "classic")} { closeall }
 if { ($game == "shadow" || $game == "classic")} { help }
 # if you don't use the full rotation for 500ms, it will switch back to main
+set sendones false
+set sendinterval 100
 while { ($game == "shadow" || $game == "classic") } {
-
+	#if { [f_pressed] } { 
+		#set sendones true
+	#}
+	#if { $sendones } { 
+		#if { [g_pressed] } { set sendones false } 
+		#if { [h_pressed] } { incr  sendinterval -1 } 
+		#if { [i_pressed] } { incr  sendinterval } 
+		#after $sendinterval
+		#puts "Interval = $sendinterval"
+		#twapi::send_keys 1 
+		#focuswin [nextwin full]
+		#continue 
+	#}
 	#How often to check keys in milliseconds. Increase for lower CPU use
 	if { ![toonlistKey checkrate] } {
 		after 1

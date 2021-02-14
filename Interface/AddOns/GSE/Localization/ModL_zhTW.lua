@@ -19,6 +19,8 @@ L[" tried to overwrite the version already loaded from "] = "試圖覆蓋已經�
 L[" was imported as a new macro."] = "導入為新的巨集."
 L[" was imported with the following errors."] = "導入時出現以下錯誤."
 L[" was updated to new version."] = "已更新為新版本."
+--[[Translation missing --]]
+L["%sMACRO VALIDATION ERROR|r - PostMacro found with invalid LoopLimit.  PostMacro will not be saved for version %s"] = "%sMACRO VALIDATION ERROR|r - PostMacro found with invalid LoopLimit.  PostMacro will not be saved for version %s"
 L[". This version was not loaded."] = ". 未加載此版本."
 L["/gs |r to get started."] = "/gs |r 已開始."
 L["/gs checkmacrosforerrors|r will loop through your macros and check for corrupt macro versions.  This will then show how to correct these issues."] = "/ gs checkmacrosforerrors |r 將循環訪問你的巨集並檢查是否存在損壞的巨集版本.同時顯示如何糾正這些問題."

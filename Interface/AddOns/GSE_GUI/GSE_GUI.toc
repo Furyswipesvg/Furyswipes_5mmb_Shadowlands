@@ -2,7 +2,7 @@
 ## Title: |cff0000ffGSE2:|r |cFF00D1FFGUI|r
 ## Notes: GSE GUI
 ## Author: TimothyLuke
-## Version: 2.6.41
+## Version: 2.6.48
 ## Dependencies: GSE
 
 
@@ -19,4 +19,5 @@ RemoteMacroBrowser.lua
 GUIFunctions.lua
 CompressSequence.lua
 MacroCompare.lua
+3_ParentFrame.lua
 Init.lua

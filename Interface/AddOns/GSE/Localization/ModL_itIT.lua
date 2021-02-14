@@ -27,6 +27,8 @@ L[" was imported as a new macro."] = "è stata importata come una nuova macro."
 L[" was imported with the following errors."] = " was imported with the following errors."
 --[[Translation missing --]]
 L[" was updated to new version."] = " was updated to new version."
+--[[Translation missing --]]
+L["%sMACRO VALIDATION ERROR|r - PostMacro found with invalid LoopLimit.  PostMacro will not be saved for version %s"] = "%sMACRO VALIDATION ERROR|r - PostMacro found with invalid LoopLimit.  PostMacro will not be saved for version %s"
 L[". This version was not loaded."] = ". Questa versione non è stata caricata"
 --[[Translation missing --]]
 L["/gs |r to get started."] = "/gs |r to get started."

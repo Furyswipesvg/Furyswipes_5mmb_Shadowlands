@@ -1744,18 +1744,18 @@ end
 --  [270] = "Mistweaver",
 --  [577] = "Havoc",
 --  [581] = "Vengeance",
-SLASH_FIND1="/find"
-SlashCmdList["FIND"]=function(item)
-	if item=="" then Print("Usage /find <classname or all or nothing> <wearing> item slot or string") return end
-	if FSMB_game=="shadow" or FSMB_game=="classic" then 
-		AceComm.SendCommMessage(FSMB,"FSMB_FIND", item ,"RAID")
-	end
-end
+--SLASH_FIND1="/find"
+--SlashCmdList["FIND"]=function(item)
+	--if item=="" then Print("Usage /find <classname or all or nothing> <wearing> item slot or string") return end
+	--if FSMB_game=="shadow" or FSMB_game=="classic" then 
+		--AceComm.SendCommMessage(FSMB,"FSMB_FIND", item ,"RAID")
+	--end
+--end
 FSMB = CreateFrame("frame","FSMB",UIParent)
 function FSMB:OnCommReceived(prefix,msg)
-	if prefix=="FSMB_FIND" then
-		FSMB_Find(msg)
-	elseif prefix=="FSMB_FOCUS" then
+	--if prefix=="FSMB_FIND" then
+		--FSMB_Find(msg)
+	if prefix=="FSMB_FOCUS" then
 		print(FSMB_RAID.." Focusing " .. msg)
 		FSMB_raidleader=msg
 		follow()
@@ -1836,11 +1836,11 @@ FSMB:SetScript("OnEvent", function(self,event, arg1, arg2, ...) -- event handler
 		--Print("Addon message recieved from"..arg2)
 		--Print("Addon message recieved from"..arg3)
 		--Print("Addon message recieved from"..arg4)
-		if arg1=="FSMB_FIND" then
-			local item = arg2
-			print("Got find request for "..item)
-			FSMB_Find(item)
-		end
+		--if arg1=="FSMB_FIND" then
+			--local item = arg2
+			--print("Got find request for "..item)
+			--FSMB_Find(item)
+		--end
 	elseif event == "UI_ERROR_MESSAGE" then
 		if arg1 == 50 then
 			if arg2 == SPELL_FAILED_NOT_STANDING then
@@ -1936,7 +1936,7 @@ function TableReverse(table)
 		end
 	return t
 end
-function FSMB_Find(item)
+function dontuseFSMB_Find(item)
 	FSMB_slotmap={ [0]="ammo",[1]="head",[2]="neck",[3]="shoulder",[4]="shirt",[5]="chest",[6]="waist",[7]="legs",[8]="feet",[9]="wrist",[10]="hands",[11]="finger 1",[12]="finger 2",[13]="trinket 1",[14]="trinket 2",[15]="back",[16]="main hand",[17]="off hand",[18]="ranged",[19]="tabard"}
 	FSMB_slotmap_i=TableReverse(FSMB_slotmap)
 	local Rarity={["poor"]=0,["common"]=1,["uncommon"]=2,["rare"]=3,["epic"]=4,["legendary"]=5}
@@ -2002,7 +2002,8 @@ function FSMB_Find(item)
 				items=string.lower(item)
 				match = string.find(links, items)
 				if IsUnboundBOE(bag,slot) then
-					FSMB_msg("Found "..link.." in bag "..bag.." slot "..slot)
+					FSMB_msg("Found boe "..link.." in bag "..bag.." slot "..slot)
+			return
 				end
 			end
 		end end
@@ -2085,7 +2086,7 @@ function FSMB_Find(item)
 		end
 	end
 end
-function IsUnboundBOE(b,s)
+function hideIsUnboundBOE(b,s)
 	local soulbound=nil
 	local boe=nil
 	--local _,_,itemID = string.find(itemlink, "item:(%d+)")
@@ -2095,9 +2096,11 @@ function IsUnboundBOE(b,s)
 	FSMBtooltip:Show()
 	local index = 1
 	local ltext = getglobal("FSMBtooltipTextLeft"..index):GetText()
+	print("DeBuG "..ltext)
 	while ltext ~= nil do
 		ltext = getglobal("FSMBtooltipTextLeft"..index):GetText()
 		if ltext ~= nil then
+	print("DeBuG2 "..ltext)
 			if string.find(ltext,"Soulbound") or string.find(ltext,textSoulbound) then
 				soulbound=true
 			end
@@ -2107,6 +2110,7 @@ function IsUnboundBOE(b,s)
 		end
 		index=index+1
 	end
+	print("haha "..nil)
 	if not soulbound and boe then return true end
 end
 function FSMB_msg(msg)

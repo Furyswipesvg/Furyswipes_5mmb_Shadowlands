@@ -20,6 +20,8 @@ L[" tried to overwrite the version already loaded from "] = "a essayé d'écrase
 L[" was imported as a new macro."] = "a été importé comme une nouvelle macro."
 L[" was imported with the following errors."] = "a été importé avec les erreurs suivantes."
 L[" was updated to new version."] = "a été mis à jour sous une nouvelle version."
+--[[Translation missing --]]
+L["%sMACRO VALIDATION ERROR|r - PostMacro found with invalid LoopLimit.  PostMacro will not be saved for version %s"] = "%sMACRO VALIDATION ERROR|r - PostMacro found with invalid LoopLimit.  PostMacro will not be saved for version %s"
 L[". This version was not loaded."] = ". Cette version n'était pas chargé."
 --[[Translation missing --]]
 L["/gs |r to get started."] = "/gs |r to get started."
