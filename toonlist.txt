@@ -3,7 +3,6 @@ box account password wow2 im-nathrezim casterhealer g
 box account password wow3 earthshock-cenarius casterhealer n s
 box account password wow4 palia-nathrezim caster p
 box account password wow5 Snöbgoblin-illidan caster p s
-usecapslock
 #demonhuntertank
 #hivemind
 extrawait1 0 
