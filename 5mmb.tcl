@@ -1,4 +1,4 @@
-set version 021421_SL_CLASSIC
+set version 030221_SL_CLASSIC
 lappend auto_path twapi
 lappend auto_path aabacus
 package require twapi
@@ -1203,12 +1203,12 @@ proc nextwin { rotation_type } {
 }
 
 # YOU MUST CLOSE ALL EXISTING WOW WINDOWS EACH TIME YOU RUN. WINDOWS MUST BE SPAWNED FROM THIS SHELL.
-if { ($game == "shadow" || $game == "classic")} { closeall }
-if { ($game == "shadow" || $game == "classic")} { help }
+if { ![toonlistKey usewob] && ($game == "shadow" || $game == "classic")} { closeall }
+if { ![toonlistKey usewob] && ($game == "shadow" || $game == "classic")} { help }
 # if you don't use the full rotation for 500ms, it will switch back to main
 set sendones false
 set sendinterval 100
-while { ($game == "shadow" || $game == "classic") } {
+while { ![toonlistKey usewob] && ($game == "shadow" || $game == "classic") } {
 	#if { [f_pressed] } { 
 		#set sendones true
 	#}
