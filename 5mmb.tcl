@@ -1,4 +1,4 @@
-set version 030221_SL_CLASSIC
+set version 030621_SL_CLASSIC
 lappend auto_path twapi
 lappend auto_path aabacus
 package require twapi
@@ -123,8 +123,10 @@ if { $tL != "" } {
 }
 set numtoons 0
 set allraids {}
-#User can't use focus follows mouse for this to work
-twapi::set_system_parameters_info SPI_SETACTIVEWINDOWTRACKING false
+if { ![toonlistKey norr] } {
+	#User can't use focus follows mouse for this to work
+	twapi::set_system_parameters_info SPI_SETACTIVEWINDOWTRACKING false
+}
 while { [gets $tL line] >= 0 } {
 	set line [regsub "\n" $line "" ]
 	if { $line == "" } { continue }
@@ -406,7 +408,7 @@ if {[toonlistKey windowplacement]} {
 }
 
 
-if { ! $nosmoverwrite } {
+if { ![toonlistKey norr] && ! $nosmoverwrite } {
 	set sM [open $SME r]
 	fconfigure $sM -encoding utf-8
 	set sMN [open tmp w+]
@@ -683,6 +685,8 @@ proc pop { raid } {
 			twapi::set_foreground_window $mywin
 			twapi::resize_window $mywin $x $y
 			twapi::move_window $mywin $xpos $ypos
+			twapi::set_foreground_window $mywin
+			twapi::enable_window_input $mywin
 			twapi::set_window_text $mywin "$rename_to"
 			twapi::set_foreground_window $mywin
 			twapi::enable_window_input $mywin
@@ -694,9 +698,12 @@ proc pop { raid } {
 				fswait $extrawait2
 			}
 			puts "done!"
-			twapi::send_input_text "$pw"
+			twapi::set_foreground_window $mywin
 			twapi::enable_window_input $mywin
-			twapi::send_keys ~
+			if { [twapi::get_window_text [twapi::get_foreground_window]] == $rename_to } {
+				twapi::send_input_text "$pw"
+				twapi::send_keys ~
+			}
 			if { [toonlistKey noframes] } { BorderLess $mywin 1 }
 			incr i
 		}
@@ -1242,7 +1249,7 @@ while { ![toonlistKey usewob] && ($game == "shadow" || $game == "classic") } {
 	}
 
 	5mmb_update_keystate ; # Do not remove or move
-
+  if { ![toonlistKey norr] } {
 	# You can replace the dps key swap list completely with override.
 	if { ![toonlistKey swapkeydowndps] } {
 		5mmb_monitor -keydown "2 3 5 !ALT" "switchwin dps"
@@ -1319,7 +1326,14 @@ while { ![toonlistKey usewob] && ($game == "shadow" || $game == "classic") } {
 		5mmb_monitor -keyup [join $switchtoleader] "arrangewin $currlead ; reset_rotations"
 		5mmb_monitor "ALT 2" "arrangewin $currlead"
 	}
-
+	if { ![toonlistKey dontresetrotations] && [lock_key_is_on] && [expr $idletimer + $returndelay] < [clock milliseconds] && [wow_is_focused] } {
+		resettimer
+		reset_rotations
+	}
+	if { [toonlistKey displayrotations] } {
+		vmonitor
+	}
+   }
 	5mmb_monitor "CONTROL h" {help}
 	5mmb_monitor "CONTROL ALT o" {closeall}
 	#TRIGGER passes whatever numpad key is pressed to arrangewin
@@ -1328,12 +1342,5 @@ while { ![toonlistKey usewob] && ($game == "shadow" || $game == "classic") } {
 		set raid [string index $raid 0]
 		5mmb_monitor "CONTROL ALT $raid" "pop $raid"
 		5mmb_monitor "CONTROL SHIFT $raid" "arrangewin 1"
-	}
-	if { ![toonlistKey dontresetrotations] && [lock_key_is_on] && [expr $idletimer + $returndelay] < [clock milliseconds] && [wow_is_focused] } {
-		resettimer
-		reset_rotations
-	}
-	if { [toonlistKey displayrotations] } {
-		vmonitor
 	}
 }
