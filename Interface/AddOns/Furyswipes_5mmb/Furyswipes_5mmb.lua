@@ -1,4 +1,4 @@
-﻿FSMB_version="021021_SL_CLASSIC"
+﻿FSMB_version="040221_SL_CLASSIC"
 FSMB_game="shadow"
 FSMB_RAID = "MULTIBOX_myraid1"
 if FSMB_game=="tbc" then 
@@ -198,6 +198,7 @@ if FSMB_game=="shadow" then
 	imprison = GetSpellInfo(217832)
 	blur = GetSpellInfo(198589)
 	disrupt = GetSpellInfo(183752)
+	mindfreeze = GetSpellInfo(47528)
 	consumeMagic = GetSpellInfo(278326)
 	detox = GetSpellInfo(115450)
 end
@@ -410,7 +411,7 @@ FSMB_maxheal={Druid=11,Priest=11,Shaman=11,Paladin=11}
 FSMB_myrez={["PALADIN"]=(redemption),["SHAMAN"]=(ancestralSpirit),["DRUID"]=(revive),["MONK"]=(resuscitate),["PRIEST"]=(resurrection),["DEATHKNIGHT"]=(raiseAlly)}
 FSMB_mypoly={["HUNTER"]=(freezingTrap),["SHAMAN"]=(hex),["ROGUE"]=(sap),["DEATHKNIGHT"]=("NONE"),["DEMONHUNTER"]=(imprison),["MONK"]=(paralysis),["PRIEST"]=(shackleUndead),["MAGE"]=(magePoly),["DRUID"]=(druidHibernate),["WARLOCK"]=(warlockBanish),["PALADIN"]=(repentance)}
 FSMB_selfheal={["DEATHKNIGHT"]=(ib),["DEMONHUNTER"]=(blur),["MONK"]=(spearHand),["PALADIN"]=(divineShield),["PRIEST"]=(priestHeal),["MAGE"]=(iceBlock),["DRUID"]=(druidHeal),["SHAMAN"]=(shamanHeal),["HUNTER"]=(exil),["WARLOCK"]=(unendingRes),["WARRIOR"]=(victoryRush),["ROGUE"]=(vanish),}
-FSMB_myint={["DEMONHUNTER"]=(disrupt),["MONK"]=(spearHand),["PALADIN"]=(hammerJustice),["PRIEST"]=(priestSilence),["MAGE"]=(mageCounter),["DRUID"]=(druidBash),["SHAMAN"]=(windShear),["HUNTER"]=(counterShot),["WARLOCK"]="",["WARRIOR"]=(warPummel),["ROGUE"]=(rogueKick),}
+FSMB_myint={["DEATHKNIGHT"]=(mindfreeze),["DEMONHUNTER"]=(disrupt),["MONK"]=(spearHand),["PALADIN"]=(hammerJustice),["PRIEST"]=(priestSilence),["MAGE"]=(mageCounter),["DRUID"]=(druidBash),["SHAMAN"]=(windShear),["HUNTER"]=(counterShot),["WARLOCK"]="",["WARRIOR"]=(warPummel),["ROGUE"]=(rogueKick),}
 if FSMB_game=="shadow" then FSMB_myint["PALADIN"]=rebuke end
 FSMB_decurse={["MONK"]=(detox),["DEMONHUNTER"]=(consumeMagic),["PALADIN"]=(palaCleanse),["PRIEST"]=(dispelMagic),["MAGE"]=(remLesserCurse),["DRUID"]=(remCurse),["SHAMAN"]=(curePoison),["HUNTER"]="None",["WARLOCK"]="None",["WARRIOR"]="None",["ROGUE"]="None",}
 FSMB_heal_names={["MONK"]=(vivify),["PALADIN"]=(palaHeal),["PRIEST"]=(priestHeal),["DRUID"]=(druidHeal),["SHAMAN"]=(shamanHeal)}
@@ -1403,6 +1404,18 @@ function init()
 	SetBinding("CTRL-0")
 	SetBinding("CTRL--")
 	SetBinding("CTRL-=")
+	SetBinding("ALT-1")
+	SetBinding("ALT-2")
+	SetBinding("ALT-3")
+	SetBinding("ALT-4")
+	SetBinding("ALT-5")
+	SetBinding("ALT-6")
+	SetBinding("ALT-7")
+	SetBinding("ALT-8")
+	SetBinding("ALT-9")
+	SetBinding("ALT-0")
+	SetBinding("ALT--")
+	SetBinding("ALT-=")
 	SetBinding("SHIFT-UP")
 	SetBinding("SHIFT-DOWN")
 	SetBinding("SHIFT-MOUSEWHEELUP")

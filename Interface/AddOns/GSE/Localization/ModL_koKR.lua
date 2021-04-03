@@ -81,8 +81,7 @@ L["About GSE"] = "GSE 정보"
 L["Actions"] = "행동"
 --[[Translation missing --]]
 L["Active Version: "] = "Active Version: "
---[[Translation missing --]]
-L["Add a substitution variable for this macro.  This can either be a straight string swap or can be a function.  If a lua function the function needs to return a value."] = "Add a substitution variable for this macro.  This can either be a straight string swap or can be a function.  If a lua function the function needs to return a value."
+L["Add a substitution variable for this macro.  This can either be a straight string swap or can be a function.  If a lua function the function needs to return a value."] = "이 매크로에 대해 치환 변수를 추가합니다. 이는 정직한 문자열 교환이거나 함수일 수 있습니다. lua 함수인 경우 함수는 값을 반환해야 합니다."
 L["Add Variable"] = "변수 추가"
 L["Add WeakAura"] = "WeakAura 추가"
 --[[Translation missing --]]
@@ -98,8 +97,7 @@ L["Are you sure you want to delete %s?  This will delete the macro and all versi
 L["Arena"] = "투기장"
 --[[Translation missing --]]
 L["Arena setting changed to Default."] = "Arena setting changed to Default."
---[[Translation missing --]]
-L["As GS-E is updated, there may be left over macros that no longer relate to sequences.  This will check for these automatically on logout.  Alternatively this check can be run via /gs cleanorphans"] = "As GS-E is updated, there may be left over macros that no longer relate to sequences.  This will check for these automatically on logout.  Alternatively this check can be run via /gs cleanorphans"
+L["As GS-E is updated, there may be left over macros that no longer relate to sequences.  This will check for these automatically on logout.  Alternatively this check can be run via /gs cleanorphans"] = "GS-E가 업데이트되면 더는 시퀀스와 관련이 없는 매크로가 남아있을 수 있습니다. 이를 접속 종료 시 자동으로 확인합니다. 또는 /gs cleanorphans를 통해 이 검사를 실행할 수 있습니다."
 --[[Translation missing --]]
 L["Auras included in GSE Macros"] = "Auras included in GSE Macros"
 L["Author"] = "작성자"
@@ -111,8 +109,7 @@ L["Automatically Create Macro Icon"] = "매크로 아이콘 자동 생성"
 L["Available Addons"] = "Available Addons"
 L["Belt"] = "허리"
 L["Blizzard Functions Colour"] = "블리자드 함수 색상"
---[[Translation missing --]]
-L["By setting the default Icon for all macros to be the QuestionMark, the macro button on your toolbar will change every key hit."] = "By setting the default Icon for all macros to be the QuestionMark, the macro button on your toolbar will change every key hit."
+L["By setting the default Icon for all macros to be the QuestionMark, the macro button on your toolbar will change every key hit."] = "모든 매크로의 기본 아이콘을 물음표로 설정하면 도구 모음의 매크로 버튼이 키 입력마다 변경됩니다."
 L["By setting this value the Sequence Editor will show every macro for every class."] = "이 값을 설정하면 시퀀스 편집기는 모든 직업에 대해 매크로를 모두 표시합니다."
 L["By setting this value the Sequence Editor will show every macro for your class.  Turning this off will only show the class macros for your current specialisation."] = "이 값을 설정하면 시퀀스 편집기에 직업 매크로가 모두 표시됩니다. 끄면 현재 전문화에 대한 직업 매크로만 표시됩니다."
 L["Cancel"] = "취소"
@@ -148,8 +145,7 @@ L["Continue"] = "계속"
 L["Contributed by: "] = "Contributed by: "
 --[[Translation missing --]]
 L["Control Keys."] = "Control Keys."
---[[Translation missing --]]
-L["Copy this link and open it in a Browser."] = "Copy this link and open it in a Browser."
+L["Copy this link and open it in a Browser."] = "이 링크를 복사하고 브라우저에서 엽니다."
 L["Create a new macro."] = "새 매크로를 만듭니다."
 L["Create buttons for Global Macros"] = "전역 매크로용 버튼 만들기"
 L["Create Icon"] = "아이콘 생성"
@@ -175,8 +171,7 @@ L["Default Version"] = "기본값 버전"
 L["Del"] = "Del"
 L["Delete"] = "삭제"
 L["Delete Icon"] = "아이콘 삭제"
---[[Translation missing --]]
-L["Delete Orphaned Macros on Logout"] = "Delete Orphaned Macros on Logout"
+L["Delete Orphaned Macros on Logout"] = "접속 종료 시 고아 매크로 삭제"
 L["Delete this macro.  This is not able to be undone."] = "이 매크로를 삭제합니다. 이는 취소할 수 없습니다."
 L["Delete this variable from the sequence."] = "시퀀스에서 이 변수를 삭제합니다."
 L[ [=[Delete this verion of the macro.  This can be undone by closing this window and not saving the change.  
@@ -217,16 +212,14 @@ L["Enforce GSE minimum version for this macro"] = "Enforce GSE minimum version f
 L["Error found in version %i of %s."] = "Error found in version %i of %s."
 L["Export"] = "내보내기"
 L["Export a Sequence"] = "시퀀스 내보내기"
---[[Translation missing --]]
-L["Export Macro Read Only"] = "Export Macro Read Only"
+L["Export Macro Read Only"] = "매크로 읽기 전용 내보내기"
 L["Export this Macro."] = "이 매크로를 내보냅니다."
 --[[Translation missing --]]
 L["Extra Macro Versions of %s has been added."] = "Extra Macro Versions of %s has been added."
 L["Filter Macro Selection"] = "매크로 선택 필터링"
 --[[Translation missing --]]
 L["Finished scanning for errors.  If no other messages then no errors were found."] = "Finished scanning for errors.  If no other messages then no errors were found."
---[[Translation missing --]]
-L["Format export for WLM Forums"] = "Format export for WLM Forums"
+L["Format export for WLM Forums"] = "WLM 포럼용 형식 내보내기"
 --[[Translation missing --]]
 L["FYou cannot delete this version of a sequence.  This version will be reloaded as it is contained in "] = "FYou cannot delete this version of a sequence.  This version will be reloaded as it is contained in "
 L["Gameplay Options"] = "게임 플레이 옵션"
@@ -295,10 +288,8 @@ L["Hide Minimap Icon"] = "미니맵 아이콘 숨기기"
 L["Hide Minimap Icon for LibDataBroker (LDB) data text."] = "LibDataBroker (LDB) 데이터 문자에 대한 미니맵 아이콘을 숨깁니다."
 L["Hides the message that GSE is loaded."] = "GSE를 불러왔다는 메시지를 숨깁니다."
 L["History"] = "역사"
---[[Translation missing --]]
-L["How many pixels high should the Editor start at.  Defaults to 700"] = "How many pixels high should the Editor start at.  Defaults to 700"
---[[Translation missing --]]
-L["How many pixels wide should the Editor start at.  Defaults to 700"] = "How many pixels wide should the Editor start at.  Defaults to 700"
+L["How many pixels high should the Editor start at.  Defaults to 700"] = "편집기가 시작되어야 하는 픽셀 높이입니다. 기본값은 700입니다."
+L["How many pixels wide should the Editor start at.  Defaults to 700"] = "편집기가 시작되어야 하는 픽셀 너비입니다. 기본값은 700입니다."
 L["Icon Colour"] = "아이콘 색상"
 --[[Translation missing --]]
 L["If you load Gnome Sequencer - Enhanced and the Sequence Editor and want to create new macros from scratch, this will enable a first cut sequenced template that you can load into the editor as a starting point.  This enables a Hello World macro called Draik01.  You will need to do a /console reloadui after this for this to take effect."] = "If you load Gnome Sequencer - Enhanced and the Sequence Editor and want to create new macros from scratch, this will enable a first cut sequenced template that you can load into the editor as a starting point.  This enables a Hello World macro called Draik01.  You will need to do a /console reloadui after this for this to take effect."
@@ -307,30 +298,18 @@ L["Import"] = "가져오기"
 L["Import Macro from Forums"] = "포럼에서 매크로 가져오기"
 --[[Translation missing --]]
 L["Imported new sequence "] = "Imported new sequence "
---[[Translation missing --]]
-L["Incorporate the belt slot into the KeyRelease. This is the equivalent of /use [combat] 5 in a KeyRelease."] = "Incorporate the belt slot into the KeyRelease. This is the equivalent of /use [combat] 5 in a KeyRelease."
---[[Translation missing --]]
-L["Incorporate the first ring slot into the KeyRelease. This is the equivalent of /use [combat] 11 in a KeyRelease."] = "Incorporate the first ring slot into the KeyRelease. This is the equivalent of /use [combat] 11 in a KeyRelease."
---[[Translation missing --]]
-L["Incorporate the first trinket slot into the KeyRelease. This is the equivalent of /use [combat] 13 in a KeyRelease."] = "Incorporate the first trinket slot into the KeyRelease. This is the equivalent of /use [combat] 13 in a KeyRelease."
---[[Translation missing --]]
-L["Incorporate the Head slot into the KeyRelease. This is the equivalent of /use [combat] 1 in a KeyRelease."] = "Incorporate the Head slot into the KeyRelease. This is the equivalent of /use [combat] 1 in a KeyRelease."
---[[Translation missing --]]
-L["Incorporate the neck slot into the KeyRelease. This is the equivalent of /use [combat] 2 in a KeyRelease."] = "Incorporate the neck slot into the KeyRelease. This is the equivalent of /use [combat] 2 in a KeyRelease."
---[[Translation missing --]]
-L["Incorporate the second ring slot into the KeyRelease. This is the equivalent of /use [combat] 12 in a KeyRelease."] = "Incorporate the second ring slot into the KeyRelease. This is the equivalent of /use [combat] 12 in a KeyRelease."
---[[Translation missing --]]
-L["Incorporate the second trinket slot into the KeyRelease. This is the equivalent of /use [combat] 14 in a KeyRelease."] = "Incorporate the second trinket slot into the KeyRelease. This is the equivalent of /use [combat] 14 in a KeyRelease."
---[[Translation missing --]]
-L["Inner Loop End"] = "Inner Loop End"
---[[Translation missing --]]
-L["Inner Loop Limit"] = "Inner Loop Limit"
---[[Translation missing --]]
+L["Incorporate the belt slot into the KeyRelease. This is the equivalent of /use [combat] 5 in a KeyRelease."] = "허리 칸을 키해제에 포함합니다. 이는 키해제 내 /use [combat] 5와 동일합니다."
+L["Incorporate the first ring slot into the KeyRelease. This is the equivalent of /use [combat] 11 in a KeyRelease."] = "1번 반지 칸을 키해제에 포함합니다. 이는 키해제 내 /use [combat] 11과 동일합니다."
+L["Incorporate the first trinket slot into the KeyRelease. This is the equivalent of /use [combat] 13 in a KeyRelease."] = "1번 장신구 칸을 키해제에 포함합니다. 이는 키해제 내 /use [combat] 13과 동일합니다."
+L["Incorporate the Head slot into the KeyRelease. This is the equivalent of /use [combat] 1 in a KeyRelease."] = "머리 칸을 키해제에 포함합니다. 이는 키해제 내 /use [combat] 1과 동일합니다."
+L["Incorporate the neck slot into the KeyRelease. This is the equivalent of /use [combat] 2 in a KeyRelease."] = "목 칸을 키해제에 포함합니다. 이는 키해제 내 /use [combat] 2와 동일합니다."
+L["Incorporate the second ring slot into the KeyRelease. This is the equivalent of /use [combat] 12 in a KeyRelease."] = "2번 반지 칸을 키해제에 포함합니다. 이는 키해제 내 /use [combat] 12와 동일합니다."
+L["Incorporate the second trinket slot into the KeyRelease. This is the equivalent of /use [combat] 14 in a KeyRelease."] = "2번 장신구 칸을 키해제에 포함합니다. 이는 키해제 내 /use [combat] 14와 동일합니다."
+L["Inner Loop End"] = "내부 반복 끝"
+L["Inner Loop Limit"] = "내부 반복 제한"
 L[ [=[Inner Loop Limit controls how many times the Sequence part of your macro executes 
-until it goes onto to the PostMacro and then resets to the PreMacro.]=] ] = [=[Inner Loop Limit controls how many times the Sequence part of your macro executes 
-until it goes onto to the PostMacro and then resets to the PreMacro.]=]
---[[Translation missing --]]
-L["Inner Loop Start"] = "Inner Loop Start"
+until it goes onto to the PostMacro and then resets to the PreMacro.]=] ] = "내부 반복 제한은 매크로의 시퀀스 부분이 후매크로로 이동한 다음 전매크로로 초기화될 때까지 실행되는 횟수를 제어합니다."
+L["Inner Loop Start"] = "내부 반복 시작"
 --[[Translation missing --]]
 L["KeyPress"] = "KeyPress"
 --[[Translation missing --]]
@@ -379,8 +358,7 @@ L["Mouse Button 5"] = "5번 마우스 버튼"
 L["Mouse Buttons."] = "마우스 버튼입니다."
 --[[Translation missing --]]
 L["Moved %s to class %s."] = "Moved %s to class %s."
---[[Translation missing --]]
-L["MS Click Rate"] = "MS Click Rate"
+L["MS Click Rate"] = "밀리초 클릭률"
 L["Mythic"] = "신화"
 --[[Translation missing --]]
 L["Mythic setting changed to Default."] = "Mythic setting changed to Default."
@@ -423,35 +401,25 @@ L["Pause"] = "중지"
 L["Paused"] = "Paused"
 --[[Translation missing --]]
 L["Paused - In Combat"] = "Paused - In Combat"
---[[Translation missing --]]
-L["Picks a Custom Colour for emphasis."] = "Picks a Custom Colour for emphasis."
+L["Picks a Custom Colour for emphasis."] = "강조용 사용자 정의 색상을 고릅니다."
 L["Picks a Custom Colour for the Author."] = "작성자용 사용자 정의 색상을 고릅니다."
---[[Translation missing --]]
-L["Picks a Custom Colour for the Commands."] = "Picks a Custom Colour for the Commands."
+L["Picks a Custom Colour for the Commands."] = "명령어용 사용자 정의 색상을 고릅니다."
 --[[Translation missing --]]
 L["Picks a Custom Colour for the Mod Names."] = "Picks a Custom Colour for the Mod Names."
---[[Translation missing --]]
-L["Picks a Custom Colour to be used for braces and indents."] = "Picks a Custom Colour to be used for braces and indents."
---[[Translation missing --]]
-L["Picks a Custom Colour to be used for Icons."] = "Picks a Custom Colour to be used for Icons."
+L["Picks a Custom Colour to be used for braces and indents."] = "중괄호 및 들여쓰기에 사용할 사용자 정의 색상을 고릅니다."
+L["Picks a Custom Colour to be used for Icons."] = "아이콘에 사용할 사용자 정의 색상을 고릅니다."
 --[[Translation missing --]]
 L["Picks a Custom Colour to be used for language descriptors"] = "Picks a Custom Colour to be used for language descriptors"
---[[Translation missing --]]
-L["Picks a Custom Colour to be used for macro conditionals eg [mod:shift]"] = "Picks a Custom Colour to be used for macro conditionals eg [mod:shift]"
---[[Translation missing --]]
-L["Picks a Custom Colour to be used for Macro Keywords like /cast and /target"] = "Picks a Custom Colour to be used for Macro Keywords like /cast and /target"
---[[Translation missing --]]
-L["Picks a Custom Colour to be used for numbers."] = "Picks a Custom Colour to be used for numbers."
---[[Translation missing --]]
-L["Picks a Custom Colour to be used for Spells and Abilities."] = "Picks a Custom Colour to be used for Spells and Abilities."
+L["Picks a Custom Colour to be used for macro conditionals eg [mod:shift]"] = "매크로 조건부(예, [mod:shift])에 사용할 사용자 정의 색상을 고릅니다."
+L["Picks a Custom Colour to be used for Macro Keywords like /cast and /target"] = "/cast 및 /target 같은 매크로 키워드에 사용할 사용자 정의 색상을 고릅니다."
+L["Picks a Custom Colour to be used for numbers."] = "숫자에 사용할 사용자 정의 색상을 고릅니다."
+L["Picks a Custom Colour to be used for Spells and Abilities."] = "주문 및 능력에 사용할 사용자 정의 색상을 고릅니다."
 --[[Translation missing --]]
 L["Picks a Custom Colour to be used for StepFunctions."] = "Picks a Custom Colour to be used for StepFunctions."
 --[[Translation missing --]]
 L["Picks a Custom Colour to be used for strings."] = "Picks a Custom Colour to be used for strings."
---[[Translation missing --]]
-L["Picks a Custom Colour to be used for unknown terms."] = "Picks a Custom Colour to be used for unknown terms."
---[[Translation missing --]]
-L["Picks a Custom Colour to be used normally."] = "Picks a Custom Colour to be used normally."
+L["Picks a Custom Colour to be used for unknown terms."] = "알 수 없는 용어에 사용할 사용자 정의 색상을 고릅니다."
+L["Picks a Custom Colour to be used normally."] = "평소에 사용할 사용자 정의 색상을 고릅니다."
 --[[Translation missing --]]
 L["Please wait till you have left combat before using the Sequence Editor."] = "Please wait till you have left combat before using the Sequence Editor."
 L["Plugins"] = "플러그인"
@@ -459,21 +427,19 @@ L["Plugins"] = "플러그인"
 L["PostMacro"] = "PostMacro"
 --[[Translation missing --]]
 L["PreMacro"] = "PreMacro"
-L["Prevent Sound Errors"] = "소리 오류 방지"
+L["Prevent Sound Errors"] = "오류 음성 방지"
 L["Prevent UI Errors"] = "UI 오류 방지"
 L["Print KeyPress Modifiers on Click"] = "클릭 시 키눌림 보조키 출력"
 L["Print to the chat window if the alt, shift, control modifiers as well as the button pressed on each macro keypress."] = "Alt, Shift, Ctrl 보조키뿐만 아니라 각 매크로 키를 누를 때 버튼을 누르면 채팅창에 출력합니다."
 L["Priority List (1 12 123 1234)"] = "우선순위 목록 (1 12 123 1234)"
---[[Translation missing --]]
-L["Prompt Samples"] = "Prompt Samples"
+L["Prompt Samples"] = "샘플 유도"
 L["PVP"] = "PVP"
 --[[Translation missing --]]
 L["PVP setting changed to Default."] = "PVP setting changed to Default."
 L["Raid"] = "공격대"
 --[[Translation missing --]]
 L["Raid setting changed to Default."] = "Raid setting changed to Default."
---[[Translation missing --]]
-L["Random - It will select .... a spell, any spell"] = "Random - It will select .... a spell, any spell"
+L["Random - It will select .... a spell, any spell"] = "무작위 - 주문, 임의 주문을 선택합니다"
 --[[Translation missing --]]
 L["Rank"] = "Rank"
 --[[Translation missing --]]
@@ -541,10 +507,8 @@ L["Sequence specID set to current spec of "] = "Sequence specID set to current s
 --[[Translation missing --]]
 L["Sequence to Compress."] = "Sequence to Compress."
 L["Sequence Viewer"] = "시퀀스 뷰어"
---[[Translation missing --]]
-L["Sequential (1 2 3 4)"] = "Sequential (1 2 3 4)"
---[[Translation missing --]]
-L["Set Default Icon QuestionMark"] = "Set Default Icon QuestionMark"
+L["Sequential (1 2 3 4)"] = "순서대로 (1 2 3 4)"
+L["Set Default Icon QuestionMark"] = "기본 아이콘 물음표로 설정"
 --[[Translation missing --]]
 L["Shift Keys."] = "Shift Keys."
 L["Show All Macros in Editor"] = "모든 매크로 편집기에 표시"
@@ -593,10 +557,8 @@ L["The GSE Out of Combat queue is %s"] = "The GSE Out of Combat queue is %s"
 L["The GUI has not been loaded.  Please activate this plugin amongst WoW's addons to use the GSE GUI."] = "The GUI has not been loaded.  Please activate this plugin amongst WoW's addons to use the GSE GUI."
 --[[Translation missing --]]
 L["The Macro Translator will translate an English sequence to your local language for execution.  It can also be used to translate a sequence into a different language.  It is also used for syntax based colour markup of Sequences in the editor."] = "The Macro Translator will translate an English sequence to your local language for execution.  It can also be used to translate a sequence into a different language.  It is also used for syntax based colour markup of Sequences in the editor."
---[[Translation missing --]]
-L["The main lines of the macro."] = "The main lines of the macro."
---[[Translation missing --]]
-L["The milliseconds being used in key click delay."] = "The milliseconds being used in key click delay."
+L["The main lines of the macro."] = "매크로의 주요 줄입니다."
+L["The milliseconds being used in key click delay."] = "키 클릭 지연에 사용되는 밀리초입니다."
 L[ [=[The name of your macro.  This name has to be unique and can only be used for one object.
 You can copy this entire macro by changing the name and choosing Save.]=] ] = "매크로 이름입니다. 이 이름은 고유해야 하며 하나의 개체에만 사용할 수 있습니다. 이름을 변경하고 저장을 선택하여 이 매크로 전체를 복사할 수 있습니다."
 --[[Translation missing --]]
@@ -641,16 +603,11 @@ The Sequence will then go on to the PreMacro if it exists then back to the Seque
 L[ [=[These lines are executed after the lines in the Sequence Box have been repeated Inner Loop Limit number of times.
 The Sequence will then go on to the PreMacro if it exists then back to the Sequence.]=] ] = [=[These lines are executed after the lines in the Sequence Box have been repeated Inner Loop Limit number of times.
 The Sequence will then go on to the PreMacro if it exists then back to the Sequence.]=]
---[[Translation missing --]]
 L[ [=[These lines are executed before the lines in the Sequence Box.  If an Inner Loop Limit is not set, these are executed only once.  
 If an Inner Loop Limit has been set these are executed after the Sequence has been looped through the number of times.  
-The Sequence will then go on to the Post Macro if it exists then back to the PreMacro.]=] ] = [=[These lines are executed before the lines in the Sequence Box.  If an Inner Loop Limit is not set, these are executed only once.  
-If an Inner Loop Limit has been set these are executed after the Sequence has been looped through the number of times.  
-The Sequence will then go on to the Post Macro if it exists then back to the PreMacro.]=]
---[[Translation missing --]]
-L["These lines are executed every time you click this macro.  They are evaluated by WOW after the line in the Sequence Box."] = "These lines are executed every time you click this macro.  They are evaluated by WOW after the line in the Sequence Box."
---[[Translation missing --]]
-L["These lines are executed every time you click this macro.  They are evaluated by WOW before the line in the Sequence Box."] = "These lines are executed every time you click this macro.  They are evaluated by WOW before the line in the Sequence Box."
+The Sequence will then go on to the Post Macro if it exists then back to the PreMacro.]=] ] = "이 줄은 시퀀스 상자의 줄보다 먼저 실행됩니다. 내부 반복 제한이 설정되지 않은 경우 한 번만 실행됩니다. 내부 반복 제한이 설정된 경우 시퀀스가 여러 번 반복된 후에 이 줄이 실행됩니다. 그런 다음 시퀀스는 후매크로가 있으면 계속 진행하고 그 다음 전매크로로 돌아갑니다."
+L["These lines are executed every time you click this macro.  They are evaluated by WOW after the line in the Sequence Box."] = "이 줄은 이 매크로를 클릭할 때마다 실행됩니다. 시퀀스 상자의 줄 다음에 WOW에 의해 평가됩니다."
+L["These lines are executed every time you click this macro.  They are evaluated by WOW before the line in the Sequence Box."] = "이 줄은 이 매크로를 클릭할 때마다 실행됩니다. 시퀀스 상자의 줄 이전에 WOW에 의해 평가됩니다."
 --[[Translation missing --]]
 L["These options combine to allow you to reset a macro while it is running.  These options are Cumulative ie they add to each other.  Options Like LeftClick and RightClick won't work together very well."] = "These options combine to allow you to reset a macro while it is running.  These options are Cumulative ie they add to each other.  Options Like LeftClick and RightClick won't work together very well."
 L["These tick boxes have three settings for each slot.  Gold = Definately use this item. Blank = Do not use this item automatically.  Silver = Either use or not based on my default settings store in GSE's Options."] = "이 체크 상자는 각 칸에 대해 세 가지 설정이 있습니다. 금색 = 확실히 이 아이템을 사용합니다. 빈칸 = 이 아이템을 자동으로 사용하지 않습니다. 은색 = GSE의 옵션에 저장된 내 기본 설정을 기반으로 사용하거나 사용하지 않습니다."
@@ -669,8 +626,7 @@ L["This macro uses features that are not available in this version. You need to 
 --[[Translation missing --]]
 L["This option clears errors and stack traces ingame.  This is the equivalent of /run UIErrorsFrame:Clear() in a KeyRelease.  Turning this on will trigger a Scam warning about running custom scripts."] = "This option clears errors and stack traces ingame.  This is the equivalent of /run UIErrorsFrame:Clear() in a KeyRelease.  Turning this on will trigger a Scam warning about running custom scripts."
 L["This option dumps extra trace information to your chat window to help troubleshoot problems with the mod"] = "이 옵션은 mod 관련 문제를 해결하는 데 도움이 되도록 대화창에 추가 추적 정보를 출력(dump)합니다."
---[[Translation missing --]]
-L["This option hide error sounds like \"That is out of range\" from being played while you are hitting a GS Macro.  This is the equivalent of /console Sound_EnableErrorSpeech lines within a Sequence.  Turning this on will trigger a Scam warning about running custom scripts."] = "This option hide error sounds like \"That is out of range\" from being played while you are hitting a GS Macro.  This is the equivalent of /console Sound_EnableErrorSpeech lines within a Sequence.  Turning this on will trigger a Scam warning about running custom scripts."
+L["This option hide error sounds like \"That is out of range\" from being played while you are hitting a GS Macro.  This is the equivalent of /console Sound_EnableErrorSpeech lines within a Sequence.  Turning this on will trigger a Scam warning about running custom scripts."] = "이 옵션은 GS 매크로를 누르는 동안 재생되는 \"범위를 벗어났습니다\"와 같은 오류 음성을 숨깁니다. 이는 시퀀스 내 /console Sound_EnableErrorSpeech 줄과 동일합니다. 이 옵션을 켜면 사용자 지정 스크립트 실행에 대한 사기 경보가 발생합니다."
 --[[Translation missing --]]
 L["This option hides text error popups and dialogs and stack traces ingame.  This is the equivalent of /script UIErrorsFrame:Hide() in a KeyRelease.  Turning this on will trigger a Scam warning about running custom scripts."] = "This option hides text error popups and dialogs and stack traces ingame.  This is the equivalent of /script UIErrorsFrame:Hide() in a KeyRelease.  Turning this on will trigger a Scam warning about running custom scripts."
 L["This option prevents macros firing unless you have a target. Helps reduce mistaken targeting of other mobs/groups when your target dies."] = "이 옵션은 대상이 없으면 매크로가 실행되는 것을 방지합니다. 대상이 죽을 때 다른 몹/그룹에 대한 잘못된 대상 지정을 줄이는 데 도움이 됩니다."
@@ -714,31 +670,23 @@ L["UpdateSequence"] = "시퀀스 업데이트"
 --[[Translation missing --]]
 L["Updating due to new version."] = "Updating due to new version."
 L["Use"] = "사용"
---[[Translation missing --]]
-L["Use Belt Item in KeyRelease"] = "Use Belt Item in KeyRelease"
+L["Use Belt Item in KeyRelease"] = "키해제에 허리 아이템 사용"
 --[[Translation missing --]]
 L["Use External MS Timings"] = "Use External MS Timings"
---[[Translation missing --]]
-L["Use First Ring in KeyRelease"] = "Use First Ring in KeyRelease"
---[[Translation missing --]]
-L["Use First Trinket in KeyRelease"] = "Use First Trinket in KeyRelease"
+L["Use First Ring in KeyRelease"] = "키해제에 1번 반지 사용"
+L["Use First Trinket in KeyRelease"] = "키해제에 1번 장신구 사용"
 L["Use Global Account Macros"] = "전역 계정 매크로 사용"
---[[Translation missing --]]
-L["Use Head Item in KeyRelease"] = "Use Head Item in KeyRelease"
+L["Use Head Item in KeyRelease"] = "키해제에 머리 아이템 사용"
 --[[Translation missing --]]
 L["Use Macro Translator"] = "Use Macro Translator"
---[[Translation missing --]]
-L["Use Neck Item in KeyRelease"] = "Use Neck Item in KeyRelease"
+L["Use Neck Item in KeyRelease"] = "키해제에 목 아이템 사용"
 --[[Translation missing --]]
 L["Use Realtime Parsing"] = "Use Realtime Parsing"
---[[Translation missing --]]
-L["Use Second Ring in KeyRelease"] = "Use Second Ring in KeyRelease"
---[[Translation missing --]]
-L["Use Second Trinket in KeyRelease"] = "Use Second Trinket in KeyRelease"
+L["Use Second Ring in KeyRelease"] = "키해제에 2번 반지 사용"
+L["Use Second Trinket in KeyRelease"] = "키해제에 2번 장신구 사용"
 --[[Translation missing --]]
 L["Use Verbose Export Sequence Format"] = "Use Verbose Export Sequence Format"
---[[Translation missing --]]
-L["Use WLM Export Sequence Format"] = "Use WLM Export Sequence Format"
+L["Use WLM Export Sequence Format"] = "WLM 내보내기 시퀀스 형식 사용"
 L["Value"] = "값"
 L["Variables"] = "변수"
 L["Version"] = "버전"
@@ -757,18 +705,14 @@ L[ [=[What are the preferred talents for this macro?
 '1,2,3,1,2,3,1' means First row choose the first talent, Second row choose the second talent etc]=] ] = "이 매크로에서 선호하는 특성은 무엇입니까? '1,2,3,1,2,3,1'은 첫 번째 줄은 첫 번째 특성, 두 번째 줄은 두 번째 특성 등을 선택함을 뜻합니다."
 L["What class or spec is this macro for?  If it is for all classes choose Global."] = "이 매크로는 어떤 직업 또는 전문화용입니까? 모든 직업에 해당하는 경우 Global을 고르세요."
 L["When creating a macro, if there is not a personal character macro space, create an account wide macro."] = "매크로를 만들 때 개인 캐릭터 매크로 공간이 없으면 계정 전체 매크로를 만듭니다."
---[[Translation missing --]]
-L["When exporting a sequence create a stub entry to import for WLM's Website."] = "When exporting a sequence create a stub entry to import for WLM's Website."
+L["When exporting a sequence create a stub entry to import for WLM's Website."] = "시퀀스를 내보낼 때 WLM 웹사이트(wowlazymacros.com)용 가져오기 스텁(stub, 토막) 항목을 만듭니다."
 --[[Translation missing --]]
 L["When exporting a sequence use a human readable verbose form."] = "When exporting a sequence use a human readable verbose form."
 --[[Translation missing --]]
 L["When GSE imports a macro and it already exists locally and has local edits, what do you want the default action to be.  Merge - Add the new MacroVersions to the existing Macro.  Replace - Replace the existing macro with the new version. Ignore - ignore updates.  This default action will set the default on the Compare screen however if the GUI is not available this will be the action taken."] = "When GSE imports a macro and it already exists locally and has local edits, what do you want the default action to be.  Merge - Add the new MacroVersions to the existing Macro.  Replace - Replace the existing macro with the new version. Ignore - ignore updates.  This default action will set the default on the Compare screen however if the GUI is not available this will be the action taken."
---[[Translation missing --]]
-L["When loading or creating a sequence, if it is a global or the macro has an unknown specID automatically create the Macro Stub in Account Macros"] = "When loading or creating a sequence, if it is a global or the macro has an unknown specID automatically create the Macro Stub in Account Macros"
---[[Translation missing --]]
-L["When loading or creating a sequence, if it is a macro of the same class automatically create the Macro Stub"] = "When loading or creating a sequence, if it is a macro of the same class automatically create the Macro Stub"
---[[Translation missing --]]
-L["When you log into a class without any macros, prompt to load the sample macros."] = "When you log into a class without any macros, prompt to load the sample macros."
+L["When loading or creating a sequence, if it is a global or the macro has an unknown specID automatically create the Macro Stub in Account Macros"] = "시퀀스를 불러오거나 만들 때 Global이거나 매크로에 알 수 없는 전문화 ID가 있는 경우 자동으로 계정 매크로에 매크로 스텁을 생성합니다."
+L["When loading or creating a sequence, if it is a macro of the same class automatically create the Macro Stub"] = "시퀀스를 불러오거나 만들 때 같은 직업의 매크로인 경우 자동으로 매크로 스텁을 생성합니다."
+L["When you log into a class without any macros, prompt to load the sample macros."] = "매크로 없는 직업으로 접속하면 샘플 매크로를 불러오라는 메시지가 표시됩니다."
 L["Yes"] = "예"
 --[[Translation missing --]]
 L["You cannot delete the Default version of this macro.  Please choose another version to be the Default on the Configuration tab."] = "You cannot delete the Default version of this macro.  Please choose another version to be the Default on the Configuration tab."
